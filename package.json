@@ -1,0 +1,22 @@
+{
+  "name": "ts-commons",
+  "version": "1.0.0",
+  "description": "common methods for typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wz2cool/ts-commons.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wz2cool/ts-commons/issues"
+  },
+  "homepage": "https://github.com/wz2cool/ts-commons#readme",
+  "devDependencies": {
+    "tslint": "~5.10.0"
+  }
+}
