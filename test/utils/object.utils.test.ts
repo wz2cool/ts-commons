@@ -2,6 +2,46 @@ import { expect } from "chai";
 import { describe } from "mocha";
 import { ObjectUtils } from "../../src";
 describe(".ObjectUtils", () => {
+  describe("#isNull", () => {
+    it("should return true if value is null", () => {
+      const testValue = null;
+      const result = ObjectUtils.isNull(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return false if value is undefined", () => {
+      const testValue = undefined;
+      const result = ObjectUtils.isNull(testValue);
+      expect(false).to.be.eq(result);
+    });
+
+    it("should return false if value is object", () => {
+      const testValue = {};
+      const result = ObjectUtils.isNull(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#isUndefinend", () => {
+    it("should return false if value is null", () => {
+      const testValue = null;
+      const result = ObjectUtils.isUndefinend(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return true if value is undefined", () => {
+      const testValue = undefined;
+      const result = ObjectUtils.isUndefinend(testValue);
+      expect(false).to.be.eq(result);
+    });
+
+    it("should return false if value is object", () => {
+      const testValue = {};
+      const result = ObjectUtils.isUndefinend(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
+
   describe("#isNullOrUndefined", () => {
     it("should return true if value is null", () => {
       const testValue = null;

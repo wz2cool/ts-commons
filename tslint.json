@@ -7,7 +7,6 @@
   "rules": {
     "no-console": false,
     "eofline": false,
-    "quotemark": [true],
     "indent": false,
     "member-access": [false],
     "ordered-imports": [false],

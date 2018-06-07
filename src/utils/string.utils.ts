@@ -1,10 +1,6 @@
 import { ObjectUtils } from "./object.utils";
 
 export class StringUtils {
-  private constructor() {
-    // hide constructor
-  }
-
   public static isEmpty(cs: string): boolean {
     return ObjectUtils.isNullOrUndefined(cs) || cs.length === 0;
   }
