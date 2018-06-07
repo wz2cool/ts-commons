@@ -21,6 +21,14 @@ export class StringUtils {
     if (ObjectUtils.isNullOrUndefined(cs)) {
       return cs;
     } else {
+      return cs.replace("\b", "").trim();
+    }
+  }
+
+  public static strip(cs: string): string {
+    if (ObjectUtils.isNullOrUndefined(cs)) {
+      return cs;
+    } else {
       return cs.trim();
     }
   }
