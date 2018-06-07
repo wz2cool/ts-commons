@@ -26,13 +26,13 @@ describe(".ObjectUtils", () => {
     it("should return false if value is null", () => {
       const testValue = null;
       const result = ObjectUtils.isUndefinend(testValue);
-      expect(true).to.be.eq(result);
+      expect(false).to.be.eq(result);
     });
 
     it("should return true if value is undefined", () => {
       const testValue = undefined;
       const result = ObjectUtils.isUndefinend(testValue);
-      expect(false).to.be.eq(result);
+      expect(true).to.be.eq(result);
     });
 
     it("should return false if value is object", () => {

@@ -18,7 +18,7 @@ describe(".StringUtils", () => {
     it('should return false if value is "   "', () => {
       const testValue = "   ";
       const result = StringUtils.isBlank(testValue);
-      expect(false).to.be.eq(result);
+      expect(true).to.be.eq(result);
     });
 
     it('should return false if value is "bob"', () => {
