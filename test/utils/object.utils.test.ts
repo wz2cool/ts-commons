@@ -105,4 +105,60 @@ describe(".ObjectUtils", () => {
       expect(true).to.be.eq(result);
     });
   });
+
+  describe("#isDate", () => {
+    it("should return true if value is new Date()", () => {
+      const testValue = new Date();
+      const result = ObjectUtils.isDate(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return false if value is 123", () => {
+      const testValue = "123";
+      const result = ObjectUtils.isDate(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#isString", () => {
+    it("should return true if value is 'test'", () => {
+      const testValue = "test";
+      const result = ObjectUtils.isString(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return false if value is 123", () => {
+      const testValue = 123;
+      const result = ObjectUtils.isString(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#isNumber", () => {
+    it("should return true if value is 123", () => {
+      const testValue = 123;
+      const result = ObjectUtils.isNumber(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return false if value is 'test'", () => {
+      const testValue = "test";
+      const result = ObjectUtils.isNumber(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#isBoolean", () => {
+    it("should return true if value is true", () => {
+      const testValue = true;
+      const result = ObjectUtils.isBoolean(testValue);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return false if value is 'test'", () => {
+      const testValue = "test";
+      const result = ObjectUtils.isBoolean(testValue);
+      expect(false).to.be.eq(result);
+    });
+  });
 });
