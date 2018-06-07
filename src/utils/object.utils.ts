@@ -8,7 +8,7 @@ export class ObjectUtils {
   }
 
   public static isNullOrUndefined(value: any): boolean {
-    return ObjectUtils.isNull(value) || ObjectUtils.isUndefinend(value);
+    return this.isNull(value) || this.isUndefinend(value);
   }
 
   public static isArray(value: any): boolean {

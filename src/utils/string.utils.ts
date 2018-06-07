@@ -12,4 +12,8 @@ export class StringUtils {
   public static isBlank(cs: string): boolean {
     return ObjectUtils.isNullOrUndefined(cs) || cs.trim() === "";
   }
+
+  public static isNotBlank(cs: string): boolean {
+    return !this.isBlank(cs);
+  }
 }
