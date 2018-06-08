@@ -32,4 +32,14 @@ export class StringUtils {
       return cs.trim();
     }
   }
+
+  public static trimToNull(cs: string): string {
+    const tmp = this.trim(cs);
+    return this.isBlank(tmp) ? null : tmp;
+  }
+
+  public static trimToEmpty(cs: string): string {
+    const tmp = this.trim(cs);
+    return this.isBlank(tmp) ? "" : tmp;
+  }
 }
