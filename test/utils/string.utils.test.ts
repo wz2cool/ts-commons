@@ -374,4 +374,69 @@ describe(".StringUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#stripStart", () => {
+    // * StringUtils.stripStart(null, *)          = null
+    // * StringUtils.stripStart("", *)            = ""
+    // * StringUtils.stripStart("abc", "")        = "abc"
+    // * StringUtils.stripStart("abc", null)      = "abc"
+    // * StringUtils.stripStart("  abc", null)    = "abc"
+    // * StringUtils.stripStart("abc  ", null)    = "abc  "
+    // * StringUtils.stripStart(" abc ", null)    = "abc "
+    // * StringUtils.stripStart("yxabc  ", "xyz") = "abc  "
+    it("should return null if value is null", () => {
+      const str = null;
+      const stripChars = "*";
+      const result = StringUtils.stripStart(str, stripChars);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if value is undefined", () => {
+      const str = undefined;
+      const stripChars = "*";
+      const result = StringUtils.stripStart(str, stripChars);
+      expect(undefined).to.be.eq(result);
+    });
+    it("should return 'abc' if str is 'abc' and stripChars is ''", () => {
+      const str = "abc";
+      const stripChars = "";
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc").to.be.eq(result);
+    });
+    it("should return 'abc' if str is 'abc' and stripChars is null", () => {
+      const str = "abc";
+      const stripChars = null;
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc").to.be.eq(result);
+    });
+    it("should return 'abc' if str is 'abc' and stripChars is undefined", () => {
+      const str = "abc";
+      const stripChars = undefined;
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc").to.be.eq(result);
+    });
+    it("should return 'abc' if str is '  abc' and stripChars is null", () => {
+      const str = "  abc";
+      const stripChars = null;
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc").to.be.eq(result);
+    });
+    it("should return 'abc  ' if str is 'abc  ' and stripChars is null", () => {
+      const str = "abc  ";
+      const stripChars = null;
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc  ").to.be.eq(result);
+    });
+    it("should return 'abc  ' if str is '  abc  ' and stripChars is null", () => {
+      const str = "  abc  ";
+      const stripChars = null;
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc  ").to.be.eq(result);
+    });
+    it("should return 'abc  ' if str is 'yxabc  ' and stripChars is 'xyz'", () => {
+      const str = "yxabc  ";
+      const stripChars = "xyz";
+      const result = StringUtils.stripStart(str, stripChars);
+      expect("abc  ").to.be.eq(result);
+    });
+  });
 });
