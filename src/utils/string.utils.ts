@@ -1,6 +1,21 @@
 import { ObjectUtils } from "./object.utils";
 
 export class StringUtils {
+  /**
+   * <p>Checks if a String is empty ("") or null or underfined.</p>
+   *
+   * <pre>
+   * StringUtils.isEmpty(null)      = true
+   * StringUtils.isEmpty(undefined) = true
+   * StringUtils.isEmpty("")        = true
+   * StringUtils.isEmpty(" ")       = false
+   * StringUtils.isEmpty("bob")     = false
+   * StringUtils.isEmpty("  bob  ") = false
+   * </pre>
+   *
+   * @param str  the String to check, may be null or undefined.
+   * @return <code>true</code> if the String is empty or null or undefined
+   */
   public static isEmpty(str: string): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
   }
