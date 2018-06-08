@@ -358,5 +358,20 @@ describe(".StringUtils", () => {
       const result = StringUtils.isWhitespace(testValue);
       expect(true).to.be.eq(result);
     });
+    it("should return false if value is 'a'", () => {
+      const testValue = "a";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is null", () => {
+      const testValue = null;
+      const result = StringUtils.isWhitespace(testValue);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is undefined", () => {
+      const testValue = undefined;
+      const result = StringUtils.isWhitespace(testValue);
+      expect(false).to.be.eq(result);
+    });
   });
 });
