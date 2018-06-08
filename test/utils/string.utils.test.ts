@@ -315,4 +315,48 @@ describe(".StringUtils", () => {
       expect("dd").to.be.eq(result);
     });
   });
+
+  describe("#isWhitespace", () => {
+    //  \f\n\r\t\v\u00A0\u2028\u2029
+    it("should return true if value is ' '", () => {
+      const testValue = "";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\f'", () => {
+      const testValue = "\f";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\r'", () => {
+      const testValue = "\r";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\t'", () => {
+      const testValue = "\t";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\v'", () => {
+      const testValue = "\v";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\u00A0'", () => {
+      const testValue = "\u00A0";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\u2028'", () => {
+      const testValue = "\u2028";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is '\u2029'", () => {
+      const testValue = "\u2029";
+      const result = StringUtils.isWhitespace(testValue);
+      expect(true).to.be.eq(result);
+    });
+  });
 });

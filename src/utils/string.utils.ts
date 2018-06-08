@@ -1,45 +1,69 @@
 import { ObjectUtils } from "./object.utils";
 
 export class StringUtils {
-  public static isEmpty(cs: string): boolean {
-    return ObjectUtils.isNullOrUndefined(cs) || cs.length === 0;
+  public static isEmpty(str: string): boolean {
+    return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
   }
 
-  public static isNotEmpty(cs: string): boolean {
-    return !this.isEmpty(cs);
+  public static isNotEmpty(str: string): boolean {
+    return !this.isEmpty(str);
   }
 
-  public static isBlank(cs: string): boolean {
-    return ObjectUtils.isNullOrUndefined(cs) || cs.trim() === "";
+  public static isBlank(str: string): boolean {
+    return ObjectUtils.isNullOrUndefined(str) || str.trim() === "";
   }
 
-  public static isNotBlank(cs: string): boolean {
-    return !this.isBlank(cs);
+  public static isNotBlank(str: string): boolean {
+    return !this.isBlank(str);
   }
 
-  public static trim(cs: string): string {
-    if (ObjectUtils.isNullOrUndefined(cs)) {
-      return cs;
+  public static trim(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return str;
     } else {
-      return cs.replace("\b", "").trim();
+      return str.replace("\b", "").trim();
     }
   }
 
-  public static strip(cs: string): string {
-    if (ObjectUtils.isNullOrUndefined(cs)) {
-      return cs;
+  public static strip(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return str;
     } else {
-      return cs.trim();
+      return str.trim();
     }
   }
 
-  public static trimToNull(cs: string): string {
-    const tmp = this.trim(cs);
+  public static trimToNull(str: string): string {
+    const tmp = this.trim(str);
     return this.isBlank(tmp) ? null : tmp;
   }
 
-  public static trimToEmpty(cs: string): string {
-    const tmp = this.trim(cs);
+  public static trimToEmpty(str: string): string {
+    const tmp = this.trim(str);
     return this.isBlank(tmp) ? "" : tmp;
+  }
+
+  public static stripStart(str: string, stripChars: string) {
+    if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
+      return str;
+    }
+    const strLen = str.length;
+    let start = 0;
+    if (ObjectUtils.isNullOrUndefined(stripChars)) {
+      while (start !== strLen && this.isWhitespace(str.charAt(start))) {
+        start++;
+      }
+    }
+    if (this.isEmpty(stripChars)) {
+      return str;
+    }
+    while (start !== strLen && stripChars.indexOf(str.charAt(start)) !== -1) {
+      start++;
+    }
+    return str.substring(start);
+  }
+
+  public static isWhitespace(ch: string): boolean {
+    return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }
 }
