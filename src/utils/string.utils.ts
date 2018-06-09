@@ -1,6 +1,9 @@
 import { ObjectUtils } from "./object.utils";
 
 export class StringUtils {
+  public static readonly EMPTY: string = "";
+  public static readonly INDEX_NOT_FOUND: number = -1;
+
   /**
    * <p>Checks if a String is empty ("") or null or underfined.</p>
    *
@@ -25,7 +28,7 @@ export class StringUtils {
   }
 
   public static isBlank(str: string): boolean {
-    return ObjectUtils.isNullOrUndefined(str) || str.trim() === "";
+    return ObjectUtils.isNullOrUndefined(str) || str.trim() === this.EMPTY;
   }
 
   public static isNotBlank(str: string): boolean {
@@ -36,23 +39,45 @@ export class StringUtils {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return str;
     } else {
-      return str.replace("\b", "").trim();
+      return str.replace("\b", this.EMPTY).trim();
     }
   }
 
   public static trimToNull(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return null;
+    }
     const tmp = this.trim(str);
     return this.isBlank(tmp) ? null : tmp;
   }
 
   public static trimToEmpty(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return this.EMPTY;
+    }
     const tmp = this.trim(str);
-    return this.isBlank(tmp) ? "" : tmp;
+    return this.isBlank(tmp) ? this.EMPTY : tmp;
   }
 
   public static strip(str: string, stripChars?: string): string {
     const tmp = this.stripStart(str, stripChars);
     return this.stripEnd(tmp, stripChars);
+  }
+
+  public static stripToNull(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return null;
+    }
+    const tmp = this.strip(str);
+    return this.isBlank(tmp) ? null : tmp;
+  }
+
+  public static stripToEmpty(str: string): string {
+    if (ObjectUtils.isNullOrUndefined(str)) {
+      return this.EMPTY;
+    }
+    const tmp = this.strip(str);
+    return this.isBlank(tmp) ? this.EMPTY : tmp;
   }
 
   /**
@@ -62,7 +87,7 @@ export class StringUtils {
    * An empty string ("") input returns the empty string.</p>
    *
    * <p>If the stripChars String is <code>null</code>, whitespace is
-   * stripped as defined by {@link isWhitespace(char)}.</p>
+   * stripped as defined by {@link #isWhitespace(char)}.</p>
    *
    * <pre>
    * StringUtils.stripStart(null, *)          = null
@@ -77,7 +102,7 @@ export class StringUtils {
    *
    * @param str  the String to remove characters from, may be null
    * @param stripChars  the characters to remove, null or undefined treated as whitespace
-   * @return the stripped String, <code>null</code> if null String input
+   * @return the stripped String, <code>null</code> if null or undefind String input
    */
   public static stripStart(str: string, stripChars: string) {
     if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
@@ -106,7 +131,7 @@ export class StringUtils {
    * An empty string ("") input returns the empty string.</p>
    *
    * <p>If the stripChars String is <code>null</code>, whitespace is
-   * stripped as defined by {@link Character#isWhitespace(char)}.</p>
+   * stripped as defined by {@link #isWhitespace(char)}.</p>
    *
    * <pre>
    * StringUtils.stripEnd(null, *)          = null
@@ -120,7 +145,7 @@ export class StringUtils {
    * </pre>
    *
    * @param str  the String to remove characters from, may be null
-   * @param stripChars  the characters to remove, null treated as whitespace
+   * @param stripChars  the characters to remove, null or undefined treated as whitespace
    * @return the stripped String, <code>null</code> if null String input
    */
   public static stripEnd(str: string, stripChars: string) {

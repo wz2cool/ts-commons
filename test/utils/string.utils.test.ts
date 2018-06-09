@@ -247,6 +247,102 @@ describe(".StringUtils", () => {
     });
   });
 
+  describe("#stripToNull", () => {
+    it("should return null if value is null", () => {
+      const testValue = null;
+      const result = StringUtils.stripToNull(testValue);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if value is undefined", () => {
+      const testValue = undefined;
+      const result = StringUtils.stripToNull(testValue);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if value is ''", () => {
+      const testValue = "";
+      const result = StringUtils.stripToNull(testValue);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if value is '   '", () => {
+      const testValue = "   ";
+      const result = StringUtils.stripToNull(testValue);
+      expect(null).to.be.eq(result);
+    });
+    it("should return '' if value is '      \b \t \n \f \r    '", () => {
+      const testValue = "     \b\t \n \f \r    ";
+      const result = StringUtils.stripToNull(testValue);
+      expect("\b").to.be.eq(result);
+    });
+    it("should return 'ss' if value is '     \n\tss   \b'", () => {
+      const testValue = "     \n\tss   \b";
+      const result = StringUtils.stripToNull(testValue);
+      expect("ss   \b").to.be.eq(result);
+    });
+    it("should return 'd   d dd' if value is ' d   d dd     '", () => {
+      const testValue = " d   d dd     ";
+      const result = StringUtils.stripToNull(testValue);
+      expect("d   d dd").to.be.eq(result);
+    });
+    it("should return 'dd' if value is 'dd     '", () => {
+      const testValue = "dd     ";
+      const result = StringUtils.stripToNull(testValue);
+      expect("dd").to.be.eq(result);
+    });
+    it("should return 'dd' if value is '     dd       '", () => {
+      const testValue = "     dd       ";
+      const result = StringUtils.stripToNull(testValue);
+      expect("dd").to.be.eq(result);
+    });
+  });
+
+  describe("#stripToEmpty", () => {
+    it("should return '' if value is null", () => {
+      const testValue = null;
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is undefined", () => {
+      const testValue = undefined;
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is ''", () => {
+      const testValue = "";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is '   '", () => {
+      const testValue = "   ";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is '      \b \t \n \f \r    '", () => {
+      const testValue = "     \b\t \n \f \r    ";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("\b").to.be.eq(result);
+    });
+    it("should return 'ss' if value is '     \n\tss   \b'", () => {
+      const testValue = "     \n\tss   \b";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("ss   \b").to.be.eq(result);
+    });
+    it("should return 'd   d dd' if value is ' d   d dd     '", () => {
+      const testValue = " d   d dd     ";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("d   d dd").to.be.eq(result);
+    });
+    it("should return 'dd' if value is 'dd     '", () => {
+      const testValue = "dd     ";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("dd").to.be.eq(result);
+    });
+    it("should return 'dd' if value is '     dd       '", () => {
+      const testValue = "     dd       ";
+      const result = StringUtils.stripToEmpty(testValue);
+      expect("dd").to.be.eq(result);
+    });
+  });
+
   describe("#trimToNull", () => {
     it("should return null if value is null", () => {
       const testValue = null;
