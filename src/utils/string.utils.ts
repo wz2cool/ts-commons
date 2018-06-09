@@ -5,19 +5,12 @@ export class StringUtils {
   public static readonly INDEX_NOT_FOUND: number = -1;
 
   /**
-   * <p>Checks if a String is empty ("") or null or underfined.</p>
-   *
-   * <pre>
    * StringUtils.isEmpty(null)      = true
    * StringUtils.isEmpty(undefined) = true
    * StringUtils.isEmpty("")        = true
    * StringUtils.isEmpty(" ")       = false
    * StringUtils.isEmpty("bob")     = false
    * StringUtils.isEmpty("  bob  ") = false
-   * </pre>
-   *
-   * @param str  the String to check, may be null or undefined.
-   * @return <code>true</code> if the String is empty or null or undefined
    */
   public static isEmpty(str: string): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
@@ -81,15 +74,6 @@ export class StringUtils {
   }
 
   /**
-   * <p>Strips any of a set of characters from the start of a String.</p>
-   *
-   * <p>A <code>null</code> input String returns <code>null</code>.
-   * An empty string ("") input returns the empty string.</p>
-   *
-   * <p>If the stripChars String is <code>null</code>, whitespace is
-   * stripped as defined by {@link #isWhitespace(char)}.</p>
-   *
-   * <pre>
    * StringUtils.stripStart(null, *)          = null
    * StringUtils.stripStart("", *)            = ""
    * StringUtils.stripStart("abc", "")        = "abc"
@@ -98,13 +82,8 @@ export class StringUtils {
    * StringUtils.stripStart("abc  ", null)    = "abc  "
    * StringUtils.stripStart(" abc ", null)    = "abc "
    * StringUtils.stripStart("yxabc  ", "xyz") = "abc  "
-   * </pre>
-   *
-   * @param str  the String to remove characters from, may be null
-   * @param stripChars  the characters to remove, null or undefined treated as whitespace
-   * @return the stripped String, <code>null</code> if null or undefind String input
    */
-  public static stripStart(str: string, stripChars: string) {
+  public static stripStart(str: string, stripChars: string): string {
     if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
       return str;
     }
@@ -125,15 +104,6 @@ export class StringUtils {
   }
 
   /**
-   * <p>Strips any of a set of characters from the end of a String.</p>
-   *
-   * <p>A <code>null</code> input String returns <code>null</code>.
-   * An empty string ("") input returns the empty string.</p>
-   *
-   * <p>If the stripChars String is <code>null</code>, whitespace is
-   * stripped as defined by {@link #isWhitespace(char)}.</p>
-   *
-   * <pre>
    * StringUtils.stripEnd(null, *)          = null
    * StringUtils.stripEnd("", *)            = ""
    * StringUtils.stripEnd("abc", "")        = "abc"
@@ -142,13 +112,8 @@ export class StringUtils {
    * StringUtils.stripEnd("abc  ", null)    = "abc"
    * StringUtils.stripEnd(" abc ", null)    = " abc"
    * StringUtils.stripEnd("  abcyx", "xyz") = "  abc"
-   * </pre>
-   *
-   * @param str  the String to remove characters from, may be null
-   * @param stripChars  the characters to remove, null or undefined treated as whitespace
-   * @return the stripped String, <code>null</code> if null String input
    */
-  public static stripEnd(str: string, stripChars: string) {
+  public static stripEnd(str: string, stripChars: string): string {
     if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
       return str;
     }
@@ -165,6 +130,63 @@ export class StringUtils {
       }
     }
     return str.substring(0, end);
+  }
+
+  /**
+   * StringUtils.equal(null, null)              = true
+   * StringUtils.equal(undefined, undefined)      = true
+   * StringUtils.equal(undefined, null)          = false
+   * StringUtils.equal(null, undefined)          = false
+   * StringUtils.equal(null, "abc")             = false
+   * StringUtils.equal("abc", null)             = false
+   * StringUtils.equal("abc", undefined)         = false
+   * StringUtils.equal(undefined, "abc")         = false
+   * StringUtils.equal("abc", "def")            = false
+   * StringUtils.equal("abc", "abc")            = true
+   */
+  public static equals(str1: string, str2: string): boolean {
+    if (
+      !ObjectUtils.isNullOrUndefined(str1) &&
+      !ObjectUtils.isNullOrUndefined(str2)
+    ) {
+      return str1 === str2;
+    }
+    if (ObjectUtils.isNull(str1) && ObjectUtils.isNull(str2)) {
+      return true;
+    }
+    if (ObjectUtils.isUndefinend(str1) && ObjectUtils.isUndefinend(str2)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * StringUtils.equal(null, null)              = true
+   * StringUtils.equal(undefined, undefined)      = true
+   * StringUtils.equal(undefined, null)          = false
+   * StringUtils.equal(null, undefined)          = false
+   * StringUtils.equal(null, "abc")             = false
+   * StringUtils.equal("abc", null)             = false
+   * StringUtils.equal("abc", undefined)         = false
+   * StringUtils.equal(undefined, "abc")         = false
+   * StringUtils.equal("abc", "def")            = false
+   * StringUtils.equal("abc", "abc")            = true
+   * StringUtils.equal("abc", "AbC")            = true
+   */
+  public static equalsIgnoreCase(str1: string, str2: string): boolean {
+    if (
+      !ObjectUtils.isNullOrUndefined(str1) &&
+      !ObjectUtils.isNullOrUndefined(str2)
+    ) {
+      return str1.toLocaleLowerCase() === str2.toLocaleLowerCase();
+    }
+    if (ObjectUtils.isNull(str1) && ObjectUtils.isNull(str2)) {
+      return true;
+    }
+    if (ObjectUtils.isUndefinend(str1) && ObjectUtils.isUndefinend(str2)) {
+      return true;
+    }
+    return false;
   }
 
   public static isWhitespace(ch: string): boolean {

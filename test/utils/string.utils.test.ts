@@ -617,4 +617,156 @@ describe(".StringUtils", () => {
       expect("  abc").to.be.eq(result);
     });
   });
+
+  describe("#equal", () => {
+    // * StringUtils.equal(null, null)              = true
+    // * StringUtils.equal(undefined, undefined)      = true
+    // * StringUtils.equal(undefined, null)          = false
+    // * StringUtils.equal(null, undefined)          = false
+    // * StringUtils.equal(null, "abc")             = false
+    // * StringUtils.equal("abc", null)             = false
+    // * StringUtils.equal("abc", undefined)         = false
+    // * StringUtils.equal(undefined, "abc")         = false
+    // * StringUtils.equal("abc", "def")            = false
+    // * StringUtils.equal("abc", "abc")            = true
+    it("should return true if str1 is null and str2 is null", () => {
+      const str1 = null;
+      const str2 = null;
+      const result = StringUtils.equals(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str1 is undefined and str2 is undefined", () => {
+      const str1 = undefined;
+      const str2 = undefined;
+      const result = StringUtils.equals(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str1 is undefined and str2 is null", () => {
+      const str1 = undefined;
+      const str2 = null;
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is null and str2 is undefined", () => {
+      const str1 = null;
+      const str2 = undefined;
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is null and str2 is 'abc'", () => {
+      const str1 = null;
+      const str2 = "abc";
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is null", () => {
+      const str1 = "abc";
+      const str2 = null;
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is undefined and str2 is 'abc'", () => {
+      const str1 = undefined;
+      const str2 = "abc";
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is undefined", () => {
+      const str1 = "abc";
+      const str2 = undefined;
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is 'def'", () => {
+      const str1 = "abc";
+      const str2 = "def";
+      const result = StringUtils.equals(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str1 is 'abc' and str2 is 'abc'", () => {
+      const str1 = "abc";
+      const str2 = "abc";
+      const result = StringUtils.equals(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+  });
+
+  describe("#equal", () => {
+    // * StringUtils.equal(null, null)              = true
+    // * StringUtils.equal(undefined, undefined)      = true
+    // * StringUtils.equal(undefined, null)          = false
+    // * StringUtils.equal(null, undefined)          = false
+    // * StringUtils.equal(null, "abc")             = false
+    // * StringUtils.equal("abc", null)             = false
+    // * StringUtils.equal("abc", undefined)         = false
+    // * StringUtils.equal(undefined, "abc")         = false
+    // * StringUtils.equal("abc", "def")            = false
+    // * StringUtils.equal("abc", "AbC")            = true
+    it("should return true if str1 is null and str2 is null", () => {
+      const str1 = null;
+      const str2 = null;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str1 is undefined and str2 is undefined", () => {
+      const str1 = undefined;
+      const str2 = undefined;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str1 is undefined and str2 is null", () => {
+      const str1 = undefined;
+      const str2 = null;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is null and str2 is undefined", () => {
+      const str1 = null;
+      const str2 = undefined;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is null and str2 is 'abc'", () => {
+      const str1 = null;
+      const str2 = "abc";
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is null", () => {
+      const str1 = "abc";
+      const str2 = null;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is undefined and str2 is 'abc'", () => {
+      const str1 = undefined;
+      const str2 = "abc";
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is undefined", () => {
+      const str1 = "abc";
+      const str2 = undefined;
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str1 is 'abc' and str2 is 'def'", () => {
+      const str1 = "abc";
+      const str2 = "def";
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str1 is 'abc' and str2 is 'abc'", () => {
+      const str1 = "abc";
+      const str2 = "abc";
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str1 is 'abc' and str2 is 'AbC'", () => {
+      const str1 = "abc";
+      const str2 = "AbC";
+      const result = StringUtils.equalsIgnoreCase(str1, str2);
+      expect(true).to.be.eq(result);
+    });
+  });
 });
