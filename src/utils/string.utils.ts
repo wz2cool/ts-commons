@@ -189,6 +189,8 @@ export class StringUtils {
     return false;
   }
 
+  // public static indexOf(str: string, searchStr: string, startPos?: number) {}
+
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }
