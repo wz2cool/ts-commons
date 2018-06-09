@@ -82,4 +82,55 @@ describe(".NumberUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#isSafeInteger", () => {
+    // Number.isSafeInteger(3);                    // true
+    // Number.isSafeInteger(Math.pow(2, 53));      // false
+    // Number.isSafeInteger(Math.pow(2, 53) - 1);  // true
+    // Number.isSafeInteger(NaN);                  // false
+    // Number.isSafeInteger(Infinity);             // false
+    // Number.isSafeInteger('3');                  // false
+    // Number.isSafeInteger(3.1);                  // false
+    // Number.isSafeInteger(3.0);                  // true
+    it("should return false if value is 3", () => {
+      const value = 3;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if value is Math.pow(2, 53)", () => {
+      const value = Math.pow(2, 53);
+      const result = NumberUtils.isSafeInteger(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if value is Math.pow(2, 53)-1", () => {
+      const value = Math.pow(2, 53) - 1;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if value is NaN", () => {
+      const value = NaN;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is Infinity", () => {
+      const value = Infinity;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is '3'", () => {
+      const value = "3";
+      const result = NumberUtils.isSafeInteger(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is 3.1", () => {
+      const value = 3.1;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is 3.0", () => {
+      const value = 3.0;
+      const result = NumberUtils.isSafeInteger(value);
+      expect(true).to.be.eq(result);
+    });
+  });
 });

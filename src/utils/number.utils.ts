@@ -1,6 +1,9 @@
 import { ObjectUtils } from "./object.utils";
 
 export class NumberUtils {
+  public static readonly MAX_SAFE_INTEGER: number = 9007199254740991;
+  public static readonly MIN_SAFE_INTEGER: number = -9007199254740991;
+
   /**
    * Number.isInteger(0);         // true
    * Number.isInteger(1);         // true
@@ -24,5 +27,19 @@ export class NumberUtils {
       isFinite(value) &&
       Math.floor(value) === value
     );
+  }
+
+  /**
+   * Number.isSafeInteger(3);                    // true
+   * Number.isSafeInteger(Math.pow(2, 53));      // false
+   * Number.isSafeInteger(Math.pow(2, 53) - 1);  // true
+   * Number.isSafeInteger(NaN);                  // false
+   * Number.isSafeInteger(Infinity);             // false
+   * Number.isSafeInteger('3');                  // false
+   * Number.isSafeInteger(3.1);                  // false
+   * Number.isSafeInteger(3.0);                  // true
+   */
+  public static isSafeInteger(value: any): boolean {
+    return this.isInteger(value) && Math.abs(value) <= this.MAX_SAFE_INTEGER;
   }
 }
