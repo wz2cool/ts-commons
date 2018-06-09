@@ -28,6 +28,11 @@ describe(".StringUtils", () => {
       const result = StringUtils.isEmpty(testValue);
       expect(false).to.be.eq(result);
     });
+    it("should return false if value is [1]", () => {
+      const testValue = [1] as any;
+      const result = StringUtils.isEmpty(testValue);
+      expect(false).to.be.eq(result);
+    });
   });
 
   describe("#isNotEmpty", () => {

@@ -132,6 +132,12 @@ describe(".ObjectUtils", () => {
       const result = ObjectUtils.isString(testValue);
       expect(false).to.be.eq(result);
     });
+
+    it("should return false if value is null", () => {
+      const testValue = null;
+      const result = ObjectUtils.isString(testValue);
+      expect(false).to.be.eq(result);
+    });
   });
 
   describe("#isNumber", () => {

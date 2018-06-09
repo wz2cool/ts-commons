@@ -18,7 +18,7 @@ export class NumberUtils {
    * Number.isInteger(false);     // false
    * Number.isInteger([1]);       // false
    */
-  public static isInteger(value: number): boolean {
+  public static isInteger(value: any): boolean {
     return (
       ObjectUtils.isNumber(value) &&
       isFinite(value) &&
