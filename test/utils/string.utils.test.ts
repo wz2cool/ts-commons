@@ -774,4 +774,31 @@ describe(".StringUtils", () => {
       expect(true).to.be.eq(result);
     });
   });
+
+  describe("#indexOf", () => {
+    it("should return -1 if str is null and searchStr is 'a'", () => {
+      const str = null;
+      const searchStr = "";
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is undefined and searchStr is 'a'", () => {
+      const str = undefined;
+      const searchStr = "";
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is null", () => {
+      const str = "abc";
+      const searchStr = null;
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined", () => {
+      const str = "abc";
+      const searchStr = undefined;
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+  });
 });

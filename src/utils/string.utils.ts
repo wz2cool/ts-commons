@@ -1,4 +1,5 @@
 import { ObjectUtils } from "./object.utils";
+import { NumberUtils } from ".";
 
 export class StringUtils {
   public static readonly EMPTY: string = "";
@@ -189,7 +190,18 @@ export class StringUtils {
     return false;
   }
 
-  // public static indexOf(str: string, searchStr: string, startPos?: number) {}
+  public static indexOf(str: string, searchStr: string, startPos?: number) {
+    if (
+      ObjectUtils.isNullOrUndefined(str) ||
+      ObjectUtils.isNullOrUndefined(searchStr) ||
+      (!ObjectUtils.isUndefinend(startPos) &&
+        !NumberUtils.isSafeInteger(startPos))
+    ) {
+      return this.INDEX_NOT_FOUND;
+    }
+    const useStartPos = ObjectUtils.isUndefinend(startPos) ? 0 : startPos;
+    return str.indexOf(searchStr, useStartPos);
+  }
 
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
