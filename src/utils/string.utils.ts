@@ -1,5 +1,5 @@
 import { ObjectUtils } from "./object.utils";
-import { NumberUtils } from ".";
+import { NumberUtils } from "./number.utils";
 
 export class StringUtils {
   public static readonly EMPTY: string = "";
@@ -190,6 +190,14 @@ export class StringUtils {
     return false;
   }
 
+  /**
+   *  StringUtils.indexOf(null, *)         = -1
+   *  StringUtils.indexOf(undefined, *)         = -1
+   *  StringUtils.indexOf("", *)           = -1
+   *  StringUtils.indexOf("aabaabaa", 'a') = 0
+   *  StringUtils.indexOf("aabaabaa", 'b') = 2
+   *  StringUtils.indexOf("aabaabaa", 'b', 3) = 5
+   */
   public static indexOf(str: string, searchStr: string, startPos?: number) {
     if (
       ObjectUtils.isNullOrUndefined(str) ||

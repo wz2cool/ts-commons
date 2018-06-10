@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { describe } from "mocha";
-import { StringUtils } from "../../src";
+import { StringUtils, NumberUtils } from "../../src";
 describe(".StringUtils", () => {
   describe("#isEmpty", () => {
     it("should return true if value is null", () => {
@@ -776,6 +776,12 @@ describe(".StringUtils", () => {
   });
 
   describe("#indexOf", () => {
+    // StringUtils.indexOf(null, *)         = -1
+    // StringUtils.indexOf(undefined, *)         = -1
+    // StringUtils.indexOf("", *)           = -1
+    // StringUtils.indexOf("aabaabaa", 'a') = 0
+    // StringUtils.indexOf("aabaabaa", 'b') = 2
+    // StringUtils.indexOf("aabaabaa", 'b', 3) = 5
     it("should return -1 if str is null and searchStr is 'a'", () => {
       const str = null;
       const searchStr = "";
@@ -799,6 +805,46 @@ describe(".StringUtils", () => {
       const searchStr = undefined;
       const result = StringUtils.indexOf(str, searchStr);
       expect(-1).to.be.eq(result);
+    });
+    it("should return 0 if str is 'aabaabaa' and searchStr is 'a'", () => {
+      const str = "aabaabaa";
+      const searchStr = "a";
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(0).to.be.eq(result);
+    });
+    it("should return 2 if str is 'aabaabaa' and searchStr is 'b'", () => {
+      const str = "aabaabaa";
+      const searchStr = "b";
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(2).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined and startPos is null", () => {
+      const str = "abc";
+      const searchStr = "b";
+      const startPos = null;
+      const result = StringUtils.indexOf(str, searchStr, startPos);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined and startPos is null", () => {
+      const str = "abc";
+      const searchStr = "b";
+      const startPos = 1.2;
+      const result = StringUtils.indexOf(str, searchStr, startPos);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return 2 if str is 'aabaabaa' and searchStr is 'b' and startPos is 0", () => {
+      const str = "aabaabaa";
+      const searchStr = "b";
+      const startPos = 0;
+      const result = StringUtils.indexOf(str, searchStr, startPos);
+      expect(2).to.be.eq(result);
+    });
+    it("should return 5 if str is 'aabaabaa' and searchStr is 'b' and startPos is 3", () => {
+      const str = "aabaabaa";
+      const searchStr = "b";
+      const startPos = 3;
+      const result = StringUtils.indexOf(str, searchStr, startPos);
+      expect(5).to.be.eq(result);
     });
   });
 });

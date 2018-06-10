@@ -1,5 +1,6 @@
 import { ObjectUtils } from "./object.utils";
 
+// isInteger and isSafeInteger cannot be found in IE
 export class NumberUtils {
   public static readonly MAX_SAFE_INTEGER: number = 9007199254740991;
   public static readonly MIN_SAFE_INTEGER: number = -9007199254740991;
