@@ -197,6 +197,7 @@ export class StringUtils {
    *  StringUtils.indexOf("aabaabaa", 'a') = 0
    *  StringUtils.indexOf("aabaabaa", 'b') = 2
    *  StringUtils.indexOf("aabaabaa", 'b', 3) = 5
+   *  StringUtils.indexOf("aabaabaa", '') = 0
    */
   public static indexOf(str: string, searchStr: string, startPos?: number) {
     if (
@@ -209,6 +210,32 @@ export class StringUtils {
     }
     const useStartPos = ObjectUtils.isUndefinend(startPos) ? 0 : startPos;
     return str.indexOf(searchStr, useStartPos);
+  }
+
+  /**
+   * StringUtils.lastIndexOf("aFkyk", "k")          =4
+   * StringUtils.lastIndexOf("a Fkyk", " ");        =1
+   * StringUtils.lastIndexOf("aabaabaa", "b");      =5
+   * StringUtils.lastIndexOf("aabaabaa", "b", 4);   =2
+   */
+  public static lastIndexOf(
+    str: string,
+    searchStr: string,
+    // tslint:disable-next-line:trailing-comma
+    position?: number
+  ) {
+    if (
+      ObjectUtils.isNullOrUndefined(str) ||
+      ObjectUtils.isNullOrUndefined(searchStr) ||
+      (!ObjectUtils.isUndefinend(position) &&
+        !NumberUtils.isSafeInteger(position))
+    ) {
+      return this.INDEX_NOT_FOUND;
+    }
+    const usePosition = ObjectUtils.isUndefinend(position)
+      ? str.length - 1
+      : position;
+    return str.lastIndexOf(searchStr, usePosition);
   }
 
   public static isWhitespace(ch: string): boolean {

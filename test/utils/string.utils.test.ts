@@ -846,5 +846,79 @@ describe(".StringUtils", () => {
       const result = StringUtils.indexOf(str, searchStr, startPos);
       expect(5).to.be.eq(result);
     });
+    it("should return 0 if str is 'aabaabaa' and searchStr is ''", () => {
+      const str = "aabaabaa";
+      const searchStr = "";
+      const result = StringUtils.indexOf(str, searchStr);
+      expect(0).to.be.eq(result);
+    });
+  });
+
+  describe("#lastIndexOf", () => {
+    // StringUtils.lastIndexOf("aFkyk", "k")    4;
+    // StringUtils.lastIndexOf("a Fkyk", " ")   1;
+    it("should return -1 if str is null and searchStr is 'a'", () => {
+      const str = null;
+      const searchStr = "";
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is undefined and searchStr is 'a'", () => {
+      const str = undefined;
+      const searchStr = "";
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is null", () => {
+      const str = "abc";
+      const searchStr = null;
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined", () => {
+      const str = "abc";
+      const searchStr = undefined;
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return 2 if str is 'aabaabaa' and searchStr is 'b'", () => {
+      const str = "aabaabaa";
+      const searchStr = "b";
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(5).to.be.eq(result);
+    });
+    it("should return 2 if str is 'aabaabaa' and searchStr is 'b' and postion is 4", () => {
+      const str = "aabaabaa";
+      const searchStr = "b";
+      const positon = 4;
+      const result = StringUtils.lastIndexOf(str, searchStr, positon);
+      expect(2).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined and startPos is null", () => {
+      const str = "abc";
+      const searchStr = "b";
+      const startPos = null;
+      const result = StringUtils.lastIndexOf(str, searchStr, startPos);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return -1 if str is 'abc' and searchStr is undefined and startPos is null", () => {
+      const str = "abc";
+      const searchStr = "b";
+      const startPos = 1.2;
+      const result = StringUtils.lastIndexOf(str, searchStr, startPos);
+      expect(-1).to.be.eq(result);
+    });
+    it("should return 4 if str is 'aFkyk' and searchStr is 'k'", () => {
+      const str = "aFkyk";
+      const searchStr = "k";
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(4).to.be.eq(result);
+    });
+    it("should return 4 if str is 'aFkyk' and searchStr is ' '", () => {
+      const str = "a Fky";
+      const searchStr = " ";
+      const result = StringUtils.lastIndexOf(str, searchStr);
+      expect(1).to.be.eq(result);
+    });
   });
 });
