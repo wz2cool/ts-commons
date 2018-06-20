@@ -238,6 +238,24 @@ export class StringUtils {
     return str.lastIndexOf(searchStr, usePosition);
   }
 
+  public static contains(str: string, searchStr: string): boolean {
+    if (ObjectUtils.isString(str) && ObjectUtils.isString(searchStr)) {
+      return str.indexOf(searchStr) >= 0;
+    } else {
+      return false;
+    }
+  }
+
+  public static containsIgnoreCase(str: string, searchStr: string): boolean {
+    if (ObjectUtils.isString(str) && ObjectUtils.isString(searchStr)) {
+      return (
+        str.toLocaleLowerCase().indexOf(searchStr.toLocaleLowerCase()) >= 0
+      );
+    } else {
+      return false;
+    }
+  }
+
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }

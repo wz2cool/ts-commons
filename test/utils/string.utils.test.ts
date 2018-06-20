@@ -921,4 +921,106 @@ describe(".StringUtils", () => {
       expect(1).to.be.eq(result);
     });
   });
+
+  describe("#contains", () => {
+    it("should return false if str is 'abc' and searchStr is null", () => {
+      const str = "abc";
+      const searchStr = null;
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is undefined", () => {
+      const str = "abc";
+      const searchStr = undefined;
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is null and searchStr is 'a'", () => {
+      const str = null;
+      const searchStr = "a";
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and searchStr is 'a'", () => {
+      const str = undefined;
+      const searchStr = "a";
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is 'abc' and searchStr is 'a'", () => {
+      const str = "abc";
+      const searchStr = "a";
+      const result = StringUtils.contains(str, searchStr);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is 'abc' and searchStr is 'bc'", () => {
+      const str = "abc";
+      const searchStr = "bc";
+      const result = StringUtils.contains(str, searchStr);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is 'd'", () => {
+      const str = "abc";
+      const searchStr = "d";
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is 'B'", () => {
+      const str = "abc";
+      const searchStr = "B";
+      const result = StringUtils.contains(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#containsIgnoreCase", () => {
+    it("should return false if str is 'abc' and searchStr is null", () => {
+      const str = "abc";
+      const searchStr = null;
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is undefined", () => {
+      const str = "abc";
+      const searchStr = undefined;
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is null and searchStr is 'a'", () => {
+      const str = null;
+      const searchStr = "a";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and searchStr is 'a'", () => {
+      const str = undefined;
+      const searchStr = "a";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is 'abc' and searchStr is 'a'", () => {
+      const str = "abc";
+      const searchStr = "a";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is 'abc' and searchStr is 'bc'", () => {
+      const str = "abc";
+      const searchStr = "bc";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is 'd'", () => {
+      const str = "abc";
+      const searchStr = "d";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is 'abc' and searchStr is 'B'", () => {
+      const str = "abc";
+      const searchStr = "B";
+      const result = StringUtils.containsIgnoreCase(str, searchStr);
+      expect(true).to.be.eq(result);
+    });
+  });
 });
