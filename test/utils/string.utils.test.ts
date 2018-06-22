@@ -1061,5 +1061,44 @@ describe(".StringUtils", () => {
       const result = StringUtils.subString(value, start);
       expect(null).to.be.eq(result);
     });
+    it("should return null if str is 'abc' and start is 1 and end is null", () => {
+      const value = "abc";
+      const start = 1;
+      const end = null;
+      const result = StringUtils.subString(value, start, end);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is 1 and end is 1.2", () => {
+      const value = "abc";
+      const start = 1;
+      const end = 1.2;
+      const result = StringUtils.subString(value, start, end);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is '' and start is 1.2", () => {
+      const value = "";
+      const start = 1.2;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is 1", () => {
+      const value = "abc";
+      const start = 1;
+      const result = StringUtils.subString(value, start);
+      expect("bc").to.be.eq(result);
+    });
+    it("should return null if str is '' and start is 1", () => {
+      const value = "";
+      const start = 1;
+      const result = StringUtils.subString(value, start);
+      expect("").to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is 1 and end is 2", () => {
+      const value = "abc";
+      const start = 1;
+      const end = 2;
+      const result = StringUtils.subString(value, start, end);
+      expect("b").to.be.eq(result);
+    });
   });
 });
