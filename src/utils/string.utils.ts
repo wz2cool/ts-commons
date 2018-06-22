@@ -256,6 +256,26 @@ export class StringUtils {
     }
   }
 
+  public static subString(str: string, start: number, end?: number): string {
+    if (
+      !ObjectUtils.isString(str) ||
+      !NumberUtils.isSafeInteger(start) ||
+      (!ObjectUtils.isUndefinend(end) && !NumberUtils.isSafeInteger(end))
+    ) {
+      return null;
+    }
+
+    if (str.length === 0) {
+      return str;
+    }
+
+    if (ObjectUtils.isUndefinend(end)) {
+      return str.substring(start);
+    } else {
+      return str.substring(start, end);
+    }
+  }
+
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }

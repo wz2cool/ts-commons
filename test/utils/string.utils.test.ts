@@ -1023,4 +1023,43 @@ describe(".StringUtils", () => {
       expect(true).to.be.eq(result);
     });
   });
+
+  describe("#substring", () => {
+    it("should return null if str is null and start is 0", () => {
+      const value = null;
+      const start = 0;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is undefined and start is 0", () => {
+      const value = undefined;
+      const start = 0;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is undefined and start is 0", () => {
+      const value = undefined;
+      const start = 0;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is null", () => {
+      const value = "abc";
+      const start = null;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is undefined", () => {
+      const value = "abc";
+      const start = undefined;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+    it("should return null if str is 'abc' and start is 1.2", () => {
+      const value = "abc";
+      const start = 1.2;
+      const result = StringUtils.subString(value, start);
+      expect(null).to.be.eq(result);
+    });
+  });
 });
