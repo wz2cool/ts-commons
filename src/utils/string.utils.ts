@@ -276,6 +276,37 @@ export class StringUtils {
     }
   }
 
+  public static startWith(str: string, prefix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+      return false;
+    }
+    return str.indexOf(prefix) === 0;
+  }
+
+  public static startWithIgnoreCase(str: string, prefix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+      return false;
+    }
+    return str.toLocaleLowerCase().indexOf(prefix.toLocaleLowerCase()) === 0;
+  }
+
+  public static endWith(str: string, prefix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+      return false;
+    }
+    return str.lastIndexOf(prefix) === str.length - prefix.length;
+  }
+
+  public static endWithIgnoreCase(str: string, prefix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+      return false;
+    }
+    return (
+      str.toLocaleLowerCase().lastIndexOf(prefix.toLocaleLowerCase()) ===
+      str.length - prefix.length
+    );
+  }
+
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }

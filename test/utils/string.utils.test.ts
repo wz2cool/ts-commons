@@ -1101,4 +1101,208 @@ describe(".StringUtils", () => {
       expect("b").to.be.eq(result);
     });
   });
+
+  describe("#startWith", () => {
+    it("should return false if str is null and start is a", () => {
+      const value = null;
+      const start = "a";
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and start is a", () => {
+      const value = undefined;
+      const start = "a";
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is null", () => {
+      const value = "abc";
+      const start = null;
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is undefined", () => {
+      const value = "abc";
+      const start = undefined;
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is a", () => {
+      const value = "abc";
+      const start = "a";
+      const result = StringUtils.startWith(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is b", () => {
+      const value = "abc";
+      const start = "b";
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is A", () => {
+      const value = "abc";
+      const start = "A";
+      const result = StringUtils.startWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#startWithIgnoreCase", () => {
+    it("should return false if str is null and start is a", () => {
+      const value = null;
+      const start = "a";
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and start is a", () => {
+      const value = undefined;
+      const start = "a";
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is null", () => {
+      const value = "abc";
+      const start = null;
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is undefined", () => {
+      const value = "abc";
+      const start = undefined;
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is a", () => {
+      const value = "abc";
+      const start = "a";
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is b", () => {
+      const value = "abc";
+      const start = "b";
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is A", () => {
+      const value = "abc";
+      const start = "A";
+      const result = StringUtils.startWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+  });
+
+  describe("#endWith", () => {
+    it("should return false if str is null and start is a", () => {
+      const value = null;
+      const start = "a";
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and start is a", () => {
+      const value = undefined;
+      const start = "a";
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is null", () => {
+      const value = "abc";
+      const start = null;
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is undefined", () => {
+      const value = "abc";
+      const start = undefined;
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is abc", () => {
+      const value = "abc";
+      const start = "abc";
+      const result = StringUtils.endWith(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is bc", () => {
+      const value = "abc";
+      const start = "bc";
+      const result = StringUtils.endWith(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is c", () => {
+      const value = "abc";
+      const start = "c";
+      const result = StringUtils.endWith(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is b", () => {
+      const value = "abc";
+      const start = "b";
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is C", () => {
+      const value = "abc";
+      const start = "C";
+      const result = StringUtils.endWith(value, start);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#endWithIgnoreCase", () => {
+    it("should return false if str is null and start is a", () => {
+      const value = null;
+      const start = "a";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is undefined and start is a", () => {
+      const value = undefined;
+      const start = "a";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is null", () => {
+      const value = "abc";
+      const start = null;
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is undefined", () => {
+      const value = "abc";
+      const start = undefined;
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is abc", () => {
+      const value = "abc";
+      const start = "abc";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is bc", () => {
+      const value = "abc";
+      const start = "bc";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if str is abc and start is c", () => {
+      const value = "abc";
+      const start = "c";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is b", () => {
+      const value = "abc";
+      const start = "b";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if str is abc and start is C", () => {
+      const value = "abc";
+      const start = "C";
+      const result = StringUtils.endWithIgnoreCase(value, start);
+      expect(true).to.be.eq(result);
+    });
+  });
 });
