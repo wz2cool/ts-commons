@@ -280,31 +280,34 @@ export class StringUtils {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
       return false;
     }
-    return str.indexOf(prefix) === 0;
+    // return str.indexOf(prefix) === 0;
+    // according to https://leonax.net/p/5806/use-string-startswith-and-endswith-in-javascript/
+    return str.slice(0, prefix.length) === prefix;
   }
 
   public static startWithIgnoreCase(str: string, prefix: string): boolean {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
       return false;
     }
-    return str.toLocaleLowerCase().indexOf(prefix.toLocaleLowerCase()) === 0;
+    const useStr = str.toLocaleLowerCase();
+    const usePrefix = prefix.toLocaleLowerCase();
+    return useStr.slice(0, usePrefix.length) === usePrefix;
   }
 
-  public static endWith(str: string, prefix: string): boolean {
-    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+  public static endWith(str: string, suffix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(suffix)) {
       return false;
     }
-    return str.lastIndexOf(prefix) === str.length - prefix.length;
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
   }
 
-  public static endWithIgnoreCase(str: string, prefix: string): boolean {
-    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
+  public static endWithIgnoreCase(str: string, suffix: string): boolean {
+    if (!ObjectUtils.isString(str) || !ObjectUtils.isString(suffix)) {
       return false;
     }
-    return (
-      str.toLocaleLowerCase().lastIndexOf(prefix.toLocaleLowerCase()) ===
-      str.length - prefix.length
-    );
+    const useStr = str.toLocaleLowerCase();
+    const useSuffix = suffix.toLocaleLowerCase();
+    return useStr.indexOf(useSuffix, useStr.length - useSuffix.length) !== -1;
   }
 
   public static isWhitespace(ch: string): boolean {
