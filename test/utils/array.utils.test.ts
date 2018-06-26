@@ -108,4 +108,54 @@ describe(".CollectionUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#insert", () => {
+    it("should return true if insert md value success", () => {
+      const array = [1, 3];
+      const obj = 2;
+      const result = ArrayUtils.insert(array, 1, obj);
+      expect(true).to.be.eq(result);
+      expect(3).to.be.eq(array.length);
+    });
+
+    it("should return true if insert last value success", () => {
+      const array = [1, 2];
+      const obj = 3;
+      const result = ArrayUtils.insert(array, 2, obj);
+      expect(true).to.be.eq(result);
+      expect(3).to.be.eq(array.length);
+    });
+    it("should return true if array is []", () => {
+      const array = [];
+      const obj = 4;
+      const result = ArrayUtils.insert(array, 0, obj);
+      expect(true).to.be.eq(result);
+      expect(1).to.be.eq(array.length);
+    });
+    it("should return false if insert last value greater than source.length", () => {
+      const array = [1, 2];
+      const obj = 4;
+      const result = ArrayUtils.insert(array, 3, obj);
+      expect(false).to.be.eq(result);
+      expect(2).to.be.eq(array.length);
+    });
+    it("should return false if array is null", () => {
+      const array = null;
+      const obj = 4;
+      const result = ArrayUtils.insert(array, 1, obj);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if array is undefined", () => {
+      const array = undefined;
+      const obj = 4;
+      const result = ArrayUtils.insert(array, 1, obj);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if index is 1.2", () => {
+      const array = [1, 2];
+      const obj = 4;
+      const result = ArrayUtils.insert(array, 1.2, obj);
+      expect(false).to.be.eq(result);
+    });
+  });
 });

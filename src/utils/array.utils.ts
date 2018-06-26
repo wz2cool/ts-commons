@@ -1,4 +1,5 @@
 import { ObjectUtils } from "./object.utils";
+import { NumberUtils } from ".";
 
 // from org.springframework.util.CollectionUtils
 export class ArrayUtils {
@@ -24,5 +25,18 @@ export class ArrayUtils {
       }
     }
     return false;
+  }
+
+  public static insert<T>(array: T[], index: number, obj: T): boolean {
+    if (
+      !ObjectUtils.isArray(array) ||
+      !NumberUtils.isSafeInteger(index) ||
+      index > array.length
+    ) {
+      return false;
+    }
+    const oldCount = array.length;
+    array.splice(index, 0, obj);
+    return oldCount === array.length - 1;
   }
 }
