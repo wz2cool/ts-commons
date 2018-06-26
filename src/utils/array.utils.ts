@@ -27,7 +27,7 @@ export class ArrayUtils {
     return false;
   }
 
-  public static insert<T>(array: T[], index: number, obj: T): boolean {
+  public static insert<T>(array: T[], index: number, item: T): boolean {
     if (
       !ObjectUtils.isArray(array) ||
       !NumberUtils.isSafeInteger(index) ||
@@ -36,7 +36,7 @@ export class ArrayUtils {
       return false;
     }
     const oldCount = array.length;
-    array.splice(index, 0, obj);
+    array.splice(index, 0, item);
     return oldCount === array.length - 1;
   }
 }
