@@ -167,4 +167,37 @@ describe(".ObjectUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#toSafeString", () => {
+    it("shoud return '' if value is null", () => {
+      const value = null;
+      const result = ObjectUtils.toSafeString(value);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is undefined", () => {
+      const value = undefined;
+      const result = ObjectUtils.toSafeString(value);
+      expect("").to.be.eq(result);
+    });
+    it("should return '1' if value is 1", () => {
+      const value = 1;
+      const result = ObjectUtils.toSafeString(value);
+      expect("1").to.be.eq(result);
+    });
+    it("should return '1' if value is '1'", () => {
+      const value = "1";
+      const result = ObjectUtils.toSafeString(value);
+      expect("1").to.be.eq(result);
+    });
+    it("should return 'true' if value is true", () => {
+      const value = true;
+      const result = ObjectUtils.toSafeString(value);
+      expect("true").to.be.eq(result);
+    });
+    it("should return 'true' if value is [1,2]", () => {
+      const value = [1, 2];
+      const result = ObjectUtils.toSafeString(value);
+      expect("1,2").to.be.eq(result);
+    });
+  });
 });

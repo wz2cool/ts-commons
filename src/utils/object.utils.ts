@@ -30,4 +30,14 @@ export class ObjectUtils {
   public static isBoolean(value: any): boolean {
     return typeof value === "boolean";
   }
+
+  // return "" if value is null or undefined.
+  // from C# https://docs.microsoft.com/en-us/dotnet/api/microsoft.toolkit.extensions.stringextensions.tosafestring?view=uwp-toolkit-dotnet
+  public static toSafeString(value: any): string {
+    if (this.isNullOrUndefined(value)) {
+      return "";
+    } else {
+      return value.toString();
+    }
+  }
 }
