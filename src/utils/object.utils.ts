@@ -58,7 +58,10 @@ export class ObjectUtils {
     return (testObj.constructor as any).name;
   }
 
-  public static getClass<T>(o: T): { new (): T } {
-    return o.constructor as { new (): T };
+  public static createObject<T>(type: { new (): T }): T {
+    if (this.isNullOrUndefined(type)) {
+      return null;
+    }
+    return new type();
   }
 }

@@ -269,22 +269,25 @@ describe(".ObjectUtils", () => {
     });
   });
 
-  describe("#getClass", () => {
+  describe("#createObject", () => {
     class Student {
       name: string;
       age: number;
     }
-    it("should return Student class if value is stduent", () => {
-      const value = new Student();
-      const result = ObjectUtils.getClass(value);
-      expect(true).to.be.eq(Student === result);
+    it("should return null if value is null", () => {
+      const value = null;
+      const result = ObjectUtils.createObject(value);
+      expect(null).to.be.eq(result);
     });
-    it("should return string if value is '123'", () => {
-      const value = "123";
-      const result = ObjectUtils.getClass(value);
-      // tslint:disable-next-line:no-string-literal
-      const className = result["name"];
-      expect("String").to.be.eq(className);
+    it("should return null if value is undefined", () => {
+      const value = undefined;
+      const result = ObjectUtils.createObject(value);
+      expect(null).to.be.eq(result);
+    });
+    it("should return student if value is student", () => {
+      const value = Student;
+      const result = ObjectUtils.createObject(value);
+      expect(true).to.be.eq(result instanceof Student);
     });
   });
 });
