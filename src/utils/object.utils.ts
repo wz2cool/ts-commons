@@ -48,4 +48,13 @@ export class ObjectUtils {
   public static setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
     obj[key] = value;
   }
+
+  public static getClassName<T>(o: T | { new (): T }): string {
+    if (this.isNullOrUndefined(o)) {
+      return "";
+    }
+
+    const testObj = typeof o === "function" ? new o() : o;
+    return (testObj.constructor as any).name;
+  }
 }

@@ -230,4 +230,42 @@ describe(".ObjectUtils", () => {
       expect("test").to.be.eq(student.name);
     });
   });
+
+  describe("#getClassName", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+
+    it("should return '' if value is undefinend", () => {
+      const value = undefined;
+      const result = ObjectUtils.getClassName(value);
+      expect("").to.be.eq(result);
+    });
+    it("should return '' if value is null", () => {
+      const value = null;
+      const result = ObjectUtils.getClassName(value);
+      expect("").to.be.eq(result);
+    });
+    it("should return 'Student' if value is student", () => {
+      const value = new Student();
+      const result = ObjectUtils.getClassName(value);
+      expect("Student").to.be.eq(result);
+    });
+    it("should return 'String' if value is 'test'", () => {
+      const value = "test";
+      const result = ObjectUtils.getClassName(value);
+      expect("String").to.be.eq(result);
+    });
+    it("should return 'number' if value is 123", () => {
+      const value = 123;
+      const result = ObjectUtils.getClassName(value);
+      expect("Number").to.be.eq(result);
+    });
+    it("should return 'Student' if value is Student", () => {
+      const value = Student;
+      const result = ObjectUtils.getClassName(value);
+      expect("Student").to.be.eq(result);
+    });
+  });
 });
