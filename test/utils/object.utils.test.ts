@@ -268,4 +268,23 @@ describe(".ObjectUtils", () => {
       expect("Student").to.be.eq(result);
     });
   });
+
+  describe("#getClass", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+    it("should return Student class if value is stduent", () => {
+      const value = new Student();
+      const result = ObjectUtils.getClass(value);
+      expect(true).to.be.eq(Student === result);
+    });
+    it("should return string if value is '123'", () => {
+      const value = "123";
+      const result = ObjectUtils.getClass(value);
+      // tslint:disable-next-line:no-string-literal
+      const className = result["name"];
+      expect("String").to.be.eq(className);
+    });
+  });
 });

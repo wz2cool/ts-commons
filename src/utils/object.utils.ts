@@ -57,4 +57,8 @@ export class ObjectUtils {
     const testObj = typeof o === "function" ? new o() : o;
     return (testObj.constructor as any).name;
   }
+
+  public static getClass<T>(o: T): { new (): T } {
+    return o.constructor as { new (): T };
+  }
 }
