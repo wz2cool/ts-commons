@@ -200,4 +200,34 @@ describe(".ObjectUtils", () => {
       expect("1,2").to.be.eq(result);
     });
   });
+
+  describe("#getProperty", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+    it("should return undefind if don't have property", () => {
+      const student = new Student();
+      const result = ObjectUtils.getProperty(student, "name");
+      expect(undefined).to.be.eq(result);
+    });
+    it("should return 'test' if name is 'test'", () => {
+      const student = new Student();
+      student.name = "test";
+      const result = ObjectUtils.getProperty(student, "name");
+      expect("test").to.be.eq(result);
+    });
+  });
+
+  describe("#setProperty", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+    it("should set success", () => {
+      const student = new Student();
+      ObjectUtils.setProperty(student, "name", "test");
+      expect("test").to.be.eq(student.name);
+    });
+  });
 });
