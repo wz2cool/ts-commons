@@ -72,6 +72,8 @@ export class ObjectUtils {
       return "";
     }
 
+    // ES5: function (name) { return student.name; }
+    // ES6: (student) => student.name;
     const expression = fn.toString();
     const returnIndex = expression.indexOf("return");
     const regexp =
