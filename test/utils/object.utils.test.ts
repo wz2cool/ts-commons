@@ -290,4 +290,22 @@ describe(".ObjectUtils", () => {
       expect(true).to.be.eq(result instanceof Student);
     });
   });
+
+  describe("#getPropertyName", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+    it("should return 'name' if (s)=> s.name", () => {
+      const result = ObjectUtils.getPropertyName<Student>(
+        // tslint:disable-next-line:trailing-comma
+        student => student.name
+      );
+      expect("name").to.be.eq(result);
+    });
+    it("should return '' if null", () => {
+      const result = ObjectUtils.getPropertyName<Student>(null);
+      expect("").to.be.eq(result);
+    });
+  });
 });
