@@ -74,16 +74,12 @@ export class ObjectUtils {
 
     const expression = fn.toString();
     const returnIndex = expression.indexOf("return");
-    const useString =
-      returnIndex > -1
-        ? expression.substring(returnIndex, expression.length - 1)
-        : expression;
     const regexp =
       returnIndex > -1
-        ? new RegExp(`^return\\s+\\w+\.(\\w+)\\s*;\\s*$`)
+        ? new RegExp(`^.*return\\s+\\w+\.(\\w+)\\s*;\\s*\\}\\s*$`)
         : RegExp(`^\\s*\\(?\\w+\\)?\\s*=>\\s*\\w+\\.(\\w+)\\s*$`);
 
-    const match = regexp.exec(useString);
+    const match = regexp.exec(expression);
     return !this.isNullOrUndefined(match) && match.length === 2 ? match[1] : "";
   }
 }

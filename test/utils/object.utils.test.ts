@@ -307,5 +307,9 @@ describe(".ObjectUtils", () => {
       const result = ObjectUtils.getPropertyName<Student>(null);
       expect("").to.be.eq(result);
     });
+    it("should return '' if ''", () => {
+      const result = ObjectUtils.getPropertyName<Student>("" as any);
+      expect("").to.be.eq(result);
+    });
   });
 });
