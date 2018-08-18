@@ -313,4 +313,26 @@ export class StringUtils {
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }
+
+  public static newGuid(): string {
+    return (
+      this.S4() +
+      this.S4() +
+      "-" +
+      this.S4() +
+      "-" +
+      this.S4() +
+      "-" +
+      this.S4() +
+      "-" +
+      this.S4() +
+      this.S4() +
+      this.S4()
+    );
+  }
+
+  private static S4() {
+    // tslint:disable-next-line:no-bitwise
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  }
 }

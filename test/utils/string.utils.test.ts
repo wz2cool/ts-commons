@@ -1305,4 +1305,11 @@ describe(".StringUtils", () => {
       expect(true).to.be.eq(result);
     });
   });
+
+  describe("#newGuid", () => {
+    it("get guid string", () => {
+      const result = StringUtils.newGuid();
+      console.log(result);
+    });
+  });
 });
