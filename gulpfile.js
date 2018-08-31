@@ -1,25 +1,17 @@
 var gulp = require("gulp");
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var tsify = require("tsify");
-var sourcemaps = require("gulp-sourcemaps");
-var buffer = require("vinyl-buffer");
+var ts = require("gulp-typescript");
+const sourcemaps = require("gulp-sourcemaps");
+var tsProject = ts.createProject("tsconfig.json");
 var uglify = require("gulp-uglify");
+var merge = require('merge-stream');
 
-gulp.task("default", function() {
-  return browserify({
-    basedir: ".",
-    debug: true,
-    entries: ["src/index.ts"],
-    cache: {},
-    packageCache: {}
-  })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("index.js"))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest("dist"));
-});
+
+gulp.task('default', function () {
+    var tsProject = ts.createProject('tsconfig.json');
+    var tsResult = gulp.src(['src/**/*.ts'])
+      .pipe(sourcemaps.init())
+      .pipe(tsProject());
+    return merge(tsResult, tsResult.js)
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('./dist/src'));
+  });
