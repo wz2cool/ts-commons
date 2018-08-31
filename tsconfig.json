@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "umd",
+    "module": "commonjs",
     "target": "es5",
     "declaration": true,
     "noImplicitAny": false,
     "sourceMap": true,
-    "outDir": "",
+    "outDir": "./dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
