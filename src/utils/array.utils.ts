@@ -1,5 +1,5 @@
 import { ObjectUtils } from "./object.utils";
-import { NumberUtils } from ".";
+import { NumberUtils } from "./number.utils";
 
 // from org.springframework.util.CollectionUtils
 export class ArrayUtils {
