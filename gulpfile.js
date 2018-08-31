@@ -6,7 +6,7 @@ var sourcemaps = require("gulp-sourcemaps");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify");
 
-gulp.task("default", ["min-js"]);
+gulp.task("default", ["compile"]);
 
 gulp.task("clean", function() {
   return gulp.src(["./tmp/", "./dist/"], { read: false }).pipe(clean());
@@ -44,4 +44,10 @@ gulp.task("min-js", ["browserify-js"], function() {
     .pipe(concat("ts-commons.min.js"))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("./dist"));
+});
+
+gulp.task("compile", ["min-js"], function() {
+  var tsProjectDts = ts.createProject("tsconfig.json");
+  var tsResult = gulp.src("src/**/*.ts").pipe(tsProjectDts());
+  tsResult.dts.pipe(concat("ts-commons.d.ts")).pipe(gulp.dest("dist"));
 });
