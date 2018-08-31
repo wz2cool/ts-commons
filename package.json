@@ -1,6 +1,6 @@
 {
   "name": "ts-commons",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "common methods for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,12 +8,12 @@
     "pretest": "npm run deletedist && tsc -p tsconfig.test.json",
     "test": "nyc mocha dist/test --recursive",
     "posttest": "npm run removenyc && del-cli coverage",
-    "prepublish": "tsc",
+    "prepublish": "npm run build",
     "cover": "tsc -p tsconfig.test.json && istanbul cover ./node_modules/mocha/bin/_mocha dist/test/**/*.test.js --recursive",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && del-cli ./coverage",
     "removenyc": "del-cli .nyc_output",
     "deletedist": "del-cli dist",
-    "build": "npm run deletedist && gulp"
+    "build": "npm run deletedist && cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",

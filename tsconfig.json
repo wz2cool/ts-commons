@@ -5,7 +5,7 @@
     "declaration": true,
     "noImplicitAny": false,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

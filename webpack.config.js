@@ -4,8 +4,8 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = {
   mode: "production",
   entry: {
-    "ts-commons": "./src/index.ts",
-    "ts-commons.min": "./src/index.ts"
+    index: "./src/index.ts",
+    "index.min": "./src/index.ts"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
