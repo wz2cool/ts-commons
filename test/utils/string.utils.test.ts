@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { describe } from "mocha";
-import { StringUtils, NumberUtils } from "../../src";
+import { StringUtils } from "../../src/index";
 describe(".StringUtils", () => {
   describe("#isEmpty", () => {
     it("should return true if value is null", () => {

@@ -1,4 +1,4 @@
-import { HttpUtils } from "../../src";
+import { HttpUtils } from "../../src/index";
 import { expect } from "chai";
 
 describe(".HttpUtils", () => {

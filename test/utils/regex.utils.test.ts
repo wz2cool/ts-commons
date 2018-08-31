@@ -1,4 +1,4 @@
-import { RegexUtils } from "../../src";
+import { RegexUtils } from "../../src/index";
 import { expect } from "chai";
 
 describe(".RegexUtils", () => {

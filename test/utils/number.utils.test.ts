@@ -1,4 +1,4 @@
-import { NumberUtils } from "../../src";
+import { NumberUtils } from "../../src/index";
 import { expect } from "chai";
 
 describe(".NumberUtils", () => {
