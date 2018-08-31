@@ -24,7 +24,7 @@ gulp.task("transpile-ts", ["clean"], function() {
 
 gulp.task("min-js", ["transpile-ts"], function() {
   return gulp
-    .src("./tmp/ts-commons.js")
+    .src("./tmp/index.js")
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(browserify())
     .pipe(uglify())
