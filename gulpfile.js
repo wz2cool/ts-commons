@@ -22,7 +22,20 @@ gulp.task("transpile-ts", ["clean"], function() {
     .pipe(gulp.dest("./tmp"));
 });
 
-gulp.task("min-js", ["transpile-ts"], function() {
+gulp.task("browserify-js", ["transpile-ts"], function() {
+  return (
+    gulp
+      .src("./tmp/index.js")
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(browserify())
+      // .pipe(uglify())
+      .pipe(concat("ts-commons.js"))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest("./dist"))
+  );
+});
+
+gulp.task("min-js", ["browserify-js"], function() {
   return gulp
     .src("./tmp/index.js")
     .pipe(sourcemaps.init({ loadMaps: true }))
