@@ -1,9 +1,9 @@
 {
   "name": "ts-commons",
-  "version": "0.0.21",
+  "version": "0.0.31",
   "description": "common methods for typescript",
-  "main": "dist/ts-commons.js",
-  "types": "dist/ts-commons.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/dist/index.d.ts",
   "scripts": {
     "pretest": "npm run deletedist && tsc -p tsconfig.test.json",
     "test": "nyc mocha dist/test --recursive",
