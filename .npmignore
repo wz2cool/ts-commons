@@ -4,3 +4,5 @@ tslint.json
 src
 test
 coverage
+webpack.config.js
+.travis.yml
