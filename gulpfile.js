@@ -5,6 +5,7 @@ var concat = require("gulp-concat");
 var sourcemaps = require("gulp-sourcemaps");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify");
+var dts_gen = require("dts-generator").default;
 
 gulp.task("default", ["compile"]);
 
@@ -13,7 +14,7 @@ gulp.task("clean", function() {
 });
 
 gulp.task("transpile-ts", ["clean"], function() {
-  var tsproject = ts.createProject("./tsconfig.json");
+  var tsproject = ts.createProject("tsconfig.json");
   return tsproject
     .src()
     .pipe(sourcemaps.init())
@@ -36,18 +37,22 @@ gulp.task("browserify-js", ["transpile-ts"], function() {
 });
 
 gulp.task("min-js", ["browserify-js"], function() {
-  return gulp
-    .src("./tmp/index.js")
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(browserify())
-    .pipe(uglify())
-    .pipe(concat("ts-commons.min.js"))
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("./dist"));
+  return (
+    gulp
+      .src("./tmp/index.js")
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(browserify())
+      .pipe(uglify())
+      .pipe(concat("ts-commons.min.js"))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest("./dist"))
+  );
 });
 
 gulp.task("compile", ["min-js"], function() {
   var tsProjectDts = ts.createProject("tsconfig.json");
   var tsResult = gulp.src("src/**/*.ts").pipe(tsProjectDts());
-  tsResult.dts.pipe(concat("ts-commons.d.ts")).pipe(gulp.dest("dist"));
+  tsResult.dts
+    // .pipe(concat('index.d.ts'))
+    .pipe(gulp.dest("dist"));
 });
