@@ -10,6 +10,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
+    globalObject: "typeof self !== 'undefined' ? self : this",
     libraryTarget: "umd",
     library: "ts-commons",
     umdNamedDefine: true
