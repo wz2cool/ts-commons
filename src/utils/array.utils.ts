@@ -3,10 +3,31 @@ import { NumberUtils } from "./number.utils";
 
 // from org.springframework.util.CollectionUtils
 export class ArrayUtils {
+  /**
+   * check whether current array is empty.
+   * eg: ArrayUtils.isEmpty([]) = true;
+   * eg: ArrayUtils.isEmpty(null) = true;
+   * eg: ArrayUtils.isEmpty(underfind) = true;
+   * eg: ArrayUtils.isEmtpy([1]) = fase;
+   * eg: ArrayUtils.isEmtpy("string") = fase;
+   * eg: ArrayUtils.isEmtpy(123) = fase;
+   * @param array
+   */
   public static isEmpty<T>(array: T[]): boolean {
-    return !ObjectUtils.isArray(array) || array.length === 0;
+    if (ObjectUtils.isNullOrUndefined(array)) {
+      return true;
+    }
+    if (!ObjectUtils.isArray(array)) {
+      return false;
+    }
+    return array.length === 0;
   }
 
+  /**
+   * Determines whether an element is in the array.
+   * @param array
+   * @param obj
+   */
   public static contains<T>(array: T[], obj: T): boolean {
     if (this.isEmpty(array) || ObjectUtils.isNullOrUndefined(obj)) {
       return false;

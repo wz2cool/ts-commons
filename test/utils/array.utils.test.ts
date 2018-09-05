@@ -23,6 +23,16 @@ describe(".CollectionUtils", () => {
       const result = ArrayUtils.isEmpty(value);
       expect(false).to.be.eq(result);
     });
+    it("should return false if value is 'string' ", () => {
+      const value: any = "string";
+      const result = ArrayUtils.isEmpty(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is 123 ", () => {
+      const value: any = 123;
+      const result = ArrayUtils.isEmpty(value);
+      expect(false).to.be.eq(result);
+    });
   });
 
   describe("#constains", () => {
