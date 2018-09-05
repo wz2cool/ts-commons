@@ -1,7 +1,6 @@
 import { ObjectUtils } from "./object.utils";
 import { NumberUtils } from "./number.utils";
 
-// from org.springframework.util.CollectionUtils
 export class ArrayUtils {
   /**
    * check whether current array is empty.
