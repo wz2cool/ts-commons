@@ -1,6 +1,6 @@
 {
   "name": "ts-commons",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "common methods for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
