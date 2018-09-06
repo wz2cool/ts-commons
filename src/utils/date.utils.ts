@@ -13,6 +13,11 @@ export class DateUtils {
     if (!NumberUtils.isSafeInteger(timestamp)) {
       return null;
     }
-    return new Date(timestamp * 1000);
+
+    if (timestamp > 1000000000000) {
+      return new Date(timestamp);
+    } else {
+      return new Date(timestamp * 1000);
+    }
   }
 }

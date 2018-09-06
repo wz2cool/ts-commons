@@ -42,5 +42,13 @@ describe(".DateUtils", () => {
         result.getTime()
       );
     });
+
+    it("should return Tue, 19 Jun 2018 00:00:00 GMT if value is 1529366400000", () => {
+      const value = 1529366400000;
+      const result = DateUtils.timestampToDate(value);
+      expect(new Date("Tue, 19 Jun 2018 00:00:00 GMT").getTime()).to.be.eq(
+        result.getTime()
+      );
+    });
   });
 });
