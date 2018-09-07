@@ -25,13 +25,17 @@ describe(".arrayUtils", () => {
     });
     it("should return false if value is 'string' ", () => {
       const value: any = "string";
-      const result = ArrayUtils.isEmpty(value);
-      expect(true).to.be.eq(result);
+      expect(() => ArrayUtils.isEmpty(value)).to.throw(
+        // tslint:disable-next-line:trailing-comma
+        "input parameter is not a array"
+      );
     });
     it("should return false if value is 123 ", () => {
       const value: any = 123;
-      const result = ArrayUtils.isEmpty(value);
-      expect(true).to.be.eq(result);
+      expect(() => ArrayUtils.isEmpty(value)).to.throw(
+        // tslint:disable-next-line:trailing-comma
+        "input parameter is not a array"
+      );
     });
   });
 
