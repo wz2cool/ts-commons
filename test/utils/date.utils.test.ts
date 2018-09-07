@@ -44,7 +44,7 @@ describe(".DateUtils", () => {
     });
 
     it("should return Tue, 19 Jun 2018 00:00:00 GMT if value is 1529366400000", () => {
-      const value = 1536245776000;
+      const value = 1529366400000;
       const date = DateUtils.timestampToDate(value);
       var year = date.getUTCFullYear();
       var month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number

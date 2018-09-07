@@ -17,7 +17,7 @@ export class ArrayUtils {
       return true;
     }
     if (!ObjectUtils.isArray(array)) {
-      return false;
+      return true;
     }
     return array.length === 0;
   }
@@ -58,5 +58,23 @@ export class ArrayUtils {
     const oldCount = array.length;
     array.splice(index, 0, item);
     return oldCount === array.length - 1;
+  }
+
+  /**
+   * Removes the first occurrence of a specific object from the array.
+   * @param array
+   * @param item
+   * @returns true if item is successfully removed; otherwise, false.
+   */
+  public static remove<T>(array: T[], item: T): boolean {
+    if (!ObjectUtils.isArray(array)) {
+      return false;
+    }
+    const index = array.indexOf(item);
+    if (index < 0) {
+      return false;
+    }
+    array.splice(index, 1);
+    return true;
   }
 }

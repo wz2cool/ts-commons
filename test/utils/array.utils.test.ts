@@ -1,7 +1,7 @@
 import { ArrayUtils } from "../../src/index";
 import { expect } from "chai";
 
-describe(".CollectionUtils", () => {
+describe(".arrayUtils", () => {
   describe("#isEmpty", () => {
     it("should return true if value is null", () => {
       const value = null;
@@ -26,12 +26,12 @@ describe(".CollectionUtils", () => {
     it("should return false if value is 'string' ", () => {
       const value: any = "string";
       const result = ArrayUtils.isEmpty(value);
-      expect(false).to.be.eq(result);
+      expect(true).to.be.eq(result);
     });
     it("should return false if value is 123 ", () => {
       const value: any = 123;
       const result = ArrayUtils.isEmpty(value);
-      expect(false).to.be.eq(result);
+      expect(true).to.be.eq(result);
     });
   });
 
@@ -165,6 +165,39 @@ describe(".CollectionUtils", () => {
       const array = [1, 2];
       const obj = 4;
       const result = ArrayUtils.insert(array, 1.2, obj);
+      expect(false).to.be.eq(result);
+    });
+  });
+
+  describe("#remove", () => {
+    it("should return true if obj in array", () => {
+      const array = [1, 2, 3];
+      const obj = 2;
+      const result = ArrayUtils.remove(array, obj);
+      expect(true).to.be.eq(result);
+      expect([1, 3].toString()).to.be.eq(array.toString());
+    });
+
+    it("should return false if obj not in array", () => {
+      const array = [1, 2, 3];
+      const obj = 5;
+      const result = ArrayUtils.remove(array, obj);
+      expect(false).to.be.eq(result);
+      expect([1, 2, 3].toString()).to.be.eq(array.toString());
+    });
+
+    it("should return false if obj not in array", () => {
+      const array = [1, 2, 3];
+      const obj: any = "aaaa";
+      const result = ArrayUtils.remove(array, obj);
+      expect(false).to.be.eq(result);
+      expect([1, 2, 3].toString()).to.be.eq(array.toString());
+    });
+
+    it("should return false if array is not array type", () => {
+      const array: any = "bbb";
+      const obj: any = "aaaa";
+      const result = ArrayUtils.remove(array, obj);
       expect(false).to.be.eq(result);
     });
   });
