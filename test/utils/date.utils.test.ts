@@ -44,10 +44,16 @@ describe(".DateUtils", () => {
     });
 
     it("should return Tue, 19 Jun 2018 00:00:00 GMT if value is 1529366400000", () => {
-      const value = 1529366400000;
-      const result = DateUtils.timestampToDate(value);
+      const value = 1536245776000;
+      const date = DateUtils.timestampToDate(value);
+      var year = date.getUTCFullYear();
+      var month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
+      var day = date.getUTCDate();
+      var hours = date.getUTCHours();
+      var minutes = date.getUTCMinutes();
+      var seconds = date.getUTCSeconds();
       expect(new Date("Tue, 19 Jun 2018 00:00:00 GMT").getTime()).to.be.eq(
-        result.getTime()
+        date.getTime()
       );
     });
   });
