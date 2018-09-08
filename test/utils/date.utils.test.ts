@@ -46,14 +46,35 @@ describe(".DateUtils", () => {
     it("should return Tue, 19 Jun 2018 00:00:00 GMT if value is 1529366400000", () => {
       const value = 1529366400000;
       const date = DateUtils.timestampToDate(value);
-      var year = date.getUTCFullYear();
-      var month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
-      var day = date.getUTCDate();
-      var hours = date.getUTCHours();
-      var minutes = date.getUTCMinutes();
-      var seconds = date.getUTCSeconds();
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
+      const day = date.getUTCDate();
+      const hours = date.getUTCHours();
+      const minutes = date.getUTCMinutes();
+      const seconds = date.getUTCSeconds();
       expect(new Date("Tue, 19 Jun 2018 00:00:00 GMT").getTime()).to.be.eq(
         date.getTime()
+      );
+    });
+  });
+
+  describe("#asdf", () => {
+    it("should get by yyyy/MM/dd HH:mm:ss.SSS", () => {
+      console.log(
+        `=======================================${new Date().getMilliseconds()}`
+      );
+      for (let i = 0; i < 200; i++) {
+        const result = DateUtils.toUTCString(
+          new Date(),
+          "yyyy/MM/dd HH:mm:ss.SSS"
+        );
+        // const result2 = DateUtils.toString(
+        //   new Date(),
+        //   "yyyy/MM/dd HH:mm:ss.SSS"
+        // );
+      }
+      console.log(
+        `=======================================${new Date().getMilliseconds()}`
       );
     });
   });
