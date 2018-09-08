@@ -3,7 +3,7 @@ import { NumberUtils } from "./number.utils";
 import { StringUtils } from "..";
 
 export class DateUtils {
-  private static timeFormatRegex = /yyyy|yy|MM|M|dd|d|HH|mm|ss|SSS/g;
+  private static timeFormatRegex = /yyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s|SSS|S/g;
 
   public static dateToTimestamp(date: Date): number {
     if (ObjectUtils.isNullOrUndefined(date)) {
@@ -25,19 +25,15 @@ export class DateUtils {
   }
 
   public static toString(date: Date, format: string): string {
-    const result = format.replace(
-      this.timeFormatRegex,
-      // tslint:disable-next-line:trailing-comma
-      matched => this.getTimeFormat(false, date, matched)
+    const result = format.replace(this.timeFormatRegex, matched =>
+      this.getTimeFormat(false, date, matched)
     );
     return result;
   }
 
   public static toUTCString(date: Date, format: string): string {
-    const result = format.replace(
-      this.timeFormatRegex,
-      // tslint:disable-next-line:trailing-comma
-      matched => this.getTimeFormat(true, date, matched)
+    const result = format.replace(this.timeFormatRegex, matched =>
+      this.getTimeFormat(true, date, matched)
     );
     return result;
   }
@@ -70,13 +66,28 @@ export class DateUtils {
       case "HH":
         const hour = isUTC ? date.getUTCHours() : date.getHours();
         return hour >= 10 ? hour.toString() : `0${hour}`;
+      case "H":
+        return (isUTC ? date.getUTCHours() : date.getHours()).toString();
       case "mm":
         const min = isUTC ? date.getUTCMinutes() : date.getMinutes();
         return min >= 10 ? min.toString() : `0${min}`;
+      case "m":
+        return (isUTC ? date.getUTCMinutes() : date.getMinutes()).toString();
       case "ss":
         const seconds = isUTC ? date.getUTCSeconds() : date.getSeconds();
         return seconds >= 10 ? seconds.toString() : `0${seconds}`;
+      case "s":
+        return (isUTC ? date.getUTCSeconds() : date.getSeconds()).toString();
       case "SSS":
+        const milliseconds = isUTC
+          ? date.getUTCMilliseconds()
+          : date.getMilliseconds();
+        return milliseconds >= 1000
+          ? milliseconds.toString()
+          : milliseconds >= 100
+            ? `0${milliseconds}`
+            : `00${milliseconds}`;
+      case "S":
         return (isUTC
           ? date.getUTCMilliseconds()
           : date.getMilliseconds()

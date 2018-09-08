@@ -1,5 +1,6 @@
 import { DateUtils } from "../../src/index";
 import { expect } from "chai";
+import * as dateFormat from "dateformat";
 
 describe(".DateUtils", () => {
   describe("#dateToTimestamp", () => {
@@ -58,24 +59,11 @@ describe(".DateUtils", () => {
     });
   });
 
-  describe("#asdf", () => {
-    it("should get by yyyy/MM/dd HH:mm:ss.SSS", () => {
-      console.log(
-        `=======================================${new Date().getMilliseconds()}`
-      );
-      for (let i = 0; i < 200; i++) {
-        const result = DateUtils.toUTCString(
-          new Date(),
-          "yyyy/MM/dd HH:mm:ss.SSS"
-        );
-        // const result2 = DateUtils.toString(
-        //   new Date(),
-        //   "yyyy/MM/dd HH:mm:ss.SSS"
-        // );
-      }
-      console.log(
-        `=======================================${new Date().getMilliseconds()}`
-      );
+  describe("#toUTCString", () => {
+    it("should format by yyyy/MM/dd HH:mm:ss.SSS", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = DateUtils.toUTCString(testDate, "yyyy/MM/dd HH:mm:ss.SSS");
+      expect("2018/07/19 00:00:00.0").to.be.eq(result);
     });
   });
 });
