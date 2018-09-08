@@ -82,9 +82,9 @@ export class DateUtils {
         const milliseconds = isUTC
           ? date.getUTCMilliseconds()
           : date.getMilliseconds();
-        return milliseconds >= 1000
+        return milliseconds >= 100
           ? milliseconds.toString()
-          : milliseconds >= 100
+          : milliseconds >= 10
             ? `0${milliseconds}`
             : `00${milliseconds}`;
       case "S":
