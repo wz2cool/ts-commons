@@ -63,7 +63,111 @@ describe(".DateUtils", () => {
     it("should format by yyyy/MM/dd HH:mm:ss.SSS", () => {
       const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
       const result = DateUtils.toUTCString(testDate, "yyyy/MM/dd HH:mm:ss.SSS");
-      expect("2018/07/19 00:00:00.0").to.be.eq(result);
+      expect("2018/06/19 00:00:00.000").to.be.eq(result);
+    });
+  });
+
+  describe("#getTimeFormat", () => {
+    it("should get 2018 if format is 'yyyy'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "yyyy");
+      expect("2018").to.be.eq(result);
+    });
+
+    it("should get 2018 if format is UTC 'yyyy'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "yyyy");
+      expect("2018").to.be.eq(result);
+    });
+
+    it("should get 18 if format is 'yy'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "yy");
+      expect("18").to.be.eq(result);
+    });
+
+    it("should get 18 if format is UTC 'yy'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "yy");
+      expect("18").to.be.eq(result);
+    });
+
+    it("should get 06 if format is 'MM'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "MM");
+      expect("06").to.be.eq(result);
+    });
+
+    it("should get 06 if format is UTC 'MM'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "MM");
+      expect("06").to.be.eq(result);
+    });
+
+    it("should get 6 if format is 'M'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "M");
+      expect("6").to.be.eq(result);
+    });
+
+    it("should get 6 if format is UTC 'M'", () => {
+      const testDate = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "M");
+      expect("6").to.be.eq(result);
+    });
+
+    it("should get 09 if format is 'dd'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "dd");
+      expect("09").to.be.eq(result);
+    });
+
+    it("should get 09 if format is UTC 'dd'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "dd");
+      expect("09").to.be.eq(result);
+    });
+
+    it("should get 9 if format is 'd'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "d");
+      expect("9").to.be.eq(result);
+    });
+
+    it("should get 9 if format is UTC 'd'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 00:00:00 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "d");
+      expect("9").to.be.eq(result);
+    });
+
+    it("should get currentzone + 1 if format is 'HH'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 01:02:03 GMT");
+      const offset = new Date().getTimezoneOffset();
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "HH");
+      const expectvalue = 1 + Math.abs(offset / 60);
+      expect(expectvalue > 10 ? expectvalue : `0${expectvalue}`).to.be.eq(
+        result
+      );
+    });
+
+    it("should get 01 if format is 'HH'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 01:02:03 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "HH");
+      expect("01").to.be.eq(result);
+    });
+
+    it("should get currentzone + 1 if format is 'H'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 01:02:03 GMT");
+      const offset = new Date().getTimezoneOffset();
+      const result = (DateUtils as any).getTimeFormat(false, testDate, "H");
+      const expectvalue = 1 + Math.abs(offset / 60);
+      expect(expectvalue.toString()).to.be.eq(result);
+    });
+
+    it("should get 01 if format is UTC 'H'", () => {
+      const testDate = new Date("Tue, 9 Jun 2018 01:02:03 GMT");
+      const result = (DateUtils as any).getTimeFormat(true, testDate, "H");
+      expect("1").to.be.eq(result);
     });
   });
 });

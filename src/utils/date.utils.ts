@@ -49,7 +49,7 @@ export class DateUtils {
       case "yy":
         return (isUTC ? date.getUTCFullYear() : date.getFullYear())
           .toString()
-          .substr(1);
+          .substr(2);
       case "MM":
         const month = isUTC ? date.getUTCMonth() + 1 : date.getMonth() + 1;
         return month >= 10 ? month.toString() : `0${month}`;
