@@ -1,10 +1,11 @@
 export class RegexUtils {
   /**
-   * * => \*
-   * ? => \?
-   * { => \{
-   * } => \}
+   * Escapes all reserved characters for regular expressions by preceding them with a backslash.
    * @param str target string
+   * @example * => \*
+   * @example ? => \?
+   * @example { => \{
+   * @example } => \}
    */
   public static escapeRegExp(str: string): string {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -28,6 +29,9 @@ export class RegexUtils {
     return regex.test(password);
   }
 
+  /**
+   * valid current input is email format.
+   */
   public static validateEmail(email: string): boolean {
     // from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
     const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
