@@ -16,10 +16,10 @@ describe(".DateUtils", () => {
       expect(0).to.be.eq(result);
     });
 
-    it("should return 1529366400 if value is Tue, 19 Jun 2018 00:00:00 GMT", () => {
+    it("should return 1529366400000 if value is Tue, 19 Jun 2018 00:00:00 GMT", () => {
       const value = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
       const result = DateUtils.dateToTimestamp(value);
-      expect(1529366400).to.be.eq(result);
+      expect(1529366400000).to.be.eq(result);
     });
   });
 

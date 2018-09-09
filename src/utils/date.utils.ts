@@ -5,11 +5,15 @@ import { StringUtils } from "..";
 export class DateUtils {
   private static timeFormatRegex = /yyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s|SSS|S/g;
 
+  /**
+   * Returns the number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z.
+   * @param date
+   */
   public static dateToTimestamp(date: Date): number {
     if (ObjectUtils.isNullOrUndefined(date)) {
       return 0;
     }
-    return Math.round(date.getTime() / 1000);
+    return date.getTime() ;
   }
 
   public static timestampToDate(timestamp: number): Date {
