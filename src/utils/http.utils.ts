@@ -1,10 +1,20 @@
 import { ObjectUtils } from "./object.utils";
 
 export class HttpUtils {
+  /**
+   * Get all cookie values from cookie string;
+   * @param cookie
+   * @example HttpUtils.getCookies(document.cookie)
+   */
   public static getCookies(cookie: string): { [key: string]: string } {
     return this.getParams(cookie, "; ");
   }
 
+  /**
+   * Get all query values from url;
+   * @param cookie
+   * @example HttpUtils.getQueryParams("http://www.google.com/?search=test&id=123")
+   */
   public static getQueryParams(url: string): { [key: string]: string } {
     if (!ObjectUtils.isString(url)) {
       return {};
