@@ -6,29 +6,65 @@ export class StringUtils {
   public static readonly INDEX_NOT_FOUND: number = -1;
 
   /**
-   * StringUtils.isEmpty(null)      = true
-   * StringUtils.isEmpty(undefined) = true
-   * StringUtils.isEmpty("")        = true
-   * StringUtils.isEmpty(" ")       = false
-   * StringUtils.isEmpty("bob")     = false
-   * StringUtils.isEmpty("  bob  ") = false
+   * check current string is empty.
+   * @param str
+   * @example StringUtils.isEmpty(null)      = true
+   * @example StringUtils.isEmpty(undefined) = true
+   * @example StringUtils.isEmpty("")        = true
+   * @example StringUtils.isEmpty(" ")       = false
+   * @example StringUtils.isEmpty("bob")     = false
+   * @example StringUtils.isEmpty("  bob  ") = false
    */
   public static isEmpty(str: string): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
   }
 
+  /**
+   * check current string is not empty.
+   * @param str
+   * @example StringUtils.isEmpty(null)      = false
+   * @example StringUtils.isEmpty(undefined) = false
+   * @example StringUtils.isEmpty("")        = false
+   * @example StringUtils.isEmpty(" ")       = true
+   * @example StringUtils.isEmpty("bob")     = true
+   * @example StringUtils.isEmpty("  bob  ") = true
+   */
   public static isNotEmpty(str: string): boolean {
     return !this.isEmpty(str);
   }
 
+  /**
+   * check current string is blank.
+   * @param str
+   * @example StringUtils.isEmpty(null)      = true
+   * @example StringUtils.isEmpty(undefined) = true
+   * @example StringUtils.isEmpty("")        = true
+   * @example StringUtils.isEmpty(" ")       = true
+   * @example StringUtils.isEmpty("bob")     = false
+   * @example StringUtils.isEmpty("  bob  ") = false
+   */
   public static isBlank(str: string): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.trim() === this.EMPTY;
   }
 
+  /**
+   * check current string is not blank.
+   * @param str
+   * @example StringUtils.isEmpty(null)      = false
+   * @example StringUtils.isEmpty(undefined) = false
+   * @example StringUtils.isEmpty("")        = false
+   * @example StringUtils.isEmpty(" ")       = false
+   * @example StringUtils.isEmpty("bob")     = true
+   * @example StringUtils.isEmpty("  bob  ") = true
+   */
   public static isNotBlank(str: string): boolean {
     return !this.isBlank(str);
   }
 
+  /**
+   * Removes all leading and trailing white-space characters from the current string.
+   * @param str
+   */
   public static trim(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return str;
@@ -37,6 +73,10 @@ export class StringUtils {
     }
   }
 
+  /**
+   * Removes all leading and trailing white-space characters from the current string to null.
+   * @param str
+   */
   public static trimToNull(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return null;
@@ -45,6 +85,10 @@ export class StringUtils {
     return this.isBlank(tmp) ? null : tmp;
   }
 
+  /**
+   * Removes all leading and trailing white-space characters from the current string to "".
+   * @param str
+   */
   public static trimToEmpty(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return this.EMPTY;
@@ -53,11 +97,20 @@ export class StringUtils {
     return this.isBlank(tmp) ? this.EMPTY : tmp;
   }
 
+  /**
+   * Strips any of a set of characters from the start and end of a String.
+   * @param str
+   * @param stripChars
+   */
   public static strip(str: string, stripChars?: string): string {
     const tmp = this.stripStart(str, stripChars);
     return this.stripEnd(tmp, stripChars);
   }
 
+  /**
+   * Strips whitespace from the start and end of a String returning null if the String is empty ("") after the strip.
+   * @param str
+   */
   public static stripToNull(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return null;
@@ -66,6 +119,10 @@ export class StringUtils {
     return this.isBlank(tmp) ? null : tmp;
   }
 
+  /**
+   * Strips whitespace from the start and end of a String returning an empty String if null input.
+   * @param str
+   */
   public static stripToEmpty(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
       return this.EMPTY;
@@ -75,14 +132,17 @@ export class StringUtils {
   }
 
   /**
-   * StringUtils.stripStart(null, *)          = null
-   * StringUtils.stripStart("", *)            = ""
-   * StringUtils.stripStart("abc", "")        = "abc"
-   * StringUtils.stripStart("abc", null)      = "abc"
-   * StringUtils.stripStart("  abc", null)    = "abc"
-   * StringUtils.stripStart("abc  ", null)    = "abc  "
-   * StringUtils.stripStart(" abc ", null)    = "abc "
-   * StringUtils.stripStart("yxabc  ", "xyz") = "abc  "
+   * Strips any of a set of characters from the start of a String.
+   * @param str
+   * @param stripChars
+   * @example StringUtils.stripStart(null, *)          = null
+   * @example StringUtils.stripStart("", *)            = ""
+   * @example StringUtils.stripStart("abc", "")        = "abc"
+   * @example StringUtils.stripStart("abc", null)      = "abc"
+   * @example StringUtils.stripStart("  abc", null)    = "abc"
+   * @example StringUtils.stripStart("abc  ", null)    = "abc  "
+   * @example StringUtils.stripStart(" abc ", null)    = "abc "
+   * @example StringUtils.stripStart("yxabc  ", "xyz") = "abc  "
    */
   public static stripStart(str: string, stripChars: string): string {
     if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
@@ -105,14 +165,17 @@ export class StringUtils {
   }
 
   /**
-   * StringUtils.stripEnd(null, *)          = null
-   * StringUtils.stripEnd("", *)            = ""
-   * StringUtils.stripEnd("abc", "")        = "abc"
-   * StringUtils.stripEnd("abc", null)      = "abc"
-   * StringUtils.stripEnd("  abc", null)    = "  abc"
-   * StringUtils.stripEnd("abc  ", null)    = "abc"
-   * StringUtils.stripEnd(" abc ", null)    = " abc"
-   * StringUtils.stripEnd("  abcyx", "xyz") = "  abc"
+   * Strips any of a set of characters from the end of a String.
+   * @param str
+   * @param stripChars
+   * @example StringUtils.stripEnd(null, *)          = null
+   * @example StringUtils.stripEnd("", *)            = ""
+   * @example StringUtils.stripEnd("abc", "")        = "abc"
+   * @example StringUtils.stripEnd("abc", null)      = "abc"
+   * @example StringUtils.stripEnd("  abc", null)    = "  abc"
+   * @example StringUtils.stripEnd("abc  ", null)    = "abc"
+   * @example StringUtils.stripEnd(" abc ", null)    = " abc"
+   * @example StringUtils.stripEnd("  abcyx", "xyz") = "  abc"
    */
   public static stripEnd(str: string, stripChars: string): string {
     if (ObjectUtils.isNullOrUndefined(str) || str.length === 0) {
@@ -134,16 +197,19 @@ export class StringUtils {
   }
 
   /**
-   * StringUtils.equal(null, null)              = true
-   * StringUtils.equal(undefined, undefined)      = true
-   * StringUtils.equal(undefined, null)          = false
-   * StringUtils.equal(null, undefined)          = false
-   * StringUtils.equal(null, "abc")             = false
-   * StringUtils.equal("abc", null)             = false
-   * StringUtils.equal("abc", undefined)         = false
-   * StringUtils.equal(undefined, "abc")         = false
-   * StringUtils.equal("abc", "def")            = false
-   * StringUtils.equal("abc", "abc")            = true
+   * Compares two CharSequences, returning true if they represent equal sequences of characters.
+   * @param str1
+   * @param str2
+   * @example StringUtils.equal(null, null)              = true
+   * @example StringUtils.equal(undefined, undefined)      = true
+   * @example StringUtils.equal(undefined, null)          = false
+   * @example StringUtils.equal(null, undefined)          = false
+   * @example StringUtils.equal(null, "abc")             = false
+   * @example StringUtils.equal("abc", null)             = false
+   * @example StringUtils.equal("abc", undefined)         = false
+   * @example StringUtils.equal(undefined, "abc")         = false
+   * @example StringUtils.equal("abc", "def")            = false
+   * @example StringUtils.equal("abc", "abc")            = true
    */
   public static equals(str1: string, str2: string): boolean {
     if (
@@ -162,17 +228,20 @@ export class StringUtils {
   }
 
   /**
-   * StringUtils.equal(null, null)              = true
-   * StringUtils.equal(undefined, undefined)      = true
-   * StringUtils.equal(undefined, null)          = false
-   * StringUtils.equal(null, undefined)          = false
-   * StringUtils.equal(null, "abc")             = false
-   * StringUtils.equal("abc", null)             = false
-   * StringUtils.equal("abc", undefined)         = false
-   * StringUtils.equal(undefined, "abc")         = false
-   * StringUtils.equal("abc", "def")            = false
-   * StringUtils.equal("abc", "abc")            = true
-   * StringUtils.equal("abc", "AbC")            = true
+   * Compares two CharSequences, returning true if they represent equal sequences of characters, ignoring case.
+   * @param str1
+   * @param str2
+   * @example StringUtils.equal(null, null)              = true
+   * @example StringUtils.equal(undefined, undefined)      = true
+   * @example StringUtils.equal(undefined, null)          = false
+   * @example StringUtils.equal(null, undefined)          = false
+   * @example StringUtils.equal(null, "abc")             = false
+   * @example StringUtils.equal("abc", null)             = false
+   * @example StringUtils.equal("abc", undefined)         = false
+   * @example StringUtils.equal(undefined, "abc")         = false
+   * @example StringUtils.equal("abc", "def")            = false
+   * @example StringUtils.equal("abc", "abc")            = true
+   * @example StringUtils.equal("abc", "AbC")            = true
    */
   public static equalsIgnoreCase(str1: string, str2: string): boolean {
     if (
@@ -191,15 +260,23 @@ export class StringUtils {
   }
 
   /**
-   *  StringUtils.indexOf(null, *)         = -1
-   *  StringUtils.indexOf(undefined, *)         = -1
-   *  StringUtils.indexOf("", *)           = -1
-   *  StringUtils.indexOf("aabaabaa", 'a') = 0
-   *  StringUtils.indexOf("aabaabaa", 'b') = 2
-   *  StringUtils.indexOf("aabaabaa", 'b', 3) = 5
-   *  StringUtils.indexOf("aabaabaa", '') = 0
+   * Finds the first index within a CharSequence, handling null.
+   * @param str
+   * @param searchStr
+   * @param startPos
+   * @example StringUtils.indexOf(null, *)         = -1
+   * @example StringUtils.indexOf(undefined, *)         = -1
+   * @example StringUtils.indexOf("", *)           = -1
+   * @example StringUtils.indexOf("aabaabaa", 'a') = 0
+   * @example StringUtils.indexOf("aabaabaa", 'b') = 2
+   * @example StringUtils.indexOf("aabaabaa", 'b', 3) = 5
+   * @example StringUtils.indexOf("aabaabaa", '') = 0
    */
-  public static indexOf(str: string, searchStr: string, startPos?: number) {
+  public static indexOf(
+    str: string,
+    searchStr: string,
+    startPos?: number
+  ): number {
     if (
       ObjectUtils.isNullOrUndefined(str) ||
       ObjectUtils.isNullOrUndefined(searchStr) ||
@@ -213,17 +290,20 @@ export class StringUtils {
   }
 
   /**
-   * StringUtils.lastIndexOf("aFkyk", "k")          =4
-   * StringUtils.lastIndexOf("a Fkyk", " ");        =1
-   * StringUtils.lastIndexOf("aabaabaa", "b");      =5
-   * StringUtils.lastIndexOf("aabaabaa", "b", 4);   =2
+   * Returns the index within seq of the first occurrence of the specified character, starting the search at the specified index.
+   * @param str
+   * @param searchStr
+   * @param position
+   * @example StringUtils.lastIndexOf("aFkyk", "k")          =4
+   * @example StringUtils.lastIndexOf("a Fkyk", " ");        =1
+   * @example StringUtils.lastIndexOf("aabaabaa", "b");      =5
+   * @example StringUtils.lastIndexOf("aabaabaa", "b", 4);   =2
    */
   public static lastIndexOf(
     str: string,
     searchStr: string,
-    // tslint:disable-next-line:trailing-comma
     position?: number
-  ) {
+  ): number {
     if (
       ObjectUtils.isNullOrUndefined(str) ||
       ObjectUtils.isNullOrUndefined(searchStr) ||
@@ -238,6 +318,11 @@ export class StringUtils {
     return str.lastIndexOf(searchStr, usePosition);
   }
 
+  /**
+   * Checks if CharSequence contains a search character, handling null.
+   * @param str
+   * @param searchStr
+   */
   public static contains(str: string, searchStr: string): boolean {
     if (ObjectUtils.isString(str) && ObjectUtils.isString(searchStr)) {
       return str.indexOf(searchStr) >= 0;
@@ -246,6 +331,11 @@ export class StringUtils {
     }
   }
 
+  /**
+   * Checks if CharSequence contains a search CharSequence irrespective of case, handling null.
+   * @param str
+   * @param searchStr
+   */
   public static containsIgnoreCase(str: string, searchStr: string): boolean {
     if (ObjectUtils.isString(str) && ObjectUtils.isString(searchStr)) {
       return (
@@ -256,6 +346,12 @@ export class StringUtils {
     }
   }
 
+  /**
+   * Gets a substring from the specified String avoiding exceptions.
+   * @param str
+   * @param start
+   * @param end
+   */
   public static subString(str: string, start: number, end?: number): string {
     if (
       !ObjectUtils.isString(str) ||
@@ -276,6 +372,11 @@ export class StringUtils {
     }
   }
 
+  /**
+   * Determines whether the beginning of this string instance matches the specified string.
+   * @param str
+   * @param prefix
+   */
   public static startWith(str: string, prefix: string): boolean {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
       return false;
@@ -285,6 +386,11 @@ export class StringUtils {
     return str.slice(0, prefix.length) === prefix;
   }
 
+  /**
+   * Determines whether the beginning of this string instance matches the specified string irrespective of case.
+   * @param str
+   * @param prefix
+   */
   public static startWithIgnoreCase(str: string, prefix: string): boolean {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(prefix)) {
       return false;
@@ -294,6 +400,11 @@ export class StringUtils {
     return useStr.slice(0, usePrefix.length) === usePrefix;
   }
 
+  /**
+   *  Determines whether the end of this string instance matches the specified string.
+   * @param str
+   * @param suffix
+   */
   public static endWith(str: string, suffix: string): boolean {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(suffix)) {
       return false;
@@ -301,6 +412,11 @@ export class StringUtils {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
   }
 
+  /**
+   * Determines whether the end of this string instance matches the specified string irrespective of case.
+   * @param str
+   * @param suffix
+   */
   public static endWithIgnoreCase(str: string, suffix: string): boolean {
     if (!ObjectUtils.isString(str) || !ObjectUtils.isString(suffix)) {
       return false;
@@ -310,10 +426,17 @@ export class StringUtils {
     return useStr.indexOf(useSuffix, useStr.length - useSuffix.length) !== -1;
   }
 
+  /**
+   * check if current char is whitespace
+   * @param ch
+   */
   public static isWhitespace(ch: string): boolean {
     return " \f\n\r\t\v\u00A0\u2028\u2029".indexOf(ch) > -1;
   }
 
+  /**
+   * Initializes a new string of the guid structure.
+   */
   public static newGuid(): string {
     return (
       this.S4() +
