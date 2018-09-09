@@ -7,8 +7,8 @@
   "scripts": {
     "karma-test": "npm run pretest && karma start",
     "pretest": "npm run deletedist && tsc -p tsconfig.test.json",
-    "test": "karma-test && nyc mocha dist/test --recursive",
-    "posttest": "npm run removenyc && del-cli coverage",
+    "test": "nyc mocha dist/test --recursive",
+    "posttest": "npm run karma-test && npm run removenyc && del-cli coverage",
     "prepublish": "tsc",
     "cover": "tsc -p tsconfig.test.json && istanbul cover ./node_modules/mocha/bin/_mocha dist/test/**/*.test.js --recursive",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && del-cli ./coverage",
