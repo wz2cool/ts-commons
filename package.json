@@ -7,7 +7,7 @@
   "scripts": {
     "karma-test": "npm run pretest && karma start",
     "pretest": "npm run deletedist && tsc -p tsconfig.test.json",
-    "test": "nyc mocha dist/test --recursive",
+    "test": "karma-test && nyc mocha dist/test --recursive",
     "posttest": "npm run removenyc && del-cli coverage",
     "prepublish": "tsc",
     "cover": "tsc -p tsconfig.test.json && istanbul cover ./node_modules/mocha/bin/_mocha dist/test/**/*.test.js --recursive",
