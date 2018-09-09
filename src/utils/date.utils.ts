@@ -1,6 +1,5 @@
 import { ObjectUtils } from "./object.utils";
 import { NumberUtils } from "./number.utils";
-import { StringUtils } from "..";
 
 export class DateUtils {
   private static timeFormatRegex = /yyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s|SSS|S/g;
@@ -8,14 +7,22 @@ export class DateUtils {
   /**
    * Returns the number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z.
    * @param date
+   * @example DateUtils.dateToTimestamp(null) = 0
+   * @example DateUtils.dateToTimestamp(undefined) = 0
+   * @example DateUtils.dateToTimestamp(new Date("Tue, 19 Jun 2018 00:00:00 GMT")) = 1529366400000
    */
   public static dateToTimestamp(date: Date): number {
     if (ObjectUtils.isNullOrUndefined(date)) {
       return 0;
     }
-    return date.getTime() ;
+    return date.getTime();
   }
 
+  /**
+   * Get date from the number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z.
+   * @param timestamp
+   * @example DateUtils.timestampToDate(1529366400) = new Date("Tue, 19 Jun 2018 00:00:00 GMT")
+   */
   public static timestampToDate(timestamp: number): Date {
     if (!NumberUtils.isSafeInteger(timestamp)) {
       return null;
@@ -28,6 +35,26 @@ export class DateUtils {
     }
   }
 
+  /**
+   * Converts the value of the current date to its equivalent string representation
+   * using the specified format.
+   * @param date
+   * @param format
+   * "yyyy" Year represented by four digits.
+   * "yy" Year as last two digits; leading zero for years less than 10.
+   * "MM" Month as digits; leading zero for single-digit months.
+   * "M" Month as digits; no leading zero for single-digit months.
+   * "dd" Day of the month as digits; leading zero for single-digit days.
+   * "d" Day of the month as digits; no leading zero for single-digit days.
+   * "HH" Hours; leading zero for single-digit hours (24-hour clock).
+   * "H" Hours; no leading zero for single-digit hours (24-hour clock).
+   * "mm" Minutes; leading zero for single-digit minutes.
+   * "m" Minutes; no leading zero for single-digit minutes.
+   * "ss" Seconds; leading zero for single-digit seconds.
+   * "s" Seconds; no leading zero for single-digit seconds.
+   * "SSS" Milliseconds; leading zero for single-digit seconds.
+   * "S" Milliseconds; no leading zero for single-digit seconds.
+   */
   public static toString(date: Date, format: string): string {
     const result = format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(false, date, matched)
@@ -35,6 +62,26 @@ export class DateUtils {
     return result;
   }
 
+  /**
+   * Converts the value of the current UTC date to its equivalent string representation
+   * using the specified format.
+   * @param date
+   * @param format
+   * "yyyy" Year represented by four digits.
+   * "yy" Year as last two digits; leading zero for years less than 10.
+   * "MM" Month as digits; leading zero for single-digit months.
+   * "M" Month as digits; no leading zero for single-digit months.
+   * "dd" Day of the month as digits; leading zero for single-digit days.
+   * "d" Day of the month as digits; no leading zero for single-digit days.
+   * "HH" Hours; leading zero for single-digit hours (24-hour clock).
+   * "H" Hours; no leading zero for single-digit hours (24-hour clock).
+   * "mm" Minutes; leading zero for single-digit minutes.
+   * "m" Minutes; no leading zero for single-digit minutes.
+   * "ss" Seconds; leading zero for single-digit seconds.
+   * "s" Seconds; no leading zero for single-digit seconds.
+   * "SSS" Milliseconds; leading zero for single-digit seconds.
+   * "S" Milliseconds; no leading zero for single-digit seconds.
+   */
   public static toUTCString(date: Date, format: string): string {
     const result = format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(true, date, matched)
