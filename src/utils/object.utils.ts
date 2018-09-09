@@ -1,38 +1,74 @@
 export class ObjectUtils {
+  /**
+   * check whether value is null.
+   * @param value
+   */
   public static isNull(value: any): boolean {
     return value === null;
   }
 
+  /**
+   * check whether value is undefined.
+   * @param value
+   */
   public static isUndefinend(value: any): boolean {
     return typeof value === "undefined";
   }
 
+  /**
+   * check whether value is null or undefined.
+   * @param value
+   */
   public static isNullOrUndefined(value: any): boolean {
     return this.isNull(value) || this.isUndefinend(value);
   }
 
+  /**
+   * check whether value is array.
+   * @param value
+   */
   public static isArray(value: any): boolean {
     return value instanceof Array;
   }
 
+  /**
+   * check whether value is date.
+   * @param value
+   */
   public static isDate(value: any): boolean {
     return value instanceof Date;
   }
 
+  /**
+   * check whether value is string.
+   * @param value
+   */
   public static isString(value: any): boolean {
     return typeof value === "string";
   }
 
+  /**
+   * check whether value is number.
+   * @param value
+   */
   public static isNumber(value: any): boolean {
     return typeof value === "number";
   }
 
+  /**
+   * check whether value is boolean.
+   * @param value
+   */
   public static isBoolean(value: any): boolean {
     return typeof value === "boolean";
   }
 
-  // return "" if value is null or undefined.
-  // from C# https://docs.microsoft.com/en-us/dotnet/api/microsoft.toolkit.extensions.stringextensions.tosafestring?view=uwp-toolkit-dotnet
+  /**
+   * Returns a string representation of an object even if value is null or undefined.
+   * @param value
+   * @example ObjectUtils.toSafeString(null) = ""
+   * @example ObjectUtils.toSafeString(undefined) = ""
+   */
   public static toSafeString(value: any): string {
     if (this.isNullOrUndefined(value)) {
       return "";
@@ -41,23 +77,33 @@ export class ObjectUtils {
     }
   }
 
-  public static getProperty<T, K extends keyof T>(obj: T, key: K) {
+  /**
+   * get property value of object by key.
+   * @param obj
+   * @param key
+   */
+  public static getProperty<T, K extends keyof T>(obj: T, key: K): any {
     return obj[key]; // Inferred type is T[K]
   }
 
-  public static setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
+  /**
+   * set property to object.
+   * @param obj
+   * @param key
+   * @param value
+   */
+  public static setProperty<T, K extends keyof T>(
+    obj: T,
+    key: K,
+    value: T[K]
+  ): void {
     obj[key] = value;
   }
 
-  public static getClassName<T>(o: T | { new (): T }): string {
-    if (this.isNullOrUndefined(o)) {
-      return "";
-    }
-
-    const testObj = typeof o === "function" ? new o() : o;
-    return (testObj.constructor as any).name;
-  }
-
+  /**
+   * create object by type.
+   * @param type
+   */
   public static createObject<T>(type: { new (): T }): T {
     if (this.isNullOrUndefined(type)) {
       return null;
@@ -65,23 +111,11 @@ export class ObjectUtils {
     return new type();
   }
 
-  // getPropertyName<Student>((student) => student.name) return name
-  // getPropertyName<Student>((student) => student.age) return age
-  public static getPropertyName<T>(fn: (o: T) => any): string {
-    if (this.isNullOrUndefined(fn)) {
-      return "";
-    }
-
-    // ES5: function (name) { return student.name; }
-    // ES6: (student) => student.name;
-    const expression = fn.toString();
-    const returnIndex = expression.indexOf("return");
-    const regexp =
-      returnIndex > -1
-        ? new RegExp(`^.*return\\s+\\w+\.(\\w+)\\s*;\\s*\\}\\s*$`)
-        : RegExp(`^\\s*\\(?\\w+\\)?\\s*=>\\s*\\w+\\.(\\w+)\\s*$`);
-
-    const match = regexp.exec(expression);
-    return !this.isNullOrUndefined(match) && match.length === 2 ? match[1] : "";
+  /**
+   * get name of property.
+   * @param key
+   */
+  public static getPropertyName<T>(key: keyof T): any {
+    return key.toString();
   }
 }
