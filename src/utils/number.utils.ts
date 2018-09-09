@@ -6,21 +6,21 @@ export class NumberUtils {
   public static readonly MIN_SAFE_INTEGER: number = -9007199254740991;
 
   /**
-   * Number.isInteger(0);         // true
-   * Number.isInteger(1);         // true
-   * Number.isInteger(-100000);   // true
-   * Number.isInteger(99999999999999999999999); // true
-   *
-   * Number.isInteger(0.1);       // false
-   * Number.isInteger(Math.PI);   // false
-   *
-   * Number.isInteger(NaN);       // false
-   * Number.isInteger(Infinity);  // false
-   * Number.isInteger(-Infinity); // false
-   * Number.isInteger('10');      // false
-   * Number.isInteger(true);      // false
-   * Number.isInteger(false);     // false
-   * Number.isInteger([1]);       // false
+   * check whether current value is integer
+   * @param value
+   * @example Number.isInteger(0);         // true
+   * @example Number.isInteger(1);         // true
+   * @example Number.isInteger(-100000);   // true
+   * @example Number.isInteger(99999999999999999999999); // true
+   * @example Number.isInteger(0.1);       // false
+   * @example Number.isInteger(Math.PI);   // false
+   * @example Number.isInteger(NaN);       // false
+   * @example Number.isInteger(Infinity);  // false
+   * @example Number.isInteger(-Infinity); // false
+   * @example Number.isInteger('10');      // false
+   * @example Number.isInteger(true);      // false
+   * @example Number.isInteger(false);     // false
+   * @example Number.isInteger([1]);       // false
    */
   public static isInteger(value: any): boolean {
     return (
@@ -31,14 +31,16 @@ export class NumberUtils {
   }
 
   /**
-   * Number.isSafeInteger(3);                    // true
-   * Number.isSafeInteger(Math.pow(2, 53));      // false
-   * Number.isSafeInteger(Math.pow(2, 53) - 1);  // true
-   * Number.isSafeInteger(NaN);                  // false
-   * Number.isSafeInteger(Infinity);             // false
-   * Number.isSafeInteger('3');                  // false
-   * Number.isSafeInteger(3.1);                  // false
-   * Number.isSafeInteger(3.0);                  // true
+   * check whether current value is safe integer
+   * @param value
+   * @example Number.isSafeInteger(3);                    // true
+   * @example Number.isSafeInteger(Math.pow(2, 53));      // false
+   * @example Number.isSafeInteger(Math.pow(2, 53) - 1);  // true
+   * @example Number.isSafeInteger(NaN);                  // false
+   * @example Number.isSafeInteger(Infinity);             // false
+   * @example Number.isSafeInteger('3');                  // false
+   * @example Number.isSafeInteger(3.1);                  // false
+   * @example Number.isSafeInteger(3.0);                  // true
    */
   public static isSafeInteger(value: any): boolean {
     return this.isInteger(value) && Math.abs(value) <= this.MAX_SAFE_INTEGER;

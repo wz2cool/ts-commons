@@ -27,7 +27,6 @@ export class HttpUtils {
   // solve a=1[;|&]b=2[;|&]c=3
   private static getParams(
     paramStr: string,
-    // tslint:disable-next-line:trailing-comma
     splitChar: string
   ): { [key: string]: string } {
     const result: { [key: string]: string } = {};
