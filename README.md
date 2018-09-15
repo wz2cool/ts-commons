@@ -12,6 +12,9 @@ common methods for typescript/javascript
 $ npm install ts-commons --save
 ```
 
+# DOC
+[中文简介](https://wz2cool.github.io/2018/09/11/ts-commons/?from=timeline)
+
 # How to use
 typescript
 ```js
