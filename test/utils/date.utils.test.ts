@@ -2,6 +2,14 @@ import { DateUtils, StringUtils, ObjectUtils } from "../../src/index";
 import { expect } from "chai";
 
 describe(".DateUtils", () => {
+  describe("#getToday", () => {
+    const result = DateUtils.getToday();
+    expect(0).to.be.eq(result.getHours());
+    expect(0).to.be.eq(result.getMinutes());
+    expect(0).to.be.eq(result.getSeconds());
+    expect(0).to.be.eq(result.getMilliseconds());
+  });
+
   describe("#dateToTimestamp", () => {
     it("should return 0 if value is null", () => {
       const value = null;

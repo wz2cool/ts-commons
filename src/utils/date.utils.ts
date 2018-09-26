@@ -36,6 +36,15 @@ export class DateUtils {
   }
 
   /**
+   * Get currnet date without hours, minutes and seconds.
+   */
+  public static getToday(): Date {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    return now;
+  }
+
+  /**
    * Converts the value of the current date to its equivalent string representation
    * using the specified format.
    * @param date
