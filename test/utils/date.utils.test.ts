@@ -2,6 +2,30 @@ import { DateUtils, StringUtils, ObjectUtils } from "../../src/index";
 import { expect } from "chai";
 
 describe(".DateUtils", () => {
+  describe("#compare", () => {
+    it("should return 0 if date1 === date2", () => {
+      const date1 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const date2 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = DateUtils.compare(date1, date2);
+      expect(0).to.be.eq(result);
+    });
+
+    it("should return 1 if date1 > date2", () => {
+      const date1 = new Date("Tue, 19 Jun 2018 11:00:00 GMT");
+      const date2 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const result = DateUtils.compare(date1, date2);
+      expect(1).to.be.eq(result);
+    });
+
+
+    it("should return -1 if date1 < date2", () => {
+      const date1 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
+      const date2 = new Date("Tue, 19 Jun 2018 11:00:00 GMT");
+      const result = DateUtils.compare(date1, date2);
+      expect(-1).to.be.eq(result);
+    });
+  });
+
   describe("#getToday", () => {
     const result = DateUtils.getToday();
     expect(0).to.be.eq(result.getHours());
