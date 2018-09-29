@@ -98,6 +98,28 @@ export class DateUtils {
     return result;
   }
 
+  /**
+   *  Compares two date and returns a value indicating whether one is less than, equal to, or greater than the other.
+   * @param date1
+   * @param date2
+   * @returns
+   * - If less than 0, date1 is less than date2.
+   * - If 0, date1 equals date2.
+   * - If greater than 0, date1 is greater than date2.
+   */
+  public static compare(date1: Date, date2: Date): number {
+    const date1Time = date1.getTime();
+    const date2Time = date2.getTime();
+
+    if (date1Time === date2Time) {
+      return 0;
+    } else if (date1Time < date2Time) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+
   private static getTimeFormat(
     isUTC: boolean,
     date: Date,
