@@ -11,7 +11,7 @@ module.exports = function(config) {
     frameworks: ["mocha", "chai", "browserify"],
 
     // list of files / patterns to load in the browser
-    files: ["src/**/*.js", "test/utils/*.test.js"],
+    files: ["src/**/*.js", "test/**/*.test.js"],
 
     // list of files / patterns to exclude
     exclude: [],
@@ -20,7 +20,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       "src/**/*.js": ["browserify"],
-      "test/utils/*.test.js": ["browserify"]
+      "test/**/*.test.js": ["browserify"]
     },
 
     // test results reporter to use
@@ -47,7 +47,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ["PhantomJS"],
+    browsers: ["Firefox"],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

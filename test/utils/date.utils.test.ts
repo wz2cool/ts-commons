@@ -94,7 +94,7 @@ describe(".DateUtils", () => {
   let needTestToString = true;
   try {
     if (
-      StringUtils.containsIgnoreCase(window.navigator.userAgent, "phantomjs")
+      StringUtils.containsIgnoreCase(window.navigator.userAgent, "Firefox")
     ) {
       needTestToString = false;
     }
