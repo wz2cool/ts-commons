@@ -5,6 +5,7 @@ import { DateUtils } from "./utils/date.utils";
 import { RegexUtils } from "./utils/regex.utils";
 import { HttpUtils } from "./utils/http.utils";
 import { ArrayUtils } from "./utils/array.utils";
+import { ThreadUtils } from "./utils/thread.utils";
 
 export {
   ObjectUtils,
@@ -13,6 +14,6 @@ export {
   DateUtils,
   RegexUtils,
   HttpUtils,
-  // tslint:disable-next-line:trailing-comma
-  ArrayUtils
+  ArrayUtils,
+  ThreadUtils
 };
