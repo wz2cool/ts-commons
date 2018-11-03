@@ -15,7 +15,7 @@ export class StringUtils {
    * @example StringUtils.isEmpty("bob")     = false
    * @example StringUtils.isEmpty("  bob  ") = false
    */
-  public static isEmpty(str: string): boolean {
+  public static isEmpty(str: string | undefined | null): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
   }
 
@@ -29,7 +29,7 @@ export class StringUtils {
    * @example StringUtils.isEmpty("bob")     = true
    * @example StringUtils.isEmpty("  bob  ") = true
    */
-  public static isNotEmpty(str: string): boolean {
+  public static isNotEmpty(str: string | undefined | null): boolean {
     return !this.isEmpty(str);
   }
 
@@ -43,7 +43,7 @@ export class StringUtils {
    * @example StringUtils.isEmpty("bob")     = false
    * @example StringUtils.isEmpty("  bob  ") = false
    */
-  public static isBlank(str: string): boolean {
+  public static isBlank(str: string | undefined | null): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.trim() === this.EMPTY;
   }
 
@@ -57,7 +57,7 @@ export class StringUtils {
    * @example StringUtils.isEmpty("bob")     = true
    * @example StringUtils.isEmpty("  bob  ") = true
    */
-  public static isNotBlank(str: string): boolean {
+  public static isNotBlank(str: string | undefined | null): boolean {
     return !this.isBlank(str);
   }
 
