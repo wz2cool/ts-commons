@@ -130,4 +130,48 @@ export class ArrayUtils {
   public static min(array: number[]): number {
     return Math.min.apply(null, array);
   }
+
+  public static take<T>(array: T[], n?: number | undefined | null): T[] {
+    const length = array.length;
+    let takeN;
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
+      takeN = 1;
+    } else if (n <= 0) {
+      takeN = 0;
+    } else if (n < length) {
+      takeN = n;
+    } else {
+      takeN = length;
+    }
+    return array.slice(0, takeN);
+  }
+
+  /**
+   * Creates a slice of array with n items taken from the end.
+   * @param array
+   * @returns Array - The slice of the array.
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5]) = [5]
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], null) = [5]
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], NaN) = [5]
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], 3) = [3, 4, 5]
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], 0) = []
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], -2) = []
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], 10) = [1, 2, 3, 4, 5]
+   * @example  ArrayUtils.takeRight([1, 2, 3, 4, 5], Number.MAX_VALUE) = [1, 2, 3, 4, 5]
+   */
+  public static takeRight<T>(array: T[], n?: number | undefined | null): T[] {
+    const length = array.length;
+    let useStartIndex;
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
+      // default value is 1
+      useStartIndex = length - 1;
+    } else if (n < 0) {
+      useStartIndex = length;
+    } else if (n < length) {
+      useStartIndex = length - n;
+    } else {
+      useStartIndex = 0;
+    }
+    return array.slice(useStartIndex, length);
+  }
 }

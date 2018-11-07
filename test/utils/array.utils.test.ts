@@ -221,4 +221,91 @@ describe(".arrayUtils", () => {
       expect(1).to.be.eq(result);
     });
   });
+
+  describe("#takeRight", () => {
+    it("should return [5] if takeRight([1, 2, 3, 4, 5]);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array);
+      expect(1).to.be.eq(result.length);
+      expect(5).to.be.eq(result[0]);
+    });
+
+    it("should return [5] if takeRight([1, 2, 3, 4, 5], null);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, null);
+      expect(1).to.be.eq(result.length);
+      expect(5).to.be.eq(result[0]);
+    });
+
+    it("should return [5] if takeRight([1, 2, 3, 4, 5], NaN);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, NaN);
+      expect(1).to.be.eq(result.length);
+      expect(5).to.be.eq(result[0]);
+    });
+
+    it("should return [3, 4, 5] if takeRight([1, 2, 3, 4, 5], 3);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, 3);
+      expect(3).to.be.eq(result.length);
+      expect(3).to.be.eq(result[0]);
+    });
+
+    it("should return [] if takeRight([1, 2, 3, 4, 5], 0);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, 0);
+      expect(0).to.be.eq(result.length);
+    });
+
+    it("should return [] if takeRight([1, 2, 3, 4, 5], -2);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, -2);
+      expect(0).to.be.eq(result.length);
+    });
+
+    it("should return [1, 2, 3, 4, 5] if takeRight([1, 2, 3, 4, 5], 10);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, 10);
+      expect(5).to.be.eq(result.length);
+      expect(1).to.be.eq(result[0]);
+      expect(5).to.be.eq(result[4]);
+    });
+
+    it("should return [1, 2, 3, 4, 5] if takeRight([1, 2, 3, 4, 5], Number.MAX_VALUE);", () => {
+      const array = [1, 2, 3, 4, 5];
+      const result = ArrayUtils.takeRight(array, Number.MAX_VALUE);
+      expect(5).to.be.eq(result.length);
+      expect(1).to.be.eq(result[0]);
+      expect(5).to.be.eq(result[4]);
+    });
+  });
+
+  describe("#take", () => {
+    it("should return [1] if take([1, 2, 3]);", () => {
+      const array = [1, 2, 3];
+      const result = ArrayUtils.take(array);
+      expect(1).to.be.eq(result.length);
+      expect(1).to.be.eq(result[0]);
+    });
+
+    it("should return [1, 2] if take([1, 2, 3], 2);", () => {
+      const array = [1, 2, 3];
+      const result = ArrayUtils.take(array, 2);
+      expect(2).to.be.eq(result.length);
+      expect(1).to.be.eq(result[0]);
+      expect(2).to.be.eq(result[1]);
+    });
+
+    it("should return [1, 2, 3] if take([1, 2, 3], 5);", () => {
+      const array = [1, 2, 3];
+      const result = ArrayUtils.take(array, 5);
+      expect(3).to.be.eq(result.length);
+    });
+
+    it("should return [] if take([1, 2, 3], 0);", () => {
+      const array = [1, 2, 3];
+      const result = ArrayUtils.take(array, 0);
+      expect(0).to.be.eq(result.length);
+    });
+  });
 });
