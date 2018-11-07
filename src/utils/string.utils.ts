@@ -458,4 +458,40 @@ export class StringUtils {
     // tslint:disable-next-line:no-bitwise
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   }
+
+  /**
+   * JavaScript convert string to snake_case.
+   * @example console.log(toSnakeCase('string')); // => string
+   * @example console.log(toSnakeCase('camelCase')); // => camel_case
+   * @example console.log(toSnakeCase('param-case')); // => param_case
+   * @example console.log(toSnakeCase('PascalCase')); // => pascal_case
+   * @example console.log(toSnakeCase('UPPER_CASE')); // => upper_case
+   * @example console.log(toSnakeCase('snake_case')); // => snake_case
+   * @example console.log(toSnakeCase('sentence case')); // => sentence_case
+   * @example console.log(toSnakeCase('Title Case')); // => title_case
+   * @example console.log(toSnakeCase('dot.case')); // => // dot_case
+   * @example
+   * @example console.log(toSnakeCase('')); // => ''
+   * @example console.log(toSnakeCase(null)); // => ''
+   * @example console.log(toSnakeCase(undefined)); // => ''
+   * @example
+   * @example console.log(toSnakeCase('Abc ___ 123 ___ xYz')); // => abc_123_x_yz
+   * @example console.log(toSnakeCase('123__abc  ... ?// {#} def 12')); // => 123_abc_def_12
+   * @example console.log(toSnakeCase('	tab space ??? ________')); // => tab_space
+   * @example console.log(toSnakeCase('___?||123  abc|| 123..123')); // => 123_abc_123_123
+   * @example console.log(toSnakeCase('!@#$%  {}|":;" ABC XyZ G123H')); // => abc_xy_z_g123h
+   * @example console.log(toSnakeCase(' ^&* #DEFine x: 15 + ==')); // => define_x_15
+   * @example console.log(toSnakeCase('123456789')); // => 123456789
+   */
+  public static snakeCase(str: string): string {
+    if (this.isBlank(str)) {
+      return "";
+    }
+
+    return String(str)
+      .replace(/^[^A-Za-z0-9]*|[^A-Za-z0-9]*$/g, "")
+      .replace(/([a-z])([A-Z])/g, (m, a, b) => a + "_" + b.toLowerCase())
+      .replace(/[^A-Za-z0-9]+|_+/g, "_")
+      .toLowerCase();
+  }
 }

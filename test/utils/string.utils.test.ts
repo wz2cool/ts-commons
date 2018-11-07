@@ -1312,4 +1312,31 @@ describe(".StringUtils", () => {
       console.log(result);
     });
   });
+
+  describe("#snakeCase", () => {
+    it("should return 'string' if target is 'string'", () => {
+      const target = "string";
+      const result = StringUtils.snakeCase(target);
+      expect("string").to.be.eq(result);
+    });
+
+    it("should return 'camel_case' if target is 'camelCase'", () => {
+      const target = "camelCase";
+      const result = StringUtils.snakeCase(target);
+      expect("camel_case").to.be.eq(result);
+    });
+
+    it("should return 'param_case' if target is 'param-case'", () => {
+      const target = "param-case";
+      const result = StringUtils.snakeCase(target);
+      expect("param_case").to.be.eq(result);
+    });
+
+    it("should return '' if target is null", () => {
+      const target = null;
+      const result = StringUtils.snakeCase(target);
+      expect("").to.be.eq(result);
+    });
+
+  });
 });
