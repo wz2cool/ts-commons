@@ -1337,6 +1337,5 @@ describe(".StringUtils", () => {
       const result = StringUtils.snakeCase(target);
       expect("").to.be.eq(result);
     });
-
   });
 });
