@@ -110,4 +110,24 @@ export class ArrayUtils {
     array.splice(index, 1);
     return true;
   }
+
+  /**
+   * Find the max number value from array.
+   * @param array
+   * @returns the max value of the number array.
+   * @example  ArrayUtils.max([1,5,3,2,4]) = 5
+   */
+  public static max(array: number[]): number {
+    return Math.max.apply(null, array);
+  }
+
+  /**
+   * Find the min number value from array.
+   * @param array
+   * @returns the max value of the number array.
+   * @example  ArrayUtils.min([1,5,3,2,4]) = 1
+   */
+  public static min(array: number[]): number {
+    return Math.min.apply(null, array);
+  }
 }

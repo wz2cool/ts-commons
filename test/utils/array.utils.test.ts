@@ -205,4 +205,20 @@ describe(".arrayUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#max", () => {
+    it("should return 5 if array is [1, 5,3,2,4]", () => {
+      const array = [1, 5, 3, 2, 4];
+      const result = ArrayUtils.max(array);
+      expect(5).to.be.eq(result);
+    });
+  });
+
+  describe("#min", () => {
+    it("should return 5 if array is [1, 5,3,2,4]", () => {
+      const array = [1, 5, 3, 2, 4];
+      const result = ArrayUtils.min(array);
+      expect(1).to.be.eq(result);
+    });
+  });
 });
