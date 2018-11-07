@@ -118,4 +118,13 @@ export class ObjectUtils {
   public static getPropertyName<T>(key: keyof T): any {
     return key.toString();
   }
+
+  public static values(obj: any): any[] {
+    if (this.isNullOrUndefined(obj)) {
+      return [];
+    }
+
+    const values = Object.keys(obj).map(key => obj[key]);
+    return values;
+  }
 }

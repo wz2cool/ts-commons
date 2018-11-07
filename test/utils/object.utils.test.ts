@@ -263,4 +263,25 @@ describe(".ObjectUtils", () => {
       expect("name").to.be.eq(result);
     });
   });
+
+  describe("#values", () => {
+    class Student {
+      name: string;
+      age: number;
+    }
+    it("should return ['Jack', 20]", () => {
+      const s = new Student();
+      s.name = "Jack";
+      s.age = 20;
+      const result = ObjectUtils.values(s);
+      expect(2).to.be.eq(result.length);
+      expect("Jack").to.be.eq(result[0]);
+      expect(20).to.be.eq(result[1]);
+    });
+
+    it("should return []", () => {
+      const result = ObjectUtils.values(null);
+      expect(0).to.be.eq(result.length);
+    });
+  });
 });
