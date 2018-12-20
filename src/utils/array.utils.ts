@@ -14,7 +14,7 @@ export class ArrayUtils {
    * @example ArrayUtils.isEmtpy("string") throw error;
    * @example ArrayUtils.isEmtpy(123) throw error;
    */
-  public static isEmpty<T>(array: T[]): boolean {
+  public static isEmpty<T>(array: T[] | undefined | null): boolean {
     if (ObjectUtils.isNullOrUndefined(array)) {
       return true;
     }
@@ -22,6 +22,22 @@ export class ArrayUtils {
       throw new Error("input parameter is not a array or null/undefined");
     }
     return array.length === 0;
+  }
+
+  /**
+   * check whether current array is not empty or null/undefined.
+   * @param array
+   * @returns  false if array is empty or null/undefined; otherwise, true.
+   * @throws if input parameter is not array type or null/undefined
+   * @example ArrayUtils.isNotEmpty([]) = false;
+   * @example ArrayUtils.isNotEmpty(null) = false;
+   * @example ArrayUtils.isNotEmpty(undefined) = false;
+   * @example ArrayUtils.isNotEmpty([1]) = true;
+   * @example ArrayUtils.isNotEmpty("string") throw error;
+   * @example ArrayUtils.isNotEmpty(123) throw error;
+   */
+  public static isNotEmpty<T>(array: T[] | undefined | null): boolean {
+    return !this.isEmpty(array);
   }
 
   /**

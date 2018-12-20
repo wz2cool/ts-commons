@@ -39,6 +39,43 @@ describe(".arrayUtils", () => {
     });
   });
 
+  describe("#isNotEmpty", () => {
+    it("should return false if value is null", () => {
+      const value = null;
+      const result = ArrayUtils.isNotEmpty(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is undefined", () => {
+      const value = undefined;
+      const result = ArrayUtils.isNotEmpty(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return false if value is []", () => {
+      const value = [];
+      const result = ArrayUtils.isNotEmpty(value);
+      expect(false).to.be.eq(result);
+    });
+    it("should return true if value is [1,2,3]", () => {
+      const value: number[] = [1, 2, 3];
+      const result = ArrayUtils.isNotEmpty(value);
+      expect(true).to.be.eq(result);
+    });
+    it("should return true if value is 'string' ", () => {
+      const value: any = "string";
+      expect(() => ArrayUtils.isNotEmpty(value)).to.throw(
+        // tslint:disable-next-line:trailing-comma
+        "input parameter is not a array"
+      );
+    });
+    it("should return true if value is 123 ", () => {
+      const value: any = 123;
+      expect(() => ArrayUtils.isNotEmpty(value)).to.throw(
+        // tslint:disable-next-line:trailing-comma
+        "input parameter is not a array"
+      );
+    });
+  });
+
   describe("#constains", () => {
     it("should return false if collectin is null and obj is 1", () => {
       const collectin = null;
