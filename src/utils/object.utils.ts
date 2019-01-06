@@ -104,7 +104,7 @@ export class ObjectUtils {
    * create object by type.
    * @param type
    */
-  public static createObject<T>(type: { new (): T }): T {
+  public static createObject<T>(type: new () => T): T {
     if (this.isNullOrUndefined(type)) {
       return null;
     }
