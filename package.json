@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "lint": "tslint src/**/*",
     "pretest": "npm run deletedist && tsc -p tsconfig.test.json",
     "test": "nyc mocha dist/test --recursive",
     "posttest": "karma start && npm run removenyc && del-cli coverage",
