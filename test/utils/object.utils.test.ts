@@ -284,4 +284,24 @@ describe(".ObjectUtils", () => {
       expect(0).to.be.eq(result.length);
     });
   });
+
+  describe("#getOrDefault", () => {
+    it("should return  [1,2,3] if value is not null or empty", () => {
+      const target = [1, 2, 3];
+      const value: number[] | undefined = target;
+      const result = ObjectUtils.getOrDefault(value, []);
+      expect(target).to.be.eq(result);
+    });
+
+    it("should return if [] if value is not null or empty and default value is []", () => {
+      const target = [];
+      const value: number[] | undefined = undefined;
+      const result = ObjectUtils.getOrDefault<number[] | undefined>(
+        value,
+        target
+      );
+      console.log(`length: ${result.length}`);
+      expect(target).to.be.eq(result);
+    });
+  });
 });

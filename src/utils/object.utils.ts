@@ -127,4 +127,20 @@ export class ObjectUtils {
     const values = Object.keys(obj).map(key => obj[key]);
     return values;
   }
+
+  /**
+   * if value is null or undefined return default value, else return value.
+   * @param value
+   * @param defaultValue
+   */
+  public static getOrDefault<T>(
+    value: T,
+    defaultValue: NonNullable<T>
+  ): NonNullable<T> {
+    if (ObjectUtils.isNullOrUndefined(value)) {
+      return defaultValue;
+    } else {
+      return value as NonNullable<T>;
+    }
+  }
 }
