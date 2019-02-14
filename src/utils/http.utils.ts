@@ -12,7 +12,7 @@ export class HttpUtils {
 
   /**
    * Get all query values from url;
-   * @param cookie
+   * @param url
    * @example HttpUtils.getQueryParams("http://www.google.com/?search=test&id=123")
    */
   public static getQueryParams(url: string): { [key: string]: string } {
@@ -22,6 +22,14 @@ export class HttpUtils {
     const urlItems = url.split("?");
     const queryString = urlItems.length === 1 ? urlItems[0] : urlItems[1];
     return this.getParams(queryString, "&");
+  }
+
+  public static toQueryParamsString(queryParams: {
+    [key: string]: any;
+  }): string {
+    if (ObjectUtils.isNullOrUndefined(queryParams)) {
+      return "";
+    }
   }
 
   // solve a=1[;|&]b=2[;|&]c=3

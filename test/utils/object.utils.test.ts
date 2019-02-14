@@ -156,7 +156,7 @@ describe(".ObjectUtils", () => {
 
   describe("#isBoolean", () => {
     it("should return true if value is true", () => {
-      const testValue = true;
+      const testValue = false;
       const result = ObjectUtils.isBoolean(testValue);
       expect(true).to.be.eq(result);
     });

@@ -2,6 +2,10 @@ export class ObjectUtils {
   /**
    * check whether value is null.
    * @param value
+   * @example ObjectUtils.isNull(null)        = true
+   * @example ObjectUtils.isNull(undefinend)  = false
+   * @example ObjectUtils.isNull({})          = false
+   * @example ObjectUtils.isNull(1)           = false
    */
   public static isNull(value: any): boolean {
     return value === null;
@@ -10,6 +14,10 @@ export class ObjectUtils {
   /**
    * check whether value is undefined.
    * @param value
+   * @example ObjectUtils.isUndefinend(undefinend)  = true
+   * @example ObjectUtils.isUndefinend(null)        = false
+   * @example ObjectUtils.isUndefinend({})          = false
+   * @example ObjectUtils.isUndefinend(1)           = false
    */
   public static isUndefinend(value: any): boolean {
     return typeof value === "undefined";
@@ -18,6 +26,10 @@ export class ObjectUtils {
   /**
    * check whether value is null or undefined.
    * @param value
+   * @example ObjectUtils.isNullOrUndefined(undefinend)  = true
+   * @example ObjectUtils.isNullOrUndefined(null)        = true
+   * @example ObjectUtils.isNullOrUndefined({})          = false
+   * @example ObjectUtils.isNullOrUndefined(1)           = false
    */
   public static isNullOrUndefined(value: any): boolean {
     return this.isNull(value) || this.isUndefinend(value);
@@ -26,6 +38,10 @@ export class ObjectUtils {
   /**
    * check whether value is array.
    * @param value
+   * @example ObjectUtils.isArray([])           = true
+   * @example ObjectUtils.isArray(null)         = false
+   * @example ObjectUtils.isArray(undefinend)   = false
+   * @example ObjectUtils.isArray(1)            = false
    */
   public static isArray(value: any): boolean {
     return value instanceof Array;
@@ -34,6 +50,10 @@ export class ObjectUtils {
   /**
    * check whether value is date.
    * @param value
+   * @example ObjectUtils.isDate(new Date())   = true
+   * @example ObjectUtils.isDate(null)         = false
+   * @example ObjectUtils.isDate(undefinend)   = false
+   * @example ObjectUtils.isDate(1)            = false
    */
   public static isDate(value: any): boolean {
     return value instanceof Date;
@@ -42,6 +62,10 @@ export class ObjectUtils {
   /**
    * check whether value is string.
    * @param value
+   * @example ObjectUtils.isString("test")       = true
+   * @example ObjectUtils.isString(null)         = false
+   * @example ObjectUtils.isString(undefinend)   = false
+   * @example ObjectUtils.isString(1)            = false
    */
   public static isString(value: any): boolean {
     return typeof value === "string";
@@ -50,6 +74,10 @@ export class ObjectUtils {
   /**
    * check whether value is number.
    * @param value
+   * @example ObjectUtils.isNumber(1)            = true
+   * @example ObjectUtils.isNumber(null)         = false
+   * @example ObjectUtils.isNumber(undefinend)   = false
+   * @example ObjectUtils.isNumber("test")       = false
    */
   public static isNumber(value: any): boolean {
     return typeof value === "number";
@@ -58,6 +86,10 @@ export class ObjectUtils {
   /**
    * check whether value is boolean.
    * @param value
+   * @example ObjectUtils.isBoolean(false)        = true
+   * @example ObjectUtils.isBoolean(null)         = false
+   * @example ObjectUtils.isBoolean(undefinend)   = false
+   * @example ObjectUtils.isBoolean("test")       = false
    */
   public static isBoolean(value: any): boolean {
     return typeof value === "boolean";
@@ -66,8 +98,9 @@ export class ObjectUtils {
   /**
    * Returns a string representation of an object even if value is null or undefined.
    * @param value
-   * @example ObjectUtils.toSafeString(null) = ""
-   * @example ObjectUtils.toSafeString(undefined) = ""
+   * @example ObjectUtils.toSafeString(null)        = ""
+   * @example ObjectUtils.toSafeString(undefined)   = ""
+   * @example ObjectUtils.toSafeString("test")      = "test"
    */
   public static toSafeString(value: any): string {
     if (this.isNullOrUndefined(value)) {
@@ -132,6 +165,10 @@ export class ObjectUtils {
    * if value is null or undefined return default value, else return value.
    * @param value
    * @param defaultValue
+   * @example ObjectUtils.getOrDefault<number | undefined>(1, 0)            = "1"
+   * @example ObjectUtils.getOrDefault<number | undefined>(undefined, 0)    = "0"
+   * @example ObjectUtils.getOrDefault<number | null>(1, 0)                 = "1"
+   * @example ObjectUtils.getOrDefault<number | null>(null, 0)              = "0"
    */
   public static getOrDefault<T>(
     value: T,
