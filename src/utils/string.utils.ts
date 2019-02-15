@@ -1,5 +1,5 @@
-import { ObjectUtils } from "./object.utils";
 import { NumberUtils } from "./number.utils";
+import { ObjectUtils } from "./object.utils";
 
 export class StringUtils {
   public static readonly EMPTY: string = "";
