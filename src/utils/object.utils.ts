@@ -98,13 +98,14 @@ export class ObjectUtils {
   /**
    * Returns a string representation of an object even if value is null or undefined.
    * @param value
+   * @param defaultValue
    * @example ObjectUtils.toSafeString(null)        = ""
    * @example ObjectUtils.toSafeString(undefined)   = ""
    * @example ObjectUtils.toSafeString("test")      = "test"
    */
-  public static toSafeString(value: any): string {
+  public static toSafeString(value: any, defaultValue: string = ""): string {
     if (this.isNullOrUndefined(value)) {
-      return "";
+      return defaultValue;
     } else {
       return value.toString();
     }
@@ -149,6 +150,7 @@ export class ObjectUtils {
    * @param key
    */
   public static getPropertyName<T>(key: keyof T): any {
+    const a = "";
     return key.toString();
   }
 

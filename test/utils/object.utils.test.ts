@@ -199,12 +199,17 @@ describe(".ObjectUtils", () => {
       const result = ObjectUtils.toSafeString(value);
       expect("1,2").to.be.eq(result);
     });
+    it("should return '--' if value is null and default value is '--'", () => {
+      const value = null;
+      const result = ObjectUtils.toSafeString(value, "--");
+      expect("--").to.be.eq(result);
+    });
   });
 
   describe("#getProperty", () => {
     class Student {
-      name: string;
-      age: number;
+      public name: string;
+      public age: number;
     }
     it("should return undefind if don't have property", () => {
       const student = new Student();
@@ -221,8 +226,8 @@ describe(".ObjectUtils", () => {
 
   describe("#setProperty", () => {
     class Student {
-      name: string;
-      age: number;
+      public name: string;
+      public age: number;
     }
     it("should set success", () => {
       const student = new Student();
@@ -233,8 +238,8 @@ describe(".ObjectUtils", () => {
 
   describe("#createObject", () => {
     class Student {
-      name: string;
-      age: number;
+      public name: string;
+      public age: number;
     }
     it("should return null if value is null", () => {
       const value = null;
@@ -255,8 +260,8 @@ describe(".ObjectUtils", () => {
 
   describe("#getPropertyName", () => {
     class Student {
-      name: string;
-      age: number;
+      public name: string;
+      public age: number;
     }
     it("should return 'name' if (s)=> s.name", () => {
       const result = ObjectUtils.getPropertyName<Student>("name");
@@ -266,8 +271,8 @@ describe(".ObjectUtils", () => {
 
   describe("#values", () => {
     class Student {
-      name: string;
-      age: number;
+      public name: string;
+      public age: number;
     }
     it("should return ['Jack', 20]", () => {
       const s = new Student();

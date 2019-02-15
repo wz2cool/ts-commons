@@ -1,5 +1,5 @@
-import { DateUtils, StringUtils, ObjectUtils } from "../../src/index";
 import { expect } from "chai";
+import { DateUtils, ObjectUtils, StringUtils } from "../../src/index";
 
 describe(".DateUtils", () => {
   describe("#compare", () => {
@@ -16,7 +16,6 @@ describe(".DateUtils", () => {
       const result = DateUtils.compare(date1, date2);
       expect(1).to.be.eq(result);
     });
-
 
     it("should return -1 if date1 < date2", () => {
       const date1 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
@@ -93,12 +92,12 @@ describe(".DateUtils", () => {
   // avoid phantomjs issue
   let needTestToString = true;
   try {
-    if (
-      StringUtils.containsIgnoreCase(window.navigator.userAgent, "Firefox")
-    ) {
+    if (StringUtils.containsIgnoreCase(window.navigator.userAgent, "Firefox")) {
       needTestToString = false;
     }
-  } catch (e) {}
+  } catch (e) {
+    // fix
+  }
 
   if (needTestToString) {
     describe("#toUTCString", () => {
