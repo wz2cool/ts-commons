@@ -22,12 +22,12 @@ export class StringUtils {
   /**
    * check current string is not empty.
    * @param str
-   * @example StringUtils.isEmpty(null)      = false
-   * @example StringUtils.isEmpty(undefined) = false
-   * @example StringUtils.isEmpty("")        = false
-   * @example StringUtils.isEmpty(" ")       = true
-   * @example StringUtils.isEmpty("bob")     = true
-   * @example StringUtils.isEmpty("  bob  ") = true
+   * @example StringUtils.isNotEmpty(null)      = false
+   * @example StringUtils.isNotEmpty(undefined) = false
+   * @example StringUtils.isNotEmpty("")        = false
+   * @example StringUtils.isNotEmpty(" ")       = true
+   * @example StringUtils.isNotEmpty("bob")     = true
+   * @example StringUtils.isNotEmpty("  bob  ") = true
    */
   public static isNotEmpty(str: string | undefined | null): boolean {
     return !this.isEmpty(str);
@@ -36,12 +36,12 @@ export class StringUtils {
   /**
    * check current string is blank.
    * @param str
-   * @example StringUtils.isEmpty(null)      = true
-   * @example StringUtils.isEmpty(undefined) = true
-   * @example StringUtils.isEmpty("")        = true
-   * @example StringUtils.isEmpty(" ")       = true
-   * @example StringUtils.isEmpty("bob")     = false
-   * @example StringUtils.isEmpty("  bob  ") = false
+   * @example StringUtils.isBlank(null)      = true
+   * @example StringUtils.isBlank(undefined) = true
+   * @example StringUtils.isBlank("")        = true
+   * @example StringUtils.isBlank(" ")       = true
+   * @example StringUtils.isBlank("bob")     = false
+   * @example StringUtils.isBlank("  bob  ") = false
    */
   public static isBlank(str: string | undefined | null): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.trim() === this.EMPTY;
@@ -50,12 +50,12 @@ export class StringUtils {
   /**
    * check current string is not blank.
    * @param str
-   * @example StringUtils.isEmpty(null)      = false
-   * @example StringUtils.isEmpty(undefined) = false
-   * @example StringUtils.isEmpty("")        = false
-   * @example StringUtils.isEmpty(" ")       = false
-   * @example StringUtils.isEmpty("bob")     = true
-   * @example StringUtils.isEmpty("  bob  ") = true
+   * @example StringUtils.isNotBlank(null)      = false
+   * @example StringUtils.isNotBlank(undefined) = false
+   * @example StringUtils.isNotBlank("")        = false
+   * @example StringUtils.isNotBlank(" ")       = false
+   * @example StringUtils.isNotBlank("bob")     = true
+   * @example StringUtils.isNotBlank("  bob  ") = true
    */
   public static isNotBlank(str: string | undefined | null): boolean {
     return !this.isBlank(str);
