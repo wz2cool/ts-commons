@@ -151,8 +151,7 @@ export class ObjectUtils {
    * get name of property.
    * @param key
    */
-  public static getPropertyName<T>(key: keyof T): any {
-    const a = "";
+  public static getPropertyName<T>(key: keyof T): string {
     return key.toString();
   }
 

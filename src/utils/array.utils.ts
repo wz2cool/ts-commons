@@ -1,5 +1,5 @@
-import { ObjectUtils } from "./object.utils";
 import { NumberUtils } from "./number.utils";
+import { ObjectUtils } from "./object.utils";
 
 export class ArrayUtils {
   /**
@@ -21,6 +21,7 @@ export class ArrayUtils {
     if (!ObjectUtils.isArray(array)) {
       throw new Error("input parameter is not a array or null/undefined");
     }
+
     return array.length === 0;
   }
 
@@ -150,11 +151,11 @@ export class ArrayUtils {
   public static take<T>(array: T[], n?: number | undefined | null): T[] {
     const length = array.length;
     let takeN;
-    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n!)) {
       takeN = 1;
-    } else if (n <= 0) {
+    } else if (n! <= 0) {
       takeN = 0;
-    } else if (n < length) {
+    } else if (n! < length) {
       takeN = n;
     } else {
       takeN = length;
@@ -178,13 +179,13 @@ export class ArrayUtils {
   public static takeRight<T>(array: T[], n?: number | undefined | null): T[] {
     const length = array.length;
     let useStartIndex;
-    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n!)) {
       // default value is 1
       useStartIndex = length - 1;
-    } else if (n < 0) {
+    } else if (n! < 0) {
       useStartIndex = length;
-    } else if (n < length) {
-      useStartIndex = length - n;
+    } else if (n! < length) {
+      useStartIndex = length - n!;
     } else {
       useStartIndex = 0;
     }

@@ -24,14 +24,6 @@ export class HttpUtils {
     return this.getParams(queryString, "&");
   }
 
-  public static toQueryParamsString(queryParams: {
-    [key: string]: any;
-  }): string {
-    if (ObjectUtils.isNullOrUndefined(queryParams)) {
-      return "";
-    }
-  }
-
   // solve a=1[;|&]b=2[;|&]c=3
   private static getParams(
     paramStr: string,
