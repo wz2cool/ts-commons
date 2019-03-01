@@ -1,3 +1,5 @@
+import { ArrayUtils } from "..";
+
 export class ObjectUtils {
   /**
    * check whether value is null.
@@ -161,6 +163,25 @@ export class ObjectUtils {
     }
 
     return Object.keys(obj).map(key => obj[key]);
+  }
+
+  public static getSubProperty(obj: any, subPropertyPaths: string[]): any {
+    if (this.isNullOrUndefined(obj)) {
+      return undefined;
+    }
+
+    if (ArrayUtils.isEmpty(subPropertyPaths)) {
+      return obj;
+    }
+
+    let subProperty = obj;
+    for (const subPropertyPath of subPropertyPaths) {
+      subProperty = subProperty[subPropertyPath];
+      if (ObjectUtils.isNullOrUndefined(subProperty)) {
+        return undefined;
+      }
+    }
+    return subProperty;
   }
 
   /**
