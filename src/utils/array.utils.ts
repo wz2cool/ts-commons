@@ -151,11 +151,11 @@ export class ArrayUtils {
   public static take<T>(array: T[], n?: number | undefined | null): T[] {
     const length = array.length;
     let takeN;
-    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n!)) {
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
       takeN = 1;
-    } else if (n! <= 0) {
+    } else if (n <= 0) {
       takeN = 0;
-    } else if (n! < length) {
+    } else if (n < length) {
       takeN = n;
     } else {
       takeN = length;

@@ -65,10 +65,9 @@ export class DateUtils {
    * "S" Milliseconds; no leading zero for single-digit seconds.
    */
   public static toString(date: Date, format: string): string {
-    const result = format.replace(this.timeFormatRegex, matched =>
+    return format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(false, date, matched)
     );
-    return result;
   }
 
   /**
@@ -92,10 +91,9 @@ export class DateUtils {
    * "S" Milliseconds; no leading zero for single-digit seconds.
    */
   public static toUTCString(date: Date, format: string): string {
-    const result = format.replace(this.timeFormatRegex, matched =>
+    return format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(true, date, matched)
     );
-    return result;
   }
 
   /**
@@ -120,6 +118,7 @@ export class DateUtils {
     }
   }
 
+  // tslint:disable-next-line: cognitive-complexity
   private static getTimeFormat(
     isUTC: boolean,
     date: Date,
@@ -167,8 +166,8 @@ export class DateUtils {
         return milliseconds >= 100
           ? milliseconds.toString()
           : milliseconds >= 10
-            ? `0${milliseconds}`
-            : `00${milliseconds}`;
+          ? `0${milliseconds}`
+          : `00${milliseconds}`;
       case "S":
         return (isUTC
           ? date.getUTCMilliseconds()

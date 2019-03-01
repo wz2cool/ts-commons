@@ -1,6 +1,7 @@
-import { ArrayUtils } from "../../src/index";
 import { expect } from "chai";
+import { ArrayUtils } from "../../src/index";
 
+// tslint:disable-next-line: no-big-function
 describe(".arrayUtils", () => {
   describe("#isEmpty", () => {
     it("should return true if value is null", () => {
@@ -27,6 +28,7 @@ describe(".arrayUtils", () => {
       const value: any = "string";
       expect(() => ArrayUtils.isEmpty(value)).to.throw(
         // tslint:disable-next-line:trailing-comma
+        // tslint:disable-next-line: no-duplicate-string
         "input parameter is not a array"
       );
     });
@@ -169,6 +171,7 @@ describe(".arrayUtils", () => {
       expect(3).to.be.eq(array.length);
     });
 
+    // tslint:disable-next-line: no-identical-functions
     it("should return true if insert last value success", () => {
       const array = [1, 2];
       const obj = 3;
@@ -339,6 +342,7 @@ describe(".arrayUtils", () => {
       expect(3).to.be.eq(result.length);
     });
 
+    // tslint:disable-next-line: no-identical-functions
     it("should return [] if take([1, 2, 3], 0);", () => {
       const array = [1, 2, 3];
       const result = ArrayUtils.take(array, 0);

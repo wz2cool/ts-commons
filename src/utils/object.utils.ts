@@ -160,8 +160,7 @@ export class ObjectUtils {
       return [];
     }
 
-    const values = Object.keys(obj).map(key => obj[key]);
-    return values;
+    return Object.keys(obj).map(key => obj[key]);
   }
 
   /**
