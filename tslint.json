@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended"],
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
   "jsRules": {
     "no-unused-expression": true
   },
@@ -24,7 +24,9 @@
     // "variable-name": [false],
     // "one-line": [false],
     // "one-variable-per-declaration": [false],
-    "trailing-comma": false
+    "trailing-comma": false,
+    "strict-boolean-expressions": true,
+    "no-parameter-reassignment": true
   },
   "rulesDirectory": []
 }
