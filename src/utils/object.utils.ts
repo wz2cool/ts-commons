@@ -183,4 +183,17 @@ export class ObjectUtils {
       return value as NonNullable<T>;
     }
   }
+
+  /**
+   * Indicating whether the current object has a value.
+   * @param object
+   * @returns true if current object is not null or undefined, else return false.
+   * @example ObjectUtils.hasValue(1)           = true
+   * @example ObjectUtils.hasValue("str")       = true
+   * @example ObjectUtils.hasValue(undefined)   = false
+   * @example ObjectUtils.hasValue(null)        = false
+   */
+  public static hasValue(object: any): boolean {
+    return !this.isNullOrUndefined(object);
+  }
 }

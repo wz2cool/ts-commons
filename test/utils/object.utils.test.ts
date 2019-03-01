@@ -309,4 +309,30 @@ describe(".ObjectUtils", () => {
       expect(target).to.be.eq(result);
     });
   });
+
+  describe("#hasValue", () => {
+    it("should return true if object is 1", () => {
+      const target = 1;
+      const result = ObjectUtils.hasValue(target);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return true if object is 'str'", () => {
+      const target = "str";
+      const result = ObjectUtils.hasValue(target);
+      expect(true).to.be.eq(result);
+    });
+
+    it("should return true if object is undefined", () => {
+      const target = undefined;
+      const result = ObjectUtils.hasValue(target);
+      expect(false).to.be.eq(result);
+    });
+
+    it("should return true if object is null", () => {
+      const target = null;
+      const result = ObjectUtils.hasValue(target);
+      expect(false).to.be.eq(result);
+    });
+  });
 });
