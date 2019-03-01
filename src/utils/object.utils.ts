@@ -193,7 +193,7 @@ export class ObjectUtils {
    * @example ObjectUtils.hasValue(undefined)   = false
    * @example ObjectUtils.hasValue(null)        = false
    */
-  public static hasValue(object: any): boolean {
+  public static hasValue<T>(object: T): object is NonNullable<T> {
     return !this.isNullOrUndefined(object);
   }
 }
