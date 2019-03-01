@@ -178,14 +178,14 @@ export class ArrayUtils {
    */
   public static takeRight<T>(array: T[], n?: number | undefined | null): T[] {
     const length = array.length;
-    let useStartIndex;
-    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n!)) {
+    let useStartIndex: number;
+    if (ObjectUtils.isNullOrUndefined(n) || isNaN(n)) {
       // default value is 1
       useStartIndex = length - 1;
-    } else if (n! < 0) {
+    } else if (n < 0) {
       useStartIndex = length;
-    } else if (n! < length) {
-      useStartIndex = length - n!;
+    } else if (n < length) {
+      useStartIndex = length - n;
     } else {
       useStartIndex = 0;
     }
