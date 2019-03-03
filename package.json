@@ -1,11 +1,12 @@
 {
   "name": "ts-commons",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "common methods for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
+    "localtest": "npm run clean && tsc -p tsconfig.test.json && nyc mocha dist/test --recursive && npm run clean",
     "pretest": "npm run clean && tsc -p tsconfig.test.json",
     "test": "nyc mocha dist/test --recursive && npm run cover -- --report lcovonly && karma start && npm run analyze:sonar",
     "posttest": "npm run clean",

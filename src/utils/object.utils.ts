@@ -165,23 +165,37 @@ export class ObjectUtils {
     return Object.keys(obj).map(key => obj[key]);
   }
 
-  public static getSubProperty(obj: any, subPropertyPaths: string[]): any {
+  /**
+   * get matching descendant property.
+   * @param obj
+   * @param descendantPaths
+   * @example ObjectUtils.getDescendantProperty({p1: {p2 : 1}})             = {p1: {p2 : 1}}
+   * @example ObjectUtils.getDescendantProperty({p1: {p2 : 1}}, "p1")       = {p2 : 1}
+   * @example ObjectUtils.getDescendantProperty({p1: {p2 : 1}}, "p1", "p2") = 1
+   * @example ObjectUtils.getDescendantProperty({p1: {p2 : 1}}, "p1", "p3") = undefined
+   * @example ObjectUtils.getDescendantProperty(undefined)                  = undefined
+   * @example ObjectUtils.getDescendantProperty(null)                       = undefined
+   */
+  public static getDescendantProperty(
+    obj: any,
+    ...descendantPaths: string[]
+  ): NonNullable<any> | undefined {
     if (this.isNullOrUndefined(obj)) {
       return undefined;
     }
 
-    if (ArrayUtils.isEmpty(subPropertyPaths)) {
+    if (ArrayUtils.isEmpty(descendantPaths)) {
       return obj;
     }
 
-    let subProperty = obj;
-    for (const subPropertyPath of subPropertyPaths) {
-      subProperty = subProperty[subPropertyPath];
-      if (ObjectUtils.isNullOrUndefined(subProperty)) {
+    let descendantProperty = obj;
+    for (const descendantPath of descendantPaths) {
+      descendantProperty = descendantProperty[descendantPath];
+      if (ObjectUtils.isNullOrUndefined(descendantProperty)) {
         return undefined;
       }
     }
-    return subProperty;
+    return descendantProperty;
   }
 
   /**

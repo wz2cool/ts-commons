@@ -335,4 +335,40 @@ describe(".ObjectUtils", () => {
       expect(false).to.be.eq(result);
     });
   });
+
+  describe("#getDescendantProperty", () => {
+    it("should return undefined if object is undefined", () => {
+      const obj = undefined;
+      const result = ObjectUtils.getDescendantProperty(obj, "1");
+      expect(undefined).to.be.eq(result);
+    });
+
+    it("should return 1 if can find sub1", () => {
+      const obj = { sub1: 1 };
+      const result = ObjectUtils.getDescendantProperty(obj, "sub1");
+      expect(1).to.be.eq(result);
+    });
+
+    it("should return 2 if can find sub2", () => {
+      const obj = {
+        sub1: {
+          sub2: 2
+        }
+      };
+      const result = ObjectUtils.getDescendantProperty(obj, "sub1", "sub2");
+      expect(2).to.be.eq(result);
+    });
+
+    it("should return undefined if cannot find property", () => {
+      const obj = { sub1: 1 };
+      const result = ObjectUtils.getDescendantProperty(obj, "sub2");
+      expect(undefined).to.be.eq(result);
+    });
+
+    it("should return object if pathes is empty", () => {
+      const obj = 1;
+      const result = ObjectUtils.getDescendantProperty(obj);
+      expect(1).to.be.eq(result);
+    });
+  });
 });
