@@ -494,4 +494,33 @@ export class StringUtils {
       .replace(/[^A-Za-z0-9]+|_+/g, "_")
       .toLowerCase();
   }
+
+  /**
+   * Replaces all text find in a string.
+   * @example StringUtils.replaceAll(null, "a", "b")    = null;
+   * @example StringUtils.replaceAll(" ", " ", "a")    = "a";
+   * @example StringUtils.replaceAll("aa", "a", "b")    = "bb";
+   */
+  public static replaceAll(
+    str: string,
+    searchValue: string,
+    replacer: string
+  ): string {
+    if (
+      !ObjectUtils.isString(str) ||
+      !ObjectUtils.isString(searchValue) ||
+      !ObjectUtils.isString(replacer)
+    ) {
+      return str;
+    }
+
+    return str.replace(
+      new RegExp(this.escapeRegExp(searchValue), "g"),
+      replacer
+    );
+  }
+
+  private static escapeRegExp(str: string): string {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  }
 }

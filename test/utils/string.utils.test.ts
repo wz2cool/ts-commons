@@ -1338,4 +1338,30 @@ describe(".StringUtils", () => {
       expect("").to.be.eq(result);
     });
   });
+
+  describe("#replaceAll", () => {
+    it("should return null if str is null", () => {
+      const str = null;
+      const result = StringUtils.replaceAll(str, "a", "b");
+      expect(null).to.be.eq(result);
+    });
+
+    it("should return 'bb'", () => {
+      const str = "bb";
+      const result = StringUtils.replaceAll(str, "b", "a");
+      expect("aa").to.be.eq(result.trim());
+    });
+
+    it("should return 'a'", () => {
+      const str = "a b b b";
+      const result = StringUtils.replaceAll(str, "b", "");
+      expect("a").to.be.eq(result.trim());
+    });
+
+    it("should return 'a'", () => {
+      const str = " ";
+      const result = StringUtils.replaceAll(str, " ", "a");
+      expect("a").to.be.eq(result.trim());
+    });
+  });
 });
