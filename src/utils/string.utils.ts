@@ -64,6 +64,11 @@ export class StringUtils {
   /**
    * Removes all leading and trailing white-space characters from the current string.
    * @param str
+   * @example StringUtils.trim(null)        = null
+   * @example StringUtils.trim(undefined)   = undefined
+   * @example StringUtils.trim("")          = ""
+   * @example StringUtils.trim("    ")      = ""
+   * @example StringUtils.trim(" a   ")     = "a"
    */
   public static trim(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
@@ -76,6 +81,11 @@ export class StringUtils {
   /**
    * Removes all leading and trailing white-space characters from the current string to null.
    * @param str
+   * @example StringUtils.trimToNull(null)             = null
+   * @example StringUtils.trimToNull(undefined)        = null
+   * @example StringUtils.trimToNull("")               = null
+   * @example StringUtils.trimToNull("    ")           = null
+   * @example StringUtils.trimToNull(" a   ")          = "a"
    */
   public static trimToNull(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
@@ -88,6 +98,11 @@ export class StringUtils {
   /**
    * Removes all leading and trailing white-space characters from the current string to "".
    * @param str
+   * @example StringUtils.trimToNull(null)             = ""
+   * @example StringUtils.trimToNull(undefined)        = ""
+   * @example StringUtils.trimToNull("")               = ""
+   * @example StringUtils.trimToNull("    ")           = ""
+   * @example StringUtils.trimToNull(" a   ")          = "a"
    */
   public static trimToEmpty(str: string): string {
     if (ObjectUtils.isNullOrUndefined(str)) {
