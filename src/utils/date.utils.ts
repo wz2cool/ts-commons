@@ -28,11 +28,7 @@ export class DateUtils {
       return null;
     }
 
-    if (timestamp > 1000000000000) {
-      return new Date(timestamp);
-    } else {
-      return new Date(timestamp * 1000);
-    }
+    return new Date(timestamp);
   }
 
   /**
@@ -166,8 +162,8 @@ export class DateUtils {
         return milliseconds >= 100
           ? milliseconds.toString()
           : milliseconds >= 10
-          ? `0${milliseconds}`
-          : `00${milliseconds}`;
+            ? `0${milliseconds}`
+            : `00${milliseconds}`;
       case "S":
         return (isUTC
           ? date.getUTCMilliseconds()
