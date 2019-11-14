@@ -24,10 +24,6 @@ export class DateUtils {
    * @example DateUtils.timestampToDate(1529366400) = new Date("Tue, 19 Jun 2018 00:00:00 GMT")
    */
   public static timestampToDate(timestamp: number): Date {
-    if (!NumberUtils.isSafeInteger(timestamp)) {
-      return null;
-    }
-
     return new Date(timestamp);
   }
 
