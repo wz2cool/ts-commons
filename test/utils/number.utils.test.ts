@@ -133,4 +133,24 @@ describe(".NumberUtils", () => {
       expect(true).to.be.eq(result);
     });
   });
+
+  describe("#toFixed", () => {
+    it("should return default value if value is empty", () => {
+      const value: number = null;
+      const defaultValue = "--";
+      const result = NumberUtils.toFixed(value, 2, defaultValue);
+      expect(defaultValue).to.be.eq(result);
+    });
+
+    it("should return empty if value is empty and default value is not set", () => {
+      const value: number = null;
+      const result = NumberUtils.toFixed(value, 2);
+      expect("").to.be.eq(result);
+    });
+    it("should return 1.00 if value is 1", () => {
+      const value: number = 1;
+      const result = NumberUtils.toFixed(value, 2);
+      expect("1.00").to.be.eq(result);
+    });
+  })
 });

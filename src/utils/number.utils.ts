@@ -45,4 +45,17 @@ export class NumberUtils {
   public static isSafeInteger(value: any): boolean {
     return this.isInteger(value) && Math.abs(value) <= this.MAX_SAFE_INTEGER;
   }
+
+  /**
+   * Returns a string representing a number in fixed-point notation.
+   * @param value target value.
+   * @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+   * @param defaultValue default value if value is empty. 
+   */
+  public static toFixed(value: number, fractionDigits: number, defaultValue?: string): string {
+    if (ObjectUtils.isNullOrUndefined(value)) {
+      return ObjectUtils.getOrDefault(defaultValue, "");
+    }
+    return value.toFixed(fractionDigits);
+  }
 }
