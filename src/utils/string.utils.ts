@@ -29,7 +29,7 @@ export class StringUtils {
    * @example StringUtils.isNotEmpty("bob")     = true
    * @example StringUtils.isNotEmpty("  bob  ") = true
    */
-  public static isNotEmpty(str: string | undefined | null): str is string {
+  public static isNotEmpty(str: string | undefined | null): boolean {
     return !this.isEmpty(str);
   }
 
