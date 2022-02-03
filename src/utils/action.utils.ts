@@ -1,10 +1,14 @@
+export type PromiseVoidActionType = () => Promise<void>;
+export type voidActionType = () => void;
+
 export class ActionUtils {
+
     /**
      * if test is true, execute action
      * @param test whether is true
      * @param action action
      */
-    public static ifTrue(test: boolean, action: () => void | (() => Promise<void>)): void {
+    public static ifTrue(test: boolean, action: PromiseVoidActionType | voidActionType): void {
         if (test) {
             action();
         }
@@ -15,7 +19,7 @@ export class ActionUtils {
      * @param test whether is false
      * @param action action
      */
-    public static ifFalse(test: boolean, action: () => void | (() => Promise<void>)): void {
+    public static ifFalse(test: boolean, action: PromiseVoidActionType | voidActionType): void {
         if (!test) {
             action();
         }
