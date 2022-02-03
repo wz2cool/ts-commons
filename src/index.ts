@@ -6,6 +6,7 @@ import { ObjectUtils } from "./utils/object.utils";
 import { RegexUtils } from "./utils/regex.utils";
 import { StringUtils } from "./utils/string.utils";
 import { ThreadUtils } from "./utils/thread.utils";
+import { ActionUtils } from "./utils/action.utils";
 
 export {
   ObjectUtils,
@@ -15,5 +16,6 @@ export {
   RegexUtils,
   HttpUtils,
   ArrayUtils,
-  ThreadUtils
+  ThreadUtils,
+  ActionUtils
 };

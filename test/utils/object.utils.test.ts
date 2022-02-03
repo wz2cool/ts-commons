@@ -336,34 +336,6 @@ describe(".ObjectUtils", () => {
     });
   });
 
-  describe("#ifTrue", () => {
-    it("should exec if true", () => {
-      ObjectUtils.ifTrue(true, () => {
-        expect(true).to.be.eq(true);
-      })
-    });
-
-    it("should not exec if false", () => {
-      ObjectUtils.ifTrue(false, () => {
-        throw ("should not exec ")
-      })
-    })
-  })
-
-  describe("#ifFalse", () => {
-    it("should exec if false", () => {
-      ObjectUtils.ifFalse(false, () => {
-        expect(true).to.be.eq(true);
-      })
-    });
-
-    it("should not exec if true", () => {
-      ObjectUtils.ifFalse(true, () => {
-        throw ("should not exec ")
-      })
-    })
-  })
-
   describe("#getDescendantProperty", () => {
     it("should return undefined if object is undefined", () => {
       const obj = undefined;
