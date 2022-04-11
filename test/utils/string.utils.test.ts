@@ -1364,4 +1364,27 @@ describe(".StringUtils", () => {
       expect("a").to.be.eq(result.trim());
     });
   });
+
+  describe("#join", () => {
+    it("should return \"\"", () => {
+      const str = null;
+      const result = StringUtils.join([]);
+      expect("").to.be.eq(result);
+    });
+    it("should return \"123\"", () => {
+      const str = null;
+      const result = StringUtils.join([1, 2, 3]);
+      expect("123").to.be.eq(result);
+    });
+    it("should return \"123\"", () => {
+      const str = null;
+      const result = StringUtils.join([1, 2, 3], null);
+      expect("123").to.be.eq(result);
+    });
+    it("should return \"1-2-3\"", () => {
+      const str = null;
+      const result = StringUtils.join([1, 2, 3], "-");
+      expect("1-2-3").to.be.eq(result);
+    });
+  });
 });
