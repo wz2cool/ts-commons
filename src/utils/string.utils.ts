@@ -1,3 +1,4 @@
+import { ArrayUtils } from "./array.utils";
 import { NumberUtils } from "./number.utils";
 import { ObjectUtils } from "./object.utils";
 
@@ -533,6 +534,33 @@ export class StringUtils {
       new RegExp(this.escapeRegExp(searchValue), "g"),
       replacer
     );
+  }
+
+  /**
+   * Joins the elements of the provided array into a single String
+   * @param array  the array of values to join together, may be null
+   * @param separator the separator character to use, null treated as ""
+   * @returns the joined String
+   * @example StringUtils.join([], *)    = "";
+   * @example StringUtils.join(["a", "b", "c"], null)  = "abc"
+   * @example StringUtils.join(["a", "b", "c"], "-")  = "a-b-c"
+   * @example StringUtils.join([1, 2, 3], "-")  = "1-2-3"
+   */
+  public static join<T>(array: T[], separator: string = "") {
+    if (ArrayUtils.isEmpty(array)) {
+      return ""
+    }
+    const useSeparator = this.isEmpty(separator) ? "" : separator;
+    let result: string;
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index] + "";
+      if (index === 0) {
+        result = element;
+      } else {
+        result = result + useSeparator + element;
+      }
+    }
+    return result;
   }
 
   private static escapeRegExp(str: string): string {
