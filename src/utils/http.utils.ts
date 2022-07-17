@@ -1,4 +1,5 @@
 import { ObjectUtils } from "./object.utils";
+import { StringUtils } from "./string.utils";
 
 export class HttpUtils {
   /**
@@ -22,6 +23,37 @@ export class HttpUtils {
     const urlItems = url.split("?");
     const queryString = urlItems.length === 1 ? urlItems[0] : urlItems[1];
     return this.getParams(queryString, "&");
+  }
+
+  public static mergeUrl(
+    url: string,
+    queryParams: { [key: string]: string },
+    replaceOld: boolean
+  ): string {
+    const oldParams = this.getQueryParams(url);
+    for (const key in queryParams) {
+      if (oldParams.hasOwnProperty(key)) {
+        if (replaceOld) {
+          oldParams[key] = queryParams[key];
+        }
+      } else {
+        oldParams[key] = queryParams[key];
+      }
+    }
+    let query = "";
+    for (const key in oldParams) {
+      const value = oldParams[key];
+      if (StringUtils.isBlank(query)) {
+        query += `${key}=${value}`;
+      } else {
+        query += `&${key}=${value}`;
+      }
+    }
+    if (StringUtils.isBlank(query)) {
+      return url;
+    } else {
+      return `${url.split("?")[0]}?${query}`;
+    }
   }
 
   // solve a=1[;|&]b=2[;|&]c=3
