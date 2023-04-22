@@ -54,4 +54,27 @@ describe(".HttpUtils", () => {
       expect("123").to.be.eq(result.id);
     });
   });
+
+  describe("#mergeUrl", () => {
+    it("should return replace old param", () => {
+      const queryParams: { [key: string]: string } = {};
+      queryParams.tab = "0";
+      queryParams.xxx = "1";
+      const result = HttpUtils.mergeUrl(
+        "http://test.xxxx.com?tab=1",
+        queryParams,
+        true
+      );
+      expect("http://test.xxxx.com?tab=0&xxx=1").to.be.eq(result);
+    });
+    it("should keep old", () => {
+      const queryParams: { [key: string]: string } = {};
+      const result = HttpUtils.mergeUrl(
+        "http://test.xxxx.com",
+        queryParams,
+        true
+      );
+      expect("http://test.xxxx.com").to.be.eq(result);
+    });
+  });
 });
