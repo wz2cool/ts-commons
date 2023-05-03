@@ -2,6 +2,8 @@ import { ArrayUtils } from "./array.utils";
 import { NumberUtils } from "./number.utils";
 import { ObjectUtils } from "./object.utils";
 
+export type NullableString = string | undefined | null;
+
 export class StringUtils {
   public static readonly EMPTY: string = "";
   public static readonly INDEX_NOT_FOUND: number = -1;
@@ -16,7 +18,7 @@ export class StringUtils {
    * @example StringUtils.isEmpty("bob")     = false
    * @example StringUtils.isEmpty("  bob  ") = false
    */
-  public static isEmpty(str: string | undefined | null): boolean {
+  public static isEmpty(str: NullableString): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.length === 0;
   }
 
@@ -30,7 +32,7 @@ export class StringUtils {
    * @example StringUtils.isNotEmpty("bob")     = true
    * @example StringUtils.isNotEmpty("  bob  ") = true
    */
-  public static isNotEmpty(str: string | undefined | null): boolean {
+  public static isNotEmpty(str: NullableString): str is NonNullable<NullableString> {
     return !this.isEmpty(str);
   }
 
@@ -44,7 +46,7 @@ export class StringUtils {
    * @example StringUtils.isBlank("bob")     = false
    * @example StringUtils.isBlank("  bob  ") = false
    */
-  public static isBlank(str: string | undefined | null): boolean {
+  public static isBlank(str: NullableString): boolean {
     return ObjectUtils.isNullOrUndefined(str) || str.trim() === this.EMPTY;
   }
 
@@ -58,7 +60,7 @@ export class StringUtils {
    * @example StringUtils.isNotBlank("bob")     = true
    * @example StringUtils.isNotBlank("  bob  ") = true
    */
-  public static isNotBlank(str: string | undefined | null): boolean {
+  public static isNotBlank(str: NullableString): str is NonNullable<NullableString> {
     return !this.isBlank(str);
   }
 
@@ -548,7 +550,7 @@ export class StringUtils {
    */
   public static join<T>(array: T[], separator: string = "") {
     if (ArrayUtils.isEmpty(array)) {
-      return ""
+      return "";
     }
     const useSeparator = this.isEmpty(separator) ? "" : separator;
     let result: string;
