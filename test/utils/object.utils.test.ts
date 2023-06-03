@@ -207,13 +207,23 @@ describe(".ObjectUtils", () => {
   });
 
   describe("#getProperty", () => {
+    class ClassRoom {
+      public name: string;
+    }
     class Student {
       public name: string;
       public age: number;
+      public classroom: ClassRoom;
     }
     it("should return undefind if don't have property", () => {
       const student = new Student();
       const result = ObjectUtils.getProperty(student, "name");
+      const roomName = ObjectUtils.getProperty2(
+        student,
+        "classroom",
+        "name",
+        "defaultName"
+      );
       expect(undefined).to.be.eq(result);
     });
     it("should return 'test' if name is 'test'", () => {
@@ -352,8 +362,8 @@ describe(".ObjectUtils", () => {
     it("should return 2 if can find sub2", () => {
       const obj = {
         sub1: {
-          sub2: 2
-        }
+          sub2: 2,
+        },
       };
       const result = ObjectUtils.getDescendantProperty(obj, "sub1", "sub2");
       expect(2).to.be.eq(result);

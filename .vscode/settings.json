@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "sonar_font",
+        "projectKey": "ts-commons"
+    }
+}
