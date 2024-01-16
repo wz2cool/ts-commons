@@ -1,4 +1,4 @@
-import { ArrayUtils } from "..";
+import { ArrayUtils } from '..';
 
 export class ObjectUtils {
   /**
@@ -9,7 +9,7 @@ export class ObjectUtils {
    * @example ObjectUtils.isNull({})          = false
    * @example ObjectUtils.isNull(1)           = false
    */
-  public static isNull(value: any): boolean {
+  public static isNull(value: unknown): value is null {
     return value === null;
   }
 
@@ -21,8 +21,8 @@ export class ObjectUtils {
    * @example ObjectUtils.isUndefinend({})          = false
    * @example ObjectUtils.isUndefinend(1)           = false
    */
-  public static isUndefinend(value: any): boolean {
-    return typeof value === "undefined";
+  public static isUndefinend(value: unknown): value is undefined {
+    return typeof value === 'undefined';
   }
 
   /**
@@ -33,7 +33,7 @@ export class ObjectUtils {
    * @example ObjectUtils.isNullOrUndefined({})          = false
    * @example ObjectUtils.isNullOrUndefined(1)           = false
    */
-  public static isNullOrUndefined(value: any): boolean {
+  public static isNullOrUndefined(value: unknown): value is null | undefined {
     return this.isNull(value) || this.isUndefinend(value);
   }
 
@@ -45,7 +45,7 @@ export class ObjectUtils {
    * @example ObjectUtils.isArray(undefinend)   = false
    * @example ObjectUtils.isArray(1)            = false
    */
-  public static isArray(value: any): boolean {
+  public static isArray(value: unknown): value is Array<any> {
     return value instanceof Array;
   }
 
@@ -57,7 +57,7 @@ export class ObjectUtils {
    * @example ObjectUtils.isDate(undefinend)   = false
    * @example ObjectUtils.isDate(1)            = false
    */
-  public static isDate(value: any): boolean {
+  public static isDate(value: unknown): value is Date {
     return value instanceof Date;
   }
 
@@ -69,8 +69,8 @@ export class ObjectUtils {
    * @example ObjectUtils.isString(undefinend)   = false
    * @example ObjectUtils.isString(1)            = false
    */
-  public static isString(value: any): boolean {
-    return typeof value === "string";
+  public static isString(value: unknown): value is string {
+    return typeof value === 'string';
   }
 
   /**
@@ -81,8 +81,8 @@ export class ObjectUtils {
    * @example ObjectUtils.isNumber(undefinend)   = false
    * @example ObjectUtils.isNumber("test")       = false
    */
-  public static isNumber(value: any): boolean {
-    return typeof value === "number";
+  public static isNumber(value: unknown): value is number {
+    return typeof value === 'number';
   }
 
   /**
@@ -93,8 +93,8 @@ export class ObjectUtils {
    * @example ObjectUtils.isBoolean(undefinend)   = false
    * @example ObjectUtils.isBoolean("test")       = false
    */
-  public static isBoolean(value: any): boolean {
-    return typeof value === "boolean";
+  public static isBoolean(value: unknown): value is boolean {
+    return typeof value === 'boolean';
   }
 
   /**
@@ -107,7 +107,7 @@ export class ObjectUtils {
    * @example ObjectUtils.toSafeString(null, "--")      = "--"
    * @example ObjectUtils.toSafeString(undefined, "--") = "--"
    */
-  public static toSafeString(value: any, defaultValue: string = ""): string {
+  public static toSafeString(value: any, defaultValue: string = ''): string {
     if (this.isNullOrUndefined(value)) {
       return defaultValue;
     } else {
@@ -130,11 +130,7 @@ export class ObjectUtils {
    * @param key
    * @param value
    */
-  public static setProperty<T, K extends keyof T>(
-    obj: T,
-    key: K,
-    value: T[K]
-  ): void {
+  public static setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]): void {
     obj[key] = value;
   }
 
@@ -162,7 +158,7 @@ export class ObjectUtils {
       return [];
     }
 
-    return Object.keys(obj).map(key => obj[key]);
+    return Object.keys(obj).map((key) => obj[key]);
   }
 
   /**
@@ -176,10 +172,7 @@ export class ObjectUtils {
    * @example ObjectUtils.getDescendantProperty(undefined)                  = undefined
    * @example ObjectUtils.getDescendantProperty(null)                       = undefined
    */
-  public static getDescendantProperty(
-    obj: any,
-    ...descendantPaths: string[]
-  ): NonNullable<any> | undefined {
+  public static getDescendantProperty(obj: any, ...descendantPaths: string[]): NonNullable<any> | undefined {
     if (this.isNullOrUndefined(obj)) {
       return undefined;
     }
@@ -207,10 +200,7 @@ export class ObjectUtils {
    * @example ObjectUtils.getOrDefault<number | null>(1, 0)                 = "1"
    * @example ObjectUtils.getOrDefault<number | null>(null, 0)              = "0"
    */
-  public static getOrDefault<T>(
-    value: T,
-    defaultValue: NonNullable<T>
-  ): NonNullable<T> {
+  public static getOrDefault<T>(value: T, defaultValue: NonNullable<T>): NonNullable<T> {
     if (ObjectUtils.isNullOrUndefined(value)) {
       return defaultValue;
     } else {
