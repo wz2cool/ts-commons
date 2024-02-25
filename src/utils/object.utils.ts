@@ -120,8 +120,93 @@ export class ObjectUtils {
    * @param obj
    * @param key
    */
-  public static getProperty<T, K extends keyof T>(obj: T, key: K): any {
+  public static getProperty<T, K extends keyof T>(
+    obj: T,
+    key: K,
+    defaultValue?: T[K]
+  ) {
+    if (ObjectUtils.isNullOrUndefined(obj)) {
+      return defaultValue;
+    }
     return obj[key]; // Inferred type is T[K]
+  }
+
+  /**
+   * get property value of object by key1 key2.
+   * @param obj
+   * @param key1
+   * @param key2
+   * @param defaultValue
+   * @returns 
+   */
+  public static getProperty2<T, K1 extends keyof T, K2 extends keyof T[K1]>(
+    obj: T,
+    key1: K1,
+    key2: K2,
+    defaultValue?: T[K1][K2]
+  ) {
+    const p = this.getProperty(obj, key1);
+    if (ObjectUtils.isNullOrUndefined(p)) {
+      return defaultValue;
+    }
+    return p[key2];
+  }
+
+  public static getProperty3<
+    T,
+    K1 extends keyof T,
+    K2 extends keyof T[K1],
+    K3 extends keyof T[K1][K2]
+  >(obj: T, key1: K1, key2: K2, key3: K3, defaultValue?: T[K1][K2][K3]) {
+    const p = this.getProperty2(obj, key1, key2);
+    if (ObjectUtils.isNullOrUndefined(p)) {
+      return defaultValue;
+    }
+    return p[key3];
+  }
+
+  public static getProperty4<
+    T,
+    K1 extends keyof T,
+    K2 extends keyof T[K1],
+    K3 extends keyof T[K1][K2],
+    K4 extends keyof T[K1][K2][K3]
+  >(
+    obj: T,
+    key1: K1,
+    key2: K2,
+    key3: K3,
+    key4: K4,
+    defaultValue?: T[K1][K2][K3][K4]
+  ) {
+    const p = this.getProperty3(obj, key1, key2, key3);
+    if (ObjectUtils.isNullOrUndefined(p)) {
+      return defaultValue;
+    }
+    return p[key4];
+  }
+
+  public static getProperty5<
+    T,
+    K1 extends keyof T,
+    K2 extends keyof T[K1],
+    K3 extends keyof T[K1][K2],
+    K4 extends keyof T[K1][K2][K3],
+    K5 extends keyof T[K1][K2][K3][K4]
+  >(
+    obj: T,
+    key1: K1,
+    key2: K2,
+    key3: K3,
+    key4: K4,
+    key5: K5,
+    defaultValue?: T[K1][K2][K3][K4][K5]
+  ) {
+    const p = this.getProperty4(obj, key1, key2, key3, key4);
+    if (ObjectUtils.isNullOrUndefined(p)) {
+      return defaultValue;
+    }
+    return p[key5];
   }
 
   /**
