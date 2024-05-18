@@ -12,7 +12,7 @@
     "posttest": "npm run clean",
     "prepublish": "tsc",
     "cover": "tsc -p tsconfig.test.json && istanbul cover ./node_modules/mocha/bin/_mocha dist/test/**/*.test.js --recursive",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && del-cli ./coverage",
+    "coveralls": "npm run cover -- --report lcovonly",
     "clean": "del-cli .nyc_output && del-cli dist && del-cli .scannerwork && del-cli .idea && del-cli coverage",
     "build": "npm run clean && cross-env NODE_ENV=production webpack",
     "analyze:sonar": "sonar-scanner -Dsonar.projectKey=wz2cool-github:ts-commons -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=wz2cool-github"
