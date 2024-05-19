@@ -301,6 +301,42 @@ describe(".ObjectUtils", () => {
   });
 
   describe("#getOrDefault", () => {
+    it("should return 1, if value1 is not null", () => {
+      const value1: string | undefined = "1";
+      const value2: string | undefined = "2";
+      const result = ObjectUtils.getOrDefault(value1, value2, "defaultValue");
+      expect("1").to.be.eq(result);
+    });
+
+    it("should return 2, if  value2 is not null and value1 is null", () => {
+      const value1: string | undefined = undefined;
+      const value2: string | undefined = "2";
+      const result = ObjectUtils.getOrDefault(value1, value2, "defaultValue");
+      expect("2").to.be.eq(result);
+    });
+
+    it("should return 'defaultValue', if all values is null", () => {
+      const value1: string | undefined = undefined;
+      const value2: string | undefined = undefined;
+      const result = ObjectUtils.getOrDefault(value1, value2, "defaultValue");
+      expect("defaultValue").to.be.eq(result);
+    })
+
+    it("should return 'defaultValue', if all values is null", () => {
+      const value1: string | undefined = undefined;
+      const value2: string | undefined = undefined;
+      const value3: string | undefined = undefined;
+      const result = ObjectUtils.getOrDefault(value1, value2, value3, "defaultValue");
+      expect("defaultValue").to.be.eq(result);
+    })
+
+    it("should return '', if first value is not null", () => {
+      const value1: string | undefined = undefined;
+      const value2: string | undefined = "2";
+      const result = ObjectUtils.getOrDefault(value1, value2, "defaultValue");
+      expect("2").to.be.eq(result);
+    });
+
     it("should return  [1,2,3] if value is not null or empty", () => {
       const target = [1, 2, 3];
       const value: number[] | undefined = target;
