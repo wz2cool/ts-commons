@@ -284,13 +284,32 @@ export class ObjectUtils {
    * @example ObjectUtils.getOrDefault<number | undefined>(undefined, 0)    = "0"
    * @example ObjectUtils.getOrDefault<number | null>(1, 0)                 = "1"
    * @example ObjectUtils.getOrDefault<number | null>(null, 0)              = "0"
+   * @example ObjectUtils.getOrDefault(number | null>)(1, 2, 3)             = "1"
+   * @example ObjectUtils.getOrDefault(number | null>)(null, 2, 3)          = "2" 
+   * @example ObjectUtils.getOrDefault(number | null>)(null, null, 3)       = "3"
+   * @example ObjectUtils.getOrDefault(number | null>)(null, null, null)   = null
+   * @example ObjectUtils.getOrDefault(number | null>)(null, null, null, 3) = "3"
    */
-  public static getOrDefault<T>(value: T, defaultValue: NonNullable<T>): NonNullable<T> {
-    if (ObjectUtils.isNullOrUndefined(value)) {
-      return defaultValue;
-    } else {
-      return value as NonNullable<T>;
+  public static getOrDefault<T>(value1: T, defaultValue: T): T;
+  public static getOrDefault<T>(value1: T, value2: T, defaultValue: T): T;
+  public static getOrDefault<T>(value1: T, value2: T, value3: T, defaultValue: T): T;
+  public static getOrDefault<T>(
+    value1: T,
+    value2: T,
+    value3: T,
+    defaultValue: T
+  ): T
+  public static getOrDefault<T>(value1: T, value2?: T, value3?: T, defaultValue?: T): T {
+    if (!ObjectUtils.isNullOrUndefined(value1)) {
+      return value1 as NonNullable<T>;
     }
+    if (!ObjectUtils.isNullOrUndefined(value2)) {
+      return value2 as NonNullable<T>;
+    }
+    if (!ObjectUtils.isNullOrUndefined(value3)) {
+      return value3 as NonNullable<T>;
+    }
+    return defaultValue;
   }
 
   /**
