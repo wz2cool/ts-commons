@@ -318,7 +318,7 @@ describe(".ObjectUtils", () => {
     it("should return 'defaultValue', if all values is null", () => {
       const value1: string | undefined = undefined;
       const value2: string | undefined = undefined;
-      const result = ObjectUtils.getOrDefault(value1, value2, "defaultValue");
+      const result = ObjectUtils.getOrDefault<string | undefined>(value1, value2, "defaultValue");
       expect("defaultValue").to.be.eq(result);
     })
 
@@ -326,7 +326,7 @@ describe(".ObjectUtils", () => {
       const value1: string | undefined = undefined;
       const value2: string | undefined = undefined;
       const value3: string | undefined = undefined;
-      const result = ObjectUtils.getOrDefault(value1, value2, value3, "defaultValue");
+      const result = ObjectUtils.getOrDefault<string | undefined>(value1, value2, value3, "defaultValue");
       expect("defaultValue").to.be.eq(result);
     })
 
