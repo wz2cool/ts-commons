@@ -61,13 +61,24 @@ describe(".HttpUtils", () => {
       queryParams.tab = "0";
       queryParams.xxx = "1";
       const result = HttpUtils.mergeUrl(
-        "http://test.xxxx.com?tab=1",
+        "http://test.xxxx.com?tab=9999999",
         queryParams,
         true
       );
       expect("http://test.xxxx.com?tab=0&xxx=1").to.be.eq(result);
     });
     it("should keep old", () => {
+      const queryParams: { [key: string]: string } = {};
+      queryParams.tab = "0";
+      queryParams.xxx = "1";
+      const result = HttpUtils.mergeUrl(
+        "http://test.xxxx.com?tab=1",
+        queryParams,
+        false
+      );
+      expect("http://test.xxxx.com?tab=0&xxx=0").to.be.eq(result);
+    });
+    it("empty param", () => {
       const queryParams: { [key: string]: string } = {};
       const result = HttpUtils.mergeUrl(
         "http://test.xxxx.com",
