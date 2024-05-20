@@ -165,50 +165,6 @@ export class ObjectUtils {
     return p[key3];
   }
 
-  public static getProperty4<
-    T,
-    K1 extends keyof T,
-    K2 extends keyof T[K1],
-    K3 extends keyof T[K1][K2],
-    K4 extends keyof T[K1][K2][K3]
-  >(
-    obj: T,
-    key1: K1,
-    key2: K2,
-    key3: K3,
-    key4: K4,
-    defaultValue?: T[K1][K2][K3][K4]
-  ) {
-    const p = this.getProperty3(obj, key1, key2, key3);
-    if (ObjectUtils.isNullOrUndefined(p)) {
-      return defaultValue;
-    }
-    return p[key4];
-  }
-
-  public static getProperty5<
-    T,
-    K1 extends keyof T,
-    K2 extends keyof T[K1],
-    K3 extends keyof T[K1][K2],
-    K4 extends keyof T[K1][K2][K3],
-    K5 extends keyof T[K1][K2][K3][K4]
-  >(
-    obj: T,
-    key1: K1,
-    key2: K2,
-    key3: K3,
-    key4: K4,
-    key5: K5,
-    defaultValue?: T[K1][K2][K3][K4][K5]
-  ) {
-    const p = this.getProperty4(obj, key1, key2, key3, key4);
-    if (ObjectUtils.isNullOrUndefined(p)) {
-      return defaultValue;
-    }
-    return p[key5];
-  }
-
   /**
    * set property to object.
    * @param obj

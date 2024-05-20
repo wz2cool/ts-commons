@@ -206,15 +206,21 @@ describe(".ObjectUtils", () => {
     });
   });
 
+  class Band {
+    public name: string;
+  }
+
+  class ClassRoom {
+    public name: string;
+    public band: Band;
+  }
+  class Student {
+    public name: string;
+    public age: number;
+    public classroom: ClassRoom;
+  }
   describe("#getProperty", () => {
-    class ClassRoom {
-      public name: string;
-    }
-    class Student {
-      public name: string;
-      public age: number;
-      public classroom: ClassRoom;
-    }
+
     it("should return undefind if don't have property", () => {
       const student = new Student();
       const result = ObjectUtils.getProperty(student, "name");
@@ -231,6 +237,49 @@ describe(".ObjectUtils", () => {
       student = undefined;
       const result = ObjectUtils.getProperty(student, "name", "defaultValue");
       expect("defaultValue").to.be.eq(result);
+    })
+  });
+
+  describe("#getProperty2", () => {
+    it("should get class room name", () => {
+      const student = new Student();
+      const classroom = new ClassRoom();
+      classroom.name = "class room 1";
+      student.classroom = classroom;
+      student.name = "student 1";
+      const classRoomName = ObjectUtils.getProperty2(student, "classroom", "name");
+      expect("class room 1").to.eq(classRoomName);
+    });
+
+    it("should return undefined", () => {
+      const student = new Student();
+      const classRoomName = ObjectUtils.getProperty2(student, "classroom", "name");
+      expect(undefined).to.eq(classRoomName);
+    })
+
+    it("should return default value", () => {
+      const student = new Student();
+      const classRoomName = ObjectUtils.getProperty2(student, "classroom", "name", "defaultValue");
+      expect("defaultValue").to.eq(classRoomName);
+    })
+  });
+
+  describe("#getProperty3", () => {
+    it("should return default value", () => {
+      const student = new Student();
+      const classRoomName = ObjectUtils.getProperty3(student, "classroom", "band", "name", "defaultValue");
+      expect("defaultValue").to.eq(classRoomName);
+    })
+
+    it("get band name", () => {
+      const student = new Student();
+      const classroom = new ClassRoom();
+      const band = new Band();
+      band.name = "band 1";
+      student.classroom = classroom;
+      classroom.band = band;
+      const bandName = ObjectUtils.getProperty3(student, "classroom", "band", "name", "defaultValue");
+      expect("band 1").to.eq(bandName);
     })
   });
 
