@@ -218,12 +218,6 @@ describe(".ObjectUtils", () => {
     it("should return undefind if don't have property", () => {
       const student = new Student();
       const result = ObjectUtils.getProperty(student, "name");
-      const roomName = ObjectUtils.getProperty2(
-        student,
-        "classroom",
-        "name",
-        "defaultName"
-      );
       expect(undefined).to.be.eq(result);
     });
     it("should return 'test' if name is 'test'", () => {
@@ -232,6 +226,12 @@ describe(".ObjectUtils", () => {
       const result = ObjectUtils.getProperty(student, "name");
       expect("test").to.be.eq(result);
     });
+    it("should return undefined, if object is null", () => {
+      let student: any = new Student();
+      student = undefined;
+      const result = ObjectUtils.getProperty(student, "name", "defaultValue");
+      expect("defaultValue").to.be.eq(result);
+    })
   });
 
   describe("#setProperty", () => {
