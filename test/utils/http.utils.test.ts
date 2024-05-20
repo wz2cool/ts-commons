@@ -76,7 +76,7 @@ describe(".HttpUtils", () => {
         queryParams,
         false
       );
-      expect("http://test.xxxx.com?tab=0&xxx=0").to.be.eq(result);
+      expect("http://test.xxxx.com?tab=1&xxx=1").to.be.eq(result);
     });
     it("empty param", () => {
       const queryParams: { [key: string]: string } = {};
