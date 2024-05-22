@@ -249,12 +249,6 @@ export class ObjectUtils {
   public static getOrDefault<T>(value1: T, defaultValue: NonNullable<T>): NonNullable<T>;
   public static getOrDefault<T>(value1: T, value2: T, defaultValue: NonNullable<T>): NonNullable<T>;
   public static getOrDefault<T>(value1: T, value2: T, value3: T, defaultValue: NonNullable<T>): NonNullable<T>;
-  public static getOrDefault<T>(
-    value1: T,
-    value2: T,
-    value3: T,
-    defaultValue: NonNullable<T>
-  ): NonNullable<T>
   public static getOrDefault<T>(value1: T, value2?: T, value3?: T, defaultValue?: NonNullable<T>): NonNullable<T> {
     if (!ObjectUtils.isNullOrUndefined(value1)) {
       return value1 as NonNullable<T>;
