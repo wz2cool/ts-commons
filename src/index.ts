@@ -9,6 +9,10 @@ import { ThreadUtils } from "./utils/thread.utils";
 import { ActionUtils } from "./utils/action.utils";
 import { IOUtils } from "./utils/io.utils";
 
+const hasValue = ObjectUtils.hasValue;
+const isNullOrUndefined = ObjectUtils.isNullOrUndefined;
+const getOrDefault = ObjectUtils.getOrDefault;
+
 export {
   ObjectUtils,
   StringUtils,
@@ -20,4 +24,7 @@ export {
   ThreadUtils,
   ActionUtils,
   IOUtils,
+  hasValue,
+  isNullOrUndefined,
+  getOrDefault,
 };
