@@ -8,10 +8,14 @@ import { StringUtils } from "./utils/string.utils";
 import { ThreadUtils } from "./utils/thread.utils";
 import { ActionUtils } from "./utils/action.utils";
 import { IOUtils } from "./utils/io.utils";
+import { ExtUtils } from "./utils/ext.utils";
 
 const hasValue = ObjectUtils.hasValue;
 const isNullOrUndefined = ObjectUtils.isNullOrUndefined;
 const getOrDefault = ObjectUtils.getOrDefault;
+const isEmpty = ExtUtils.isEmpty;
+const isNotEmpty = ExtUtils.isNotEmpty;
+
 
 export {
   ObjectUtils,
@@ -27,4 +31,6 @@ export {
   hasValue,
   isNullOrUndefined,
   getOrDefault,
+  isEmpty,
+  isNotEmpty
 };
