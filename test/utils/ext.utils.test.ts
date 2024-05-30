@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { isEmpty, isNotEmpty } from "../../src";
 
 describe(".ExtUtils", () => {
-    describe('isEmpty', () => {
+    describe('#isEmpty', () => {
         it('should return true for empty string', () => {
             expect(isEmpty('')).to.eq(true);
         });
@@ -24,7 +24,7 @@ describe(".ExtUtils", () => {
         });
     });
 
-    describe('isNotEmpty', () => {
+    describe('#isNotEmpty', () => {
         it('should return true for a non-empty array', () => {
             expect(isNotEmpty([1, 2, 3])).to.be.true;
         });
