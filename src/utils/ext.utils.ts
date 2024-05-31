@@ -42,4 +42,20 @@ export class ExtUtils {
         }
     }
 
+    public static contains<T>(array: T[], item: T): boolean
+    public static contains(str: string, searchStr: string): boolean
+    /**
+     * Checks whether a specified value is contained within another value.
+     * @param value1 The source value to be inspected. Can be an array or a string.
+     * @param value2 The value to search for.
+     * @returns {boolean} Returns true if found; otherwise, returns false.
+     */
+    public static contains(value1: any, valu2: any): boolean {
+        if (ObjectUtils.isArray(value1)) {
+            return ArrayUtils.contains(value1, valu2);
+        } else {
+            return StringUtils.contains(value1, valu2);
+        }
+    }
+
 }

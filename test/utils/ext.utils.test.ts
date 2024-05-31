@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import { isEmpty, isNotEmpty } from "../../src";
+import { expect, assert } from "chai";
+import { contains, isEmpty, isNotEmpty, isNullOrUndefined } from "../../src";
 
 describe(".ExtUtils", () => {
     describe('#isEmpty', () => {
@@ -47,6 +47,32 @@ describe(".ExtUtils", () => {
 
         it('should return false for undefined', () => {
             expect(isNotEmpty(undefined)).to.be.false;
+        });
+    });
+
+    describe('#contains', () => {
+        it('should return true if value2 is contained in value1 array', () => {
+            const value1 = [1, 2, 3];
+            const value2 = 2;
+            assert.equal(contains(value1, value2), true);
+        });
+
+        it('should return false if value2 is not contained in value1 array', () => {
+            const value1 = [1, 2, 3];
+            const value2 = 4;
+            assert.equal(contains(value1, value2), false);
+        });
+
+        it('should return true if value2 is contained in value1 string', () => {
+            const value1 = 'Hello, world!';
+            const value2 = 'world';
+            assert.equal(contains(value1, value2), true);
+        });
+
+        it('should return false if value2 is not contained in value1 string', () => {
+            const value1 = 'Hello, world!';
+            const value2 = 'universe';
+            assert.equal(contains(value1, value2), false);
         });
     });
 })
