@@ -274,4 +274,20 @@ export class ObjectUtils {
   public static hasValue<T>(object: T): object is NonNullable<T> {
     return !this.isNullOrUndefined(object);
   }
+
+  /**
+   * Executes the callback function if the provided object has a value.
+   *
+   * This static method safely calls the given callback when the object is not null or undefined.
+   * It provides a way to handle potentially non-existent objects without causing errors.
+   *
+   * @param Object - The object to check, typed as generic T for generality.
+   * @param callback - A callback function that is invoked when the object exists. It receives the object as an argument.
+   * @template T - The generic type parameter representing the object's type.
+   */
+  public static ifHasValue<T>(Object: T, callback: (value: NonNullable<T>) => void) {
+    if (this.hasValue(Object)) {
+      callback(Object);
+    }
+  }
 }
