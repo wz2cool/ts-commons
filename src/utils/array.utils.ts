@@ -87,6 +87,29 @@ export class ArrayUtils {
   }
 
   /**
+   * Determines whether all of candidates is in the array.
+   * @param array
+   * @param candidates
+   * @returns true if item is in the array; otherwise, false.
+   * @example ArrayUtils.containsAll(null, [1, 2]) = false
+   * @example ArrayUtils.containsAll(undefined, [1, 2]) = false
+   * @example ArrayUtils.containsAll([1, 3, 5], [1, 2]) = false
+   * @example ArrayUtils.containsAll([1, 3, 5], [1, 3]) = true
+   **/
+  public static containAll<T>(array: T[], candidates: T[]): boolean {
+    if (this.isEmpty(array) || this.isEmpty(candidates)) {
+      return false;
+    }
+
+    for (const candidate of candidates) {
+      if (!this.contains(array, candidate)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Inserts an element into the array at the specified index.
    * @param array
    * @param index The zero-based index at which item should be inserted.
