@@ -41,22 +41,22 @@ describe(".arrayUtils", () => {
     });
 
 
-    describe('containAll', function () {
+    describe('containsAll', function () {
 
       it('should return false if the array is null', function () {
-        expect(ArrayUtils.containAll(null, [1, 2])).to.be.false;
+        expect(ArrayUtils.containsAll(null, [1, 2])).to.be.false;
       });
 
       it('should return false if the array is undefined', function () {
-        expect(ArrayUtils.containAll(undefined, [1, 2])).to.be.false;
+        expect(ArrayUtils.containsAll(undefined, [1, 2])).to.be.false;
       });
 
       it('should return false if not all candidates are in the array', function () {
-        expect(ArrayUtils.containAll([1, 3, 5], [1, 2])).to.be.false;
+        expect(ArrayUtils.containsAll([1, 3, 5], [1, 2])).to.be.false;
       });
 
       it('should return true if all candidates are in the array', function () {
-        expect(ArrayUtils.containAll([1, 3, 5], [1, 3])).to.be.true;
+        expect(ArrayUtils.containsAll([1, 3, 5], [1, 3])).to.be.true;
       });
 
       // You can add more test cases as needed

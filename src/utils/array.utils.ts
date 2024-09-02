@@ -96,7 +96,7 @@ export class ArrayUtils {
    * @example ArrayUtils.containsAll([1, 3, 5], [1, 2]) = false
    * @example ArrayUtils.containsAll([1, 3, 5], [1, 3]) = true
    **/
-  public static containAll<T>(array: T[], candidates: T[]): boolean {
+  public static containsAll<T>(array: T[], candidates: T[]): boolean {
     if (this.isEmpty(array) || this.isEmpty(candidates)) {
       return false;
     }
