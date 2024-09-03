@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { describe } from "mocha";
-import { ObjectUtils } from "../../src/index";
+import * as sinon from "sinon";
+import { ObjectUtils, ifHasValue } from "../../src/index";
 describe(".ObjectUtils", () => {
   describe("#isNull", () => {
     it("should return true if value is null", () => {
@@ -464,6 +465,26 @@ describe(".ObjectUtils", () => {
       const obj = 1;
       const result = ObjectUtils.getDescendantProperty(obj);
       expect(1).to.be.eq(result);
+    });
+  });
+
+  describe('ifHasValue', () => {
+    it('should invoke callback when object exists', () => {
+      const mockCallback = sinon.spy();
+
+      const object = { value: 'test' };
+      ifHasValue(object, mockCallback);
+
+      expect(mockCallback.calledWith(object)).to.be.true;
+    });
+
+    it('should not invoke callback when object does not exist', () => {
+      const mockCallback = sinon.spy();
+
+      const object: any = null;
+      ifHasValue(object, mockCallback);
+
+      expect(mockCallback.callCount).to.equal(0);
     });
   });
 });

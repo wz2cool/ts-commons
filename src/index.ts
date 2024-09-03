@@ -18,6 +18,7 @@ const isDate = ObjectUtils.isDate;
 const isNull = ObjectUtils.isNull;
 const isUndefinend = ObjectUtils.isUndefinend;
 const hasValue = ObjectUtils.hasValue;
+const ifHasValue = ObjectUtils.ifHasValue;
 const isNullOrUndefined = ObjectUtils.isNullOrUndefined;
 const getOrDefault = ObjectUtils.getOrDefault;
 const isEmpty = ExtUtils.isEmpty;
@@ -55,5 +56,6 @@ export {
   isNotBlank,
   contains,
   containsAny,
-  containsIgnoreCase
+  containsIgnoreCase,
+  ifHasValue
 };
