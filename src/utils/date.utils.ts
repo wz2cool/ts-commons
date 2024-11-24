@@ -1,8 +1,106 @@
-import { NumberUtils } from "./number.utils";
 import { ObjectUtils } from "./object.utils";
 
 export class DateUtils {
   private static timeFormatRegex = /yyyy|yy|MM|M|dd|d|HH|H|mm|m|ss|s|SSS|S/g;
+
+  /**
+   * Adds a number of years to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date the date, not null
+   * @param years the years to add, may be negative
+   * @returns the new Date with the amount added
+   * @example DateUtils.addYears(new Date(2018, 5, 1), 1) = new Date(2019, 5, 1)
+   */
+  public static addYears(date: Date, years: number): Date {
+    const newDate = new Date(date);
+    newDate.setFullYear(date.getFullYear() + years);
+    return newDate;
+  }
+
+  /**
+   * Adds a number of months to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date the date, not null
+   * @param months the months to add, may be negative
+   * @returns the new Date with the months added
+   * @example DateUtils.addMonths(new Date(2018, 5, 1), 1) = new Date(2018, 6, 1)
+   */
+  public static addMonths(date: Date, months: number): Date {
+    const newDate = new Date(date);
+    newDate.setMonth(date.getMonth() + months);
+    return newDate;
+  }
+
+  /**
+   * Adds a number of days to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date the date, not null
+   * @param days the days to add, may be negative
+   * @returns the new Date with the days added
+   * @example DateUtils.addDays(new Date(2018, 5, 1), 1) = new Date(2018, 5, 2)
+   */
+  public static addDays(date: Date, days: number): Date {
+    return new Date(date.getTime() + days * 86400000);
+  }
+
+  /**
+   * Adds a number of hours to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date the date, not null
+   * @param hours the hours to add, may be negative
+   * @returns the new Date with the hours added
+   * @example DateUtils.addHours(new Date(2018, 5, 1), 1) = new Date(2018, 5, 1, 1)
+   */
+  public static addHours(date: Date, hours: number): Date {
+    return new Date(date.getTime() + hours * 3600000);
+  }
+
+  /**
+   * Adds a number of minutes to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date date – the date, not null
+   * @param minutes the minutes to add, may be negative
+   * @returns the new Date with the minutes added
+   * @example DateUtils.addMinutes(new Date(2018, 5, 1), 1) = new Date(2018, 5, 1, 0, 1)
+   */
+  public static addMinutes(date: Date, minutes: number): Date {
+    return new Date(date.getTime() + minutes * 60000);
+  }
+
+  /**
+   * Adds a number of seconds to a date returning a new object. The original Date is unchanged.
+   * 
+   * @param date the date, not null
+   * @param seconds the seconds to add, may be negative
+   * @returns the new Date with the seconds added
+   * @example DateUtils.addSeconds(new Date(2018, 5, 1), 1) = new Date(2018, 5, 1, 0, 0, 1)
+   */
+  public static addSeconds(date: Date, seconds: number): Date {
+    return new Date(date.getTime() + seconds * 1000);
+  }
+
+  /**
+   * The day of week.
+   * 
+   * @param date the date, not null
+   * @returns the day of week.
+   * @example DateUtils.getDayOfWeek(new Date(2024, 11, 23)) = 6
+   */
+  public static getDayOfWeek(date: Date): number {
+    return date.getDay();
+  }
+
+  /**
+   * The day of month 
+   * 
+   * @param date the date, not null.
+   * @returns the day of month.
+   * @example DateUtils.getDayOfMonth(new Date(2024, 11, 23)) = 23
+   */
+  public static getDaysInMonth(date: Date): number {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  }
+
 
   /**
    * Returns the number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z.
