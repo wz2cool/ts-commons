@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { DateUtils, ObjectUtils, StringUtils } from "../../src/index";
+import { DateUtils, StringUtils } from "../../src/index";
 
 describe(".DateUtils", () => {
 
