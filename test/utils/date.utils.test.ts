@@ -1,7 +1,281 @@
 import { expect } from "chai";
-import { DateUtils, ObjectUtils, StringUtils } from "../../src/index";
+import { DateUtils, StringUtils } from "../../src/index";
 
 describe(".DateUtils", () => {
+
+
+  describe('DateUtils', () => {
+    describe('#addYears', () => {
+      it('should correctly add years to a date', () => {
+        const originalDate = new Date(2018, 5, 1); // June 1, 2018
+        const yearsToAdd = 1;
+        const expectedDate = new Date(2019, 5, 1); // June 1, 2019
+
+        const resultDate = DateUtils.addYears(originalDate, yearsToAdd);
+
+        expect(resultDate).to.deep.equal(expectedDate);
+        expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+      });
+
+      it('should correctly subtract years from a date', () => {
+        const originalDate = new Date(2018, 5, 1); // June 1, 2018
+        const yearsToSubtract = -1;
+        const expectedDate = new Date(2017, 5, 1); // June 1, 2017
+
+        const resultDate = DateUtils.addYears(originalDate, yearsToSubtract);
+
+        expect(resultDate).to.deep.equal(expectedDate);
+        expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+      });
+
+      it('should handle dates in different months correctly', () => {
+        const originalDate = new Date(2018, 11, 30); // December 30, 2018
+        const yearsToAdd = 1;
+        const expectedDate = new Date(2019, 11, 30); // December 30, 2019
+
+        const resultDate = DateUtils.addYears(originalDate, yearsToAdd);
+
+        expect(resultDate).to.deep.equal(expectedDate);
+        expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+      });
+
+      // Add more test cases as needed...
+    });
+  });
+
+  describe('#addMonths', () => {
+    it('should correctly add months to a date', () => {
+      const date = new Date(2018, 5, 1); // June 1, 2018
+      const monthsToAdd = 1;
+      const expectedDate = new Date(2018, 6, 1); // July 1, 2018
+
+      const result = DateUtils.addMonths(date, monthsToAdd);
+
+      expect(result).to.deep.equal(expectedDate);
+    });
+
+    it('should correctly subtract months from a date', () => {
+      const date = new Date(2018, 6, 1); // July 1, 2018
+      const monthsToSubtract = -1;
+      const expectedDate = new Date(2018, 5, 1); // June 1, 2018
+
+      const result = DateUtils.addMonths(date, monthsToSubtract);
+
+      expect(result).to.deep.equal(expectedDate);
+    });
+
+    it('should handle negative months correctly', () => {
+      const date = new Date(2018, 5, 1); // June 1, 2018
+      const monthsToSubtract = -1;
+      const expectedDate = new Date(2018, 4, 1); // May 1, 2018
+
+      const result = DateUtils.addMonths(date, monthsToSubtract);
+
+      expect(result).to.deep.equal(expectedDate);
+    });
+
+    it('should not modify the original date', () => {
+      const originalDate = new Date(2018, 5, 1); // June 1, 2018
+      const date = new Date(originalDate);
+      const monthsToAdd = 1;
+      const expectedDate = new Date(2018, 6, 1); // July 1, 2018
+
+      const result = DateUtils.addMonths(date, monthsToAdd);
+
+      expect(result).to.deep.equal(expectedDate);
+      expect(expectedDate).to.not.equal(originalDate); // Original date should remain unchanged
+    });
+  });
+
+  describe('#addDays', () => {
+    it('should correctly add positive days', () => {
+      const originalDate = new Date(2018, 5, 1); // June 1, 2018
+      const daysToAdd = 1;
+      const expectedDate = new Date(2018, 5, 2); // Expected result: June 2, 2018
+
+      const resultDate = DateUtils.addDays(originalDate, daysToAdd);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+      expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+    });
+
+    it('should correctly add negative days', () => {
+      const originalDate = new Date(2018, 5, 2); // June 2, 2018
+      const daysToAdd = -1;
+      const expectedDate = new Date(2018, 5, 1); // Expected result: June 1, 2018
+
+      const resultDate = DateUtils.addDays(originalDate, daysToAdd);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+      expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+    });
+
+    it('should handle adding zero days', () => {
+      const originalDate = new Date(2018, 5, 1); // June 1, 2018
+      const daysToAdd = 0;
+      const expectedDate = new Date(2018, 5, 1); // Expected result: June 1, 2018
+
+      const resultDate = DateUtils.addDays(originalDate, daysToAdd);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+      // should not use deep since it add 0
+      expect(originalDate).to.not.equal(expectedDate); // Ensure original date is unchanged
+    });
+  });
+
+
+  describe('#addHours', () => {
+    it('should correctly add hours to a date', () => {
+      const originalDate = new Date(2018, 5, 1); // 注意：JavaScript 中的月份是从 0 开始的
+      const hoursToAdd = 1;
+      const expectedDate = new Date(2018, 5, 1, 1);
+
+      const resultDate = DateUtils.addHours(originalDate, hoursToAdd);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+      // 检查原始日期是否未被修改
+      expect(originalDate).to.deep.equal(new Date(2018, 5, 1));
+    });
+
+    it('should correctly subtract hours from a date', () => {
+      const originalDate = new Date(2018, 5, 1, 1);
+      const hoursToSubtract = -1;
+      const expectedDate = new Date(2018, 5, 1);
+
+      const resultDate = DateUtils.addHours(originalDate, hoursToSubtract);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+    });
+
+    it('should handle dates at the end of the month', () => {
+      // month start with 0
+      const originalDate = new Date(2024, 10, 30, 23);
+      const hoursToAdd = 2;
+      const expectedDate = new Date(2024, 11, 1, 1);
+
+      const resultDate = DateUtils.addHours(originalDate, hoursToAdd);
+
+      expect(resultDate).to.deep.equal(expectedDate);
+    });
+  });
+
+
+  describe('#addMinutes', () => {
+    it('should correctly add minutes to a date', () => {
+      // Arrange
+      const originalDate = new Date(2018, 5, 1, 0, 0); // 注意：JavaScript 中的月份是从 0 开始的
+      const minutesToAdd = 1;
+      const expectedDate = new Date(2018, 5, 1, 0, 1);
+
+      // Act
+      const resultDate = DateUtils.addMinutes(originalDate, minutesToAdd);
+
+      // Assert
+      expect(resultDate).to.deep.equal(expectedDate);
+      // 确保原始日期未被修改
+      expect(originalDate).to.deep.equal(new Date(2018, 5, 1, 0, 0));
+    });
+
+    it('should correctly subtract minutes from a date', () => {
+      // Arrange
+      const originalDate = new Date(2024, 11, 1, 0, 0);
+      const minutesToSubtract = -1;
+      const expectedDate = new Date(2024, 10, 30, 23, 59);
+
+      // Act
+      const resultDate = DateUtils.addMinutes(originalDate, minutesToSubtract);
+
+      // Assert
+      expect(resultDate).to.deep.equal(expectedDate);
+      // 确保原始日期未被修改
+      expect(originalDate).to.deep.equal(new Date(2024, 11, 1, 0, 0));
+    });
+  });
+
+
+  describe('#addSeconds', () => {
+    it('should correctly add seconds to a date', () => {
+      // Arrange
+      const date = new Date(2018, 5, 1); // 注意：月份在 JavaScript/TypeScript 中是从 0 开始的
+      const secondsToAdd = 1;
+      const expectedTime = date.getTime() + secondsToAdd * 1000;
+
+      // Act
+      const result = DateUtils.addSeconds(date, secondsToAdd);
+
+      // Assert
+      expect(result).to.be.an.instanceOf(Date);
+      expect(result.getTime()).to.equal(expectedTime);
+    });
+
+    it('should handle negative seconds', () => {
+      // Arrange
+      const date = new Date(2018, 5, 1);
+      const secondsToAdd = -1;
+      const expectedTime = date.getTime() + secondsToAdd * 1000;
+
+      // Act
+      const result = DateUtils.addSeconds(date, secondsToAdd);
+
+      // Assert
+      expect(result).to.be.an.instanceOf(Date);
+      expect(result.getTime()).to.equal(expectedTime);
+    });
+
+    it('should not modify the original date', () => {
+      // Arrange
+      const date = new Date(2018, 5, 1);
+      const originalDate = new Date(date.getTime());
+      const secondsToAdd = 1;
+
+      // Act
+      DateUtils.addSeconds(date, secondsToAdd);
+
+      // Assert
+      expect(date.getTime()).to.equal(originalDate.getTime());
+    });
+  });
+
+  describe('#getDayOfWeek', () => {
+    it('getDayOfWeek should return the correct day of the week', () => {
+      // Arrange
+      const testDate = new Date(2024, 10, 24); // 11 24, 2024 (Sunday)
+      const expectedDayOfWeek = 0; // Saturday is the 6th day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)
+
+      // Act
+      const actualDayOfWeek = DateUtils.getDayOfWeek(testDate);
+
+      // Assert
+      expect(actualDayOfWeek).to.equal(expectedDayOfWeek);
+    });
+  });
+
+
+  describe('#getDaysInMonth', () => {
+    it('should return the correct number of days in a month', () => {
+      // 测试不同的月份和年份
+      const testCases = [
+        { date: new Date(2024, 11, 1), expected: 31 }, // December 2024
+        { date: new Date(2024, 0, 1), expected: 31 },  // January 2024
+        { date: new Date(2024, 1, 1), expected: 29 },  // February 2024 (leap year)
+        { date: new Date(2023, 1, 1), expected: 28 },  // February 2023 (non-leap year)
+        { date: new Date(2024, 2, 1), expected: 31 },  // March 2024
+        { date: new Date(2024, 3, 1), expected: 30 },  // April 2024
+        { date: new Date(2024, 4, 1), expected: 31 },  // May 2024
+        { date: new Date(2024, 5, 1), expected: 30 },  // June 2024
+        { date: new Date(2024, 6, 1), expected: 31 },  // July 2024
+        { date: new Date(2024, 7, 1), expected: 31 },  // August 2024
+        { date: new Date(2024, 8, 1), expected: 30 },  // September 2024
+        { date: new Date(2024, 9, 1), expected: 31 },  // October 2024
+        { date: new Date(2024, 10, 1), expected: 30 }, // November 2024
+      ];
+
+      testCases.forEach(({ date, expected }) => {
+        expect(DateUtils.getDaysInMonth(date)).to.equal(expected);
+      });
+    });
+  });
+
   describe("#compare", () => {
     it("should return 0 if date1 === date2", () => {
       const date1 = new Date("Tue, 19 Jun 2018 00:00:00 GMT");
