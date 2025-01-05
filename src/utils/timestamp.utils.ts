@@ -26,9 +26,9 @@ export class TimestampUtils {
      * @param t1 First timestamp in milliseconds
      * @param t2 Second timestamp in milliseconds
      * @returns -1 if year1 < year2, 0 if year1 === year2, 1 if year1 > year2
-     * @example TimestampUtils.compareYear(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 1).getTime()) = 0
-     * @example TimestampUtils.compareYear(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 2).getTime()) = -1
-     * @example TimestampUtils.compareYear(new Date(2023, 0, 2).getTime(), new Date(2023, 0, 1).getTime()) = 1
+     * @example TimestampUtils.compareYear(new Date(2024, 0, 1).getTime(), new Date(2024, 11, 31).getTime()) = 0
+     * @example TimestampUtils.compareYear(new Date(2023, 11, 31).getTime(), new Date(2024, 0, 1).getTime()) = -1
+     * @example TimestampUtils.compareYear(new Date(2024, 0, 1).getTime(), new Date(2023, 12, 31).getTime()) = 1
      */
     public static compareYear(t1: number, t2: number): number {
         const year1 = this.getYear(t1);
@@ -45,9 +45,9 @@ export class TimestampUtils {
      * @param t1 First timestamp in milliseconds
      * @param t2 Second timestamp in milliseconds
      * @returns -1 if month1 < month2, 0 if month1 === month2, 1 if month1 > month2
-     * @example TimestampUtils.compareMonth(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 1).getTime()) = 0
-     * @example TimestampUtils.compareMonth(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 2).getTime()) = -1
-     * @example TimestampUtils.compareMonth(new Date(2023, 0, 2).getTime(), new Date(2023, 0, 1).getTime()) = 1
+     * @example TimestampUtils.compareMonth(new Date(2024, 0, 1).getTime(), new Date(2024, 0, 31).getTime()) = 0
+     * @example TimestampUtils.compareMonth(new Date(2024, 0, 31).getTime(), new Date(2024, 1, 1).getTime()) = -1
+     * @example TimestampUtils.compareMonth(new Date(2023, 12, 31).getTime(), new Date(2024, 0, 1).getTime()) = 1
      */
     public static compareMonth(t1: number, t2: number): number {
         const month1 = this.getMonth(t1);
@@ -64,9 +64,9 @@ export class TimestampUtils {
      * @param t1 First timestamp in milliseconds
      * @param t2 Second timestamp in milliseconds
      * @returns -1 if day1 < day2, 0 if day1 === day2, 1 if day1 > day2
-     * @example TimestampUtils.compareDay(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 1).getTime()) = 0
-     * @example TimestampUtils.compareDay(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 2).getTime()) = -1
-     * @example TimestampUtils.compareDay(new Date(2023, 0, 2).getTime(), new Date(2023, 0, 1).getTime()) = 1
+     * @example TimestampUtils.compareDay(new Date(2024, 0, 1, 0, 0).getTime(), new Date(2024, 0, 1, 23, 59).getTime()) = 0
+     * @example TimestampUtils.compareDay(new Date(2024, 0, 1).getTime(), new Date(2024, 0, 2).getTime()) = -1
+     * @example TimestampUtils.compareDay(new Date(2024, 0, 31).getTime(), new Date(2024, 1, 1).getTime()) = 1
      */
     public static compareDay(t1: number, t2: number): number {
         const day1 = this.getDay(t1);
@@ -83,9 +83,9 @@ export class TimestampUtils {
      * @param t1 First timestamp in milliseconds
      * @param t2 Second timestamp in milliseconds
      * @returns -1 if hour1 < hour2, 0 if hour1 === hour2, 1 if hour1 > hour2
-     * @example TimestampUtils.compareHour(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 1).getTime()) = 0
-     * @example TimestampUtils.compareHour(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 2).getTime()) = -1
-     * @example TimestampUtils.compareHour(new Date(2023, 0, 2).getTime(), new Date(2023, 0, 1).getTime()) = 1
+     * @example TimestampUtils.compareHour(new Date(2023, 0, 1, 12, 30).getTime(), new Date(2023, 0, 1, 12, 45).getTime()) = 0
+     * @example TimestampUtils.compareHour(new Date(2023, 0, 1, 12, 0).getTime(), new Date(2023, 0, 1, 13, 0).getTime()) = -1
+     * @example TimestampUtils.compareHour(new Date(2023, 0, 1, 13, 0).getTime(), new Date(2023, 0, 1, 12, 59).getTime()) = 1
      */
     public static compareHour(t1: number, t2: number): number {
         const hour1 = Math.floor(t1 / this.MS_PER_HOUR);
@@ -98,7 +98,7 @@ export class TimestampUtils {
      * @param t1 First timestamp in milliseconds
      * @param t2 Second timestamp in milliseconds
      * @returns -1 if minute1 < minute2, 0 if minute1 === minute2, 1 if minute1 > minute2
-     * @example TimestampUtils.compareMinute(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 1).getTime()) = 0
+     * @example TimestampUtils.compareMinute(new Date(2023, 0, 1, 12, 30, 0).getTime(), new Date(2023, 0, 1, 12, 45, 0).getTime()) = 0
      * @example TimestampUtils.compareMinute(new Date(2023, 0, 1).getTime(), new Date(2023, 0, 2).getTime()) = -1
      * @example TimestampUtils.compareMinute(new Date(2023, 0, 2).getTime(), new Date(2023, 0, 1).getTime()) = 1
      */
@@ -165,5 +165,45 @@ export class TimestampUtils {
      */
     public static addSeconds(timestamp: number, seconds: number): number {
         return timestamp + (seconds * this.MS_PER_SECOND);
+    }
+
+    /**
+     * Returns the start of the day for a given timestamp
+     * @param timestamp Base timestamp in milliseconds
+     * @returns Start of the day timestamp
+     * @example TimestampUtils.startOfDay(1672502400000) = 1672425600000
+     */
+    public static startOfDay(timestamp: number): number {
+        return new Date(timestamp).setHours(0, 0, 0, 0);
+    }
+
+    /**
+     * Returns the start of the hour for a given timestamp
+     * @param timestamp Base timestamp in milliseconds
+     * @returns Start of the hour timestamp
+     * @example TimestampUtils.startOfHour(1672502400000) = 1672502400000
+     */
+    public static startOfHour(timestamp: number): number {
+        return new Date(timestamp).setMinutes(0, 0, 0);
+    }
+
+    /**
+     * Returns the start of the minute for a given timestamp
+     * @param timestamp Base timestamp in milliseconds
+     * @returns Start of the minute timestamp
+     * @example TimestampUtils.startOfMinute(1672502400000) = 1672502400000
+     */
+    public static startOfMinute(timestamp: number): number {
+        return new Date(timestamp).setSeconds(0, 0);
+    }
+
+    /**
+     * Returns the start of the second for a given timestamp
+     * @param timestamp Base timestamp in milliseconds
+     * @returns Start of the second timestamp
+     * @example TimestampUtils.startOfSecond(1672502400000) = 1672502400000
+     */
+    public static startOfSecond(timestamp: number): number {
+        return new Date(timestamp).setMilliseconds(0);
     }
 }

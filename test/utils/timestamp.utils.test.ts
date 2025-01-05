@@ -17,7 +17,7 @@ describe('TimestampUtils', () => {
 
     describe('compare', () => {
         it('should return 0 for equal timestamps', () => {
-            const timestamp = Date.now();
+            const timestamp = new Date(2023, 1, 1).getTime();
             expect(TimestampUtils.compare(timestamp, timestamp)).to.equal(0);
         });
 
@@ -96,6 +96,102 @@ describe('TimestampUtils', () => {
             const t1 = createTimestamp(2024, 1, 31);
             const t2 = createTimestamp(2024, 2, 1);
             expect(TimestampUtils.compareDay(t1, t2)).to.equal(1);
+        });
+    });
+
+    describe('compareHour', () => {
+        it('should return 0 when timestamps are in the same hour', () => {
+            const t1 = new Date(2023, 0, 1, 12, 30).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 45).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(0);
+        });
+
+        it('should return -1 when first hour is earlier', () => {
+            const t1 = new Date(2023, 0, 1, 12, 0).getTime();
+            const t2 = new Date(2023, 0, 1, 13, 0).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(-1);
+        });
+
+        it('should return 1 when first hour is later', () => {
+            const t1 = new Date(2023, 0, 1, 13, 0).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 59).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(1);
+        });
+
+        it('should handle hour transitions across days', () => {
+            const t1 = new Date(2023, 0, 1, 23, 59).getTime();
+            const t2 = new Date(2023, 0, 2, 0, 1).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(-1);
+        });
+
+        it('should handle hour transitions across months', () => {
+            const t1 = new Date(2023, 0, 31, 23, 59).getTime();
+            const t2 = new Date(2023, 1, 1, 0, 1).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(-1);
+        });
+
+        it('should ignore minutes and seconds', () => {
+            const t1 = new Date(2023, 0, 1, 12, 0, 0).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 59, 59).getTime();
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(0);
+        });
+    });
+
+    describe('compareMinute', () => {
+        it('should return 0 when comparing same minute', () => {
+            // Same minute, different seconds
+            const t1 = new Date(2023, 0, 1, 12, 30, 0).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 30, 45).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(0);
+        });
+
+        it('should return -1 when first minute is earlier', () => {
+            const t1 = new Date(2023, 0, 1, 12, 30).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 31).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(-1);
+        });
+
+        it('should return 1 when first minute is later', () => {
+            const t1 = new Date(2023, 0, 1, 12, 31).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 30).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(1);
+        });
+
+        it('should handle hour boundaries correctly', () => {
+            const t1 = new Date(2023, 0, 1, 12, 59).getTime();
+            const t2 = new Date(2023, 0, 1, 13, 0).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(-1);
+        });
+
+        it('should handle day boundaries correctly', () => {
+            const t1 = new Date(2023, 0, 1, 23, 59).getTime();
+            const t2 = new Date(2023, 0, 2, 0, 0).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(-1);
+        });
+
+        it('should handle milliseconds correctly', () => {
+            const t1 = new Date(2023, 0, 1, 12, 30, 0, 0).getTime();
+            const t2 = new Date(2023, 0, 1, 12, 30, 0, 999).getTime();
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(0);
+        });
+
+        // 使用 Chai 的链式断言
+        it('should return valid comparison values', () => {
+            const base = new Date(2023, 0, 1, 12, 30).getTime();
+            const earlier = new Date(2023, 0, 1, 12, 29).getTime();
+            const later = new Date(2023, 0, 1, 12, 31).getTime();
+
+            expect(TimestampUtils.compareMinute(base, earlier))
+                .to.be.a('number')
+                .and.to.equal(1);
+
+            expect(TimestampUtils.compareMinute(base, later))
+                .to.be.a('number')
+                .and.to.equal(-1);
+
+            expect(TimestampUtils.compareMinute(base, base))
+                .to.be.a('number')
+                .and.to.equal(0);
         });
     });
 
