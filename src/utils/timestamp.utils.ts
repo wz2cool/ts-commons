@@ -193,8 +193,6 @@ export class TimestampUtils {
         return timestamp + (seconds * this.MS_PER_SECOND);
     }
 
-
-
     /**
      * Checks if a given timestamp falls within a specified time range (comparing only hours, minutes, and seconds)
      * @param timestamp The timestamp to check (in milliseconds)
