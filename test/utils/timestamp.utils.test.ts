@@ -197,6 +197,7 @@ describe('TimestampUtils', () => {
             // Jan 1, 2023 23:00 + 2 hours = Jan 2, 2023 01:00
             const baseTime = new Date(2023, 0, 1, 23).getTime(); // Jan 1, 2023 23:00
             const expected = new Date(2023, 0, 2, 1).getTime(); // Jan 2, 2023 01:00
+    
             expect(TimestampUtils.addHours(baseTime, 2)).to.equal(expected);
         });
     });
@@ -221,6 +222,84 @@ describe('TimestampUtils', () => {
             const baseTime = new Date(2023, 0, 1, 0, 45).getTime(); // Jan 1, 2023 00:45
             const expected = new Date(2023, 0, 1, 1, 15).getTime(); // Jan 1, 2023 01:15
             expect(TimestampUtils.addMinutes(baseTime, 30)).to.equal(expected);
+        });
+    });
+
+    describe('compareHour', () => {
+        it('should return 0 for same hour', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 0);
+            const t2 = createTimestamp(2024, 1, 1, 10, 59);
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(0);
+        });
+
+        it('should return -1 for earlier hour', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10);
+            const t2 = createTimestamp(2024, 1, 1, 11);
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(-1);
+        });
+
+        it('should return 1 for later hour', () => {
+            const t1 = createTimestamp(2024, 1, 1, 11);
+            const t2 = createTimestamp(2024, 1, 1, 10);
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(1);
+        });
+
+        it('should handle crossing day boundary', () => {
+            const t1 = createTimestamp(2024, 1, 1, 23);
+            const t2 = createTimestamp(2024, 1, 2, 0);
+            expect(TimestampUtils.compareHour(t1, t2)).to.equal(-1);
+        });
+    });
+
+    describe('compareMinute', () => {
+        it('should return 0 for same minute', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30, 0);
+            const t2 = createTimestamp(2024, 1, 1, 10, 30, 59);
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(0);
+        });
+
+        it('should return -1 for earlier minute', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30);
+            const t2 = createTimestamp(2024, 1, 1, 10, 31);
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(-1);
+        });
+
+        it('should return 1 for later minute', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 31);
+            const t2 = createTimestamp(2024, 1, 1, 10, 30);
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(1);
+        });
+
+        it('should handle crossing hour boundary', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 59);
+            const t2 = createTimestamp(2024, 1, 1, 11, 0);
+            expect(TimestampUtils.compareMinute(t1, t2)).to.equal(-1);
+        });
+    });
+
+    describe('compareSecond', () => {
+        it('should return 0 for same second', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30, 45);
+            const t2 = createTimestamp(2024, 1, 1, 10, 30, 45);
+            expect(TimestampUtils.compareSecond(t1, t2)).to.equal(0);
+        });
+
+        it('should return -1 for earlier second', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30, 45);
+            const t2 = createTimestamp(2024, 1, 1, 10, 30, 46);
+            expect(TimestampUtils.compareSecond(t1, t2)).to.equal(-1);
+        });
+
+        it('should return 1 for later second', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30, 46);
+            const t2 = createTimestamp(2024, 1, 1, 10, 30, 45);
+            expect(TimestampUtils.compareSecond(t1, t2)).to.equal(1);
+        });
+
+        it('should handle crossing minute boundary', () => {
+            const t1 = createTimestamp(2024, 1, 1, 10, 30, 59);
+            const t2 = createTimestamp(2024, 1, 1, 10, 31, 0);
+            expect(TimestampUtils.compareSecond(t1, t2)).to.equal(-1);
         });
     });
 
