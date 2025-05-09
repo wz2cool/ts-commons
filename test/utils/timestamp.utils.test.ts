@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { TimestampUtils } from '../../src';
+import { TIME_OF_DAY } from '../../src';
 
 describe('TimestampUtils', () => {
     // 辅助函数：创建指定日期时间的时间戳
@@ -197,7 +198,7 @@ describe('TimestampUtils', () => {
             // Jan 1, 2023 23:00 + 2 hours = Jan 2, 2023 01:00
             const baseTime = new Date(2023, 0, 1, 23).getTime(); // Jan 1, 2023 23:00
             const expected = new Date(2023, 0, 2, 1).getTime(); // Jan 2, 2023 01:00
-    
+
             expect(TimestampUtils.addHours(baseTime, 2)).to.equal(expected);
         });
     });
@@ -329,35 +330,35 @@ describe('TimestampUtils', () => {
     describe('isInTimeRange', () => {
         it('should return true for timestamp within normal time range', () => {
             const timestamp = createTimestamp(2024, 1, 1, 10, 30, 0); // 10:30:00
-            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
-            const endTime = { hour: 11, minute: 0, second: 0 }; // 11:00:00
+            const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime: TIME_OF_DAY = { hour: 11, minute: 0, second: 0 }; // 11:00:00
             expect(TimestampUtils.isInTimeRange(timestamp, startTime, endTime)).to.be.true;
         });
 
         it('should return false for timestamp outside normal time range', () => {
             const timestamp = createTimestamp(2024, 1, 1, 12, 0, 0); // 12:00:00
-            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
-            const endTime = { hour: 11, minute: 0, second: 0 }; // 11:00:00
+            const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime: TIME_OF_DAY = { hour: 11, minute: 0, second: 0 }; // 11:00:00
             expect(TimestampUtils.isInTimeRange(timestamp, startTime, endTime)).to.be.false;
         });
 
         it('should handle cross-day time range correctly (23:00-01:00)', () => {
             const timestamp1 = createTimestamp(2024, 1, 1, 23, 30, 0); // 23:30:00
             const timestamp2 = createTimestamp(2024, 1, 1, 0, 30, 0); // 00:30:00
-            const startTime = { hour: 23, minute: 0, second: 0 }; // 23:00:00
-            const endTime = { hour: 1, minute: 0, second: 0 }; // 01:00:00
-            
+            const startTime: TIME_OF_DAY = { hour: 23, minute: 0, second: 0 }; // 23:00:00
+            const endTime: TIME_OF_DAY = { hour: 1, minute: 0, second: 0 }; // 01:00:00
+
             expect(TimestampUtils.isInTimeRange(timestamp1, startTime, endTime)).to.be.true;
             expect(TimestampUtils.isInTimeRange(timestamp2, startTime, endTime)).to.be.true;
         });
 
         it('should handle exact boundary times', () => {
-            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
-            const endTime = { hour: 17, minute: 0, second: 0 }; // 17:00:00
-            
+            const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime: TIME_OF_DAY = { hour: 17, minute: 0, second: 0 }; // 17:00:00
+
             const startBoundary = createTimestamp(2024, 1, 1, 9, 0, 0); // 09:00:00
             const endBoundary = createTimestamp(2024, 1, 1, 17, 0, 0); // 17:00:00
-            
+
             expect(TimestampUtils.isInTimeRange(startBoundary, startTime, endTime)).to.be.true;
             expect(TimestampUtils.isInTimeRange(endBoundary, startTime, endTime)).to.be.true;
         });
@@ -365,9 +366,9 @@ describe('TimestampUtils', () => {
         it('should handle edge cases with seconds precision', () => {
             const timestamp1 = createTimestamp(2024, 1, 1, 9, 0, 1); // 09:00:01
             const timestamp2 = createTimestamp(2024, 1, 1, 16, 59, 59); // 16:59:59
-            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
-            const endTime = { hour: 17, minute: 0, second: 0 }; // 17:00:00
-            
+            const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime: TIME_OF_DAY = { hour: 17, minute: 0, second: 0 }; // 17:00:00
+
             expect(TimestampUtils.isInTimeRange(timestamp1, startTime, endTime)).to.be.true;
             expect(TimestampUtils.isInTimeRange(timestamp2, startTime, endTime)).to.be.true;
         });
@@ -424,23 +425,27 @@ describe('TimestampUtils', () => {
 
         it('should handle isInTimeRange performance efficiently', () => {
             const iterations = 10000;
-            const testCases = [
-                {
-                    timestamp: createTimestamp(2024, 1, 1, 10, 30),
-                    startTime: { hour: 9, minute: 0, second: 0 },
-                    endTime: { hour: 17, minute: 0, second: 0 }
-                },
-                {
-                    timestamp: createTimestamp(2024, 1, 1, 23, 30),
-                    startTime: { hour: 23, minute: 0, second: 0 },
-                    endTime: { hour: 1, minute: 0, second: 0 }
-                },
-                {
-                    timestamp: createTimestamp(2024, 1, 1, 0, 30),
-                    startTime: { hour: 23, minute: 0, second: 0 },
-                    endTime: { hour: 1, minute: 0, second: 0 }
-                }
-            ];
+            const testCases: Array<{
+                timestamp: number;
+                startTime: TIME_OF_DAY;
+                endTime: TIME_OF_DAY;
+            }> = [
+                    {
+                        timestamp: createTimestamp(2024, 1, 1, 10, 30),
+                        startTime: { hour: 9, minute: 0, second: 0 },
+                        endTime: { hour: 17, minute: 0, second: 0 }
+                    },
+                    {
+                        timestamp: createTimestamp(2024, 1, 1, 23, 30),
+                        startTime: { hour: 23, minute: 0, second: 0 },
+                        endTime: { hour: 1, minute: 0, second: 0 }
+                    },
+                    {
+                        timestamp: createTimestamp(2024, 1, 1, 0, 30),
+                        startTime: { hour: 23, minute: 0, second: 0 },
+                        endTime: { hour: 1, minute: 0, second: 0 }
+                    }
+                ];
 
             const startTime = Date.now();
 

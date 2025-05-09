@@ -1,3 +1,4 @@
+import { TIME_OF_DAY } from "../models/custom.type";
 import { NumberUtils } from "./number.utils";
 
 export class TimestampUtils {
@@ -202,7 +203,7 @@ export class TimestampUtils {
      * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 10, 30, 0).getTime(), { hour: 9, minute: 0, second: 0 }, { hour: 11, minute: 0, second: 0 }) = true
      * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 23, 30, 0).getTime(), { hour: 23, minute: 0, second: 0 }, { hour: 1, minute: 0, second: 0 }) = true
      */
-    public static isInTimeRange<T extends { hour: number, minute: number, second: number }>(timestamp: number, startTime: T, endTime: T): boolean {
+    public static isInTimeRange<T extends TIME_OF_DAY>(timestamp: number, startTime: T, endTime: T): boolean {
         const date = new Date(timestamp);
         const currentSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
         const startSeconds = startTime.hour * 3600 + startTime.minute * 60 + startTime.second;
