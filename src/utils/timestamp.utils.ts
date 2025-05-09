@@ -1,4 +1,5 @@
 import { TIME_OF_DAY } from "../models/custom.type";
+import { DateUtils } from "./date.utils";
 import { NumberUtils } from "./number.utils";
 
 export class TimestampUtils {
@@ -205,15 +206,6 @@ export class TimestampUtils {
      */
     public static isInTimeRange<T extends TIME_OF_DAY>(timestamp: number, startTime: T, endTime: T): boolean {
         const date = new Date(timestamp);
-        const currentSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
-        const startSeconds = startTime.hour * 3600 + startTime.minute * 60 + startTime.second;
-        const endSeconds = endTime.hour * 3600 + endTime.minute * 60 + endTime.second;
-
-        // Handle cross-day cases (e.g., 23:00 - 01:00)
-        if (startSeconds > endSeconds) {
-            return currentSeconds >= startSeconds || currentSeconds <= endSeconds;
-        }
-        return currentSeconds >= startSeconds && currentSeconds <= endSeconds;
+        return DateUtils.isInTimeRange(date, startTime, endTime);
     }
-
 }
