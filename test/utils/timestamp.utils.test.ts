@@ -326,6 +326,53 @@ describe('TimestampUtils', () => {
         });
     });
 
+    describe('isInTimeRange', () => {
+        it('should return true for timestamp within normal time range', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 10, 30, 0); // 10:30:00
+            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime = { hour: 11, minute: 0, second: 0 }; // 11:00:00
+            expect(TimestampUtils.isInTimeRange(timestamp, startTime, endTime)).to.be.true;
+        });
+
+        it('should return false for timestamp outside normal time range', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 12, 0, 0); // 12:00:00
+            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime = { hour: 11, minute: 0, second: 0 }; // 11:00:00
+            expect(TimestampUtils.isInTimeRange(timestamp, startTime, endTime)).to.be.false;
+        });
+
+        it('should handle cross-day time range correctly (23:00-01:00)', () => {
+            const timestamp1 = createTimestamp(2024, 1, 1, 23, 30, 0); // 23:30:00
+            const timestamp2 = createTimestamp(2024, 1, 1, 0, 30, 0); // 00:30:00
+            const startTime = { hour: 23, minute: 0, second: 0 }; // 23:00:00
+            const endTime = { hour: 1, minute: 0, second: 0 }; // 01:00:00
+            
+            expect(TimestampUtils.isInTimeRange(timestamp1, startTime, endTime)).to.be.true;
+            expect(TimestampUtils.isInTimeRange(timestamp2, startTime, endTime)).to.be.true;
+        });
+
+        it('should handle exact boundary times', () => {
+            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime = { hour: 17, minute: 0, second: 0 }; // 17:00:00
+            
+            const startBoundary = createTimestamp(2024, 1, 1, 9, 0, 0); // 09:00:00
+            const endBoundary = createTimestamp(2024, 1, 1, 17, 0, 0); // 17:00:00
+            
+            expect(TimestampUtils.isInTimeRange(startBoundary, startTime, endTime)).to.be.true;
+            expect(TimestampUtils.isInTimeRange(endBoundary, startTime, endTime)).to.be.true;
+        });
+
+        it('should handle edge cases with seconds precision', () => {
+            const timestamp1 = createTimestamp(2024, 1, 1, 9, 0, 1); // 09:00:01
+            const timestamp2 = createTimestamp(2024, 1, 1, 16, 59, 59); // 16:59:59
+            const startTime = { hour: 9, minute: 0, second: 0 }; // 09:00:00
+            const endTime = { hour: 17, minute: 0, second: 0 }; // 17:00:00
+            
+            expect(TimestampUtils.isInTimeRange(timestamp1, startTime, endTime)).to.be.true;
+            expect(TimestampUtils.isInTimeRange(timestamp2, startTime, endTime)).to.be.true;
+        });
+    });
+
     describe('Performance tests', () => {
         it('should handle large number of comparisons efficiently', () => {
             const startTime = Date.now();
@@ -373,6 +420,42 @@ describe('TimestampUtils', () => {
 
             // 确保不同时间范围的比较操作性能稳定
             expect(duration).to.be.lessThan(100);
+        });
+
+        it('should handle isInTimeRange performance efficiently', () => {
+            const iterations = 10000;
+            const testCases = [
+                {
+                    timestamp: createTimestamp(2024, 1, 1, 10, 30),
+                    startTime: { hour: 9, minute: 0, second: 0 },
+                    endTime: { hour: 17, minute: 0, second: 0 }
+                },
+                {
+                    timestamp: createTimestamp(2024, 1, 1, 23, 30),
+                    startTime: { hour: 23, minute: 0, second: 0 },
+                    endTime: { hour: 1, minute: 0, second: 0 }
+                },
+                {
+                    timestamp: createTimestamp(2024, 1, 1, 0, 30),
+                    startTime: { hour: 23, minute: 0, second: 0 },
+                    endTime: { hour: 1, minute: 0, second: 0 }
+                }
+            ];
+
+            const startTime = Date.now();
+
+            // 执行多次测试，包括普通时间范围和跨天时间范围
+            for (let i = 0; i < iterations; i++) {
+                testCases.forEach(({ timestamp, startTime: start, endTime: end }) => {
+                    TimestampUtils.isInTimeRange(timestamp, start, end);
+                });
+            }
+
+            const endTime = Date.now();
+            const duration = endTime - startTime;
+            console.log(`================ duration: ${duration}`); // 2023-08-02T15:38:21.178Z:duration: 199
+            // 确保1万次调用在可接受的时间范围内完成（例如：200ms内）
+            expect(duration).to.be.lessThan(200);
         });
     });
 });
