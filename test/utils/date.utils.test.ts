@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { DateUtils, StringUtils } from "../../src/index";
+import { DateUtils, StringUtils, TIME_OF_DAY } from "../../src/index";
 
 describe(".DateUtils", () => {
 
@@ -192,6 +192,64 @@ describe(".DateUtils", () => {
     });
   });
 
+
+  describe('#isInTimeRange', () => {
+    it('should return true when time is within normal range', () => {
+      // 测试普通工作时间范围 (9:00 - 17:00)
+      const testDate = new Date(2024, 0, 1, 13, 30, 0); // 13:30
+      const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 };
+      const endTime: TIME_OF_DAY = { hour: 17, minute: 0, second: 0 };
+
+      const result = DateUtils.isInTimeRange(testDate, startTime, endTime);
+
+      expect(result).to.be.true;
+    });
+
+    it('should return false when time is outside normal range', () => {
+      // 测试非工作时间 (20:00)
+      const testDate = new Date(2024, 0, 1, 20, 0, 0);
+      const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 };
+      const endTime: TIME_OF_DAY = { hour: 17, minute: 0, second: 0 };
+
+      const result = DateUtils.isInTimeRange(testDate, startTime, endTime);
+
+      expect(result).to.be.false;
+    });
+
+    it('should handle cross-day time range correctly', () => {
+      // 测试跨天时间范围 (23:00 - 01:00)
+      const testDate = new Date(2024, 0, 1, 0, 30, 0); // 00:30
+      const startTime: TIME_OF_DAY = { hour: 23, minute: 0, second: 0 };
+      const endTime: TIME_OF_DAY = { hour: 1, minute: 0, second: 0 };
+
+      const result = DateUtils.isInTimeRange(testDate, startTime, endTime);
+
+      expect(result).to.be.true;
+    });
+
+    it('should handle exact boundary times', () => {
+      // 测试边界值 - 开始时间
+      const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 };
+      const endTime : TIME_OF_DAY= { hour: 17, minute: 0, second: 0 };
+      const testDateStart = new Date(2024, 0, 1, 9, 0, 0);
+
+      expect(DateUtils.isInTimeRange(testDateStart, startTime, endTime)).to.be.true;
+
+      // 测试边界值 - 结束时间
+      const testDateEnd = new Date(2024, 0, 1, 17, 0, 0);
+      expect(DateUtils.isInTimeRange(testDateEnd, startTime, endTime)).to.be.true;
+    });
+
+    it('should handle same start and end time', () => {
+      // 测试起始时间相同的情况
+      const testDate = new Date(2024, 0, 1, 9, 0, 0);
+      const sameTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 };
+
+      const result = DateUtils.isInTimeRange(testDate, sameTime, sameTime);
+
+      expect(result).to.be.true;
+    });
+  });
 
   describe('#addSeconds', () => {
     it('should correctly add seconds to a date', () => {

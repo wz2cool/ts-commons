@@ -1,3 +1,4 @@
+import { TIME_OF_DAY } from "../models/custom.type";
 import { ObjectUtils } from "./object.utils";
 
 export class DateUtils {
@@ -206,6 +207,27 @@ export class DateUtils {
     } else {
       return 1;
     }
+  }
+
+   /**
+     * Checks if a given date falls within a specified time range (comparing only hours, minutes, and seconds)
+     * @param timestamp The timestamp to check (in milliseconds)
+     * @param startTime Start time containing hour, minute, second
+     * @param endTime End time containing hour, minute, second
+     * @returns true if the timestamp is within the specified range, false otherwise
+     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 10, 30, 0), { hour: 9, minute: 0, second: 0 }, { hour: 11, minute: 0, second: 0 }) = true
+     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 23, 30, 0), { hour: 23, minute: 0, second: 0 }, { hour: 1, minute: 0, second: 0 }) = true
+     */
+  public static isInTimeRange<T extends TIME_OF_DAY>(date: Date, startTime: T, endTime: T): boolean {
+    const currentSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+    const startSeconds = startTime.hour * 3600 + startTime.minute * 60 + startTime.second;
+    const endSeconds = endTime.hour * 3600 + endTime.minute * 60 + endTime.second;
+
+    // Handle cross-day cases (e.g., 23:00 - 01:00)
+    if (startSeconds > endSeconds) {
+      return currentSeconds >= startSeconds || currentSeconds <= endSeconds;
+    }
+    return currentSeconds >= startSeconds && currentSeconds <= endSeconds;
   }
 
   // tslint:disable-next-line: cognitive-complexity
