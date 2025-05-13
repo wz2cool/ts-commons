@@ -1,3 +1,5 @@
+import { TIME_OF_DAY } from "../models/custom.type";
+import { DateUtils } from "./date.utils";
 import { NumberUtils } from "./number.utils";
 
 export class TimestampUtils {
@@ -192,6 +194,9 @@ export class TimestampUtils {
      * @param timestamp Base timestamp in milliseconds
      * @returns Start of the minute timestamp
      * @example TimestampUtils.startOfMinute(1672502400000) = 1672502400000
+     * @example TimestampUtils.startOfMinute(1672502460000) = 1672502460000
+     * @example TimestampUtils.startOfMinute(1672502461000) = 1672502461000
+     * @example TimestampUtils.startOfMinute(1672502461999) = 1672502461000
      */
     public static startOfMinute(timestamp: number): number {
         return new Date(timestamp).setSeconds(0, 0);
@@ -205,5 +210,19 @@ export class TimestampUtils {
      */
     public static startOfSecond(timestamp: number): number {
         return new Date(timestamp).setMilliseconds(0);
+    }
+
+    /**
+     * Checks if a given timestamp falls within a specified time range (comparing only hours, minutes, and seconds)
+     * @param timestamp The timestamp to check (in milliseconds)
+     * @param startTime Start time containing hour, minute, second
+     * @param endTime End time containing hour, minute, second
+     * @returns true if the timestamp is within the specified range, false otherwise
+     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 10, 30, 0).getTime(), { hour: 9, minute: 0, second: 0 }, { hour: 11, minute: 0, second: 0 }) = true
+     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 23, 30, 0).getTime(), { hour: 23, minute: 0, second: 0 }, { hour: 1, minute: 0, second: 0 }) = true
+     */
+    public static isInTimeRange<T extends TIME_OF_DAY>(timestamp: number, startTime: T, endTime: T): boolean {
+        const date = new Date(timestamp);
+        return DateUtils.isInTimeRange(date, startTime, endTime);
     }
 }

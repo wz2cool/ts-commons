@@ -196,6 +196,86 @@ describe('TimestampUtils', () => {
         });
     });
 
+    describe('startOfDay', () => {
+        it('should set time to start of day', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 45, 500);
+            const expected = createTimestamp(2024, 1, 1, 0, 0, 0, 0);
+            expect(TimestampUtils.startOfDay(timestamp)).to.equal(expected);
+        });
+
+        it('should handle day boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 0, 0, 0, 1);
+            const expected = createTimestamp(2024, 1, 1, 0, 0, 0, 0);
+            expect(TimestampUtils.startOfDay(timestamp)).to.equal(expected);
+        });
+
+        it('should handle month boundary', () => {
+            const timestamp = createTimestamp(2024, 2, 1, 12, 30, 0, 0);
+            const expected = createTimestamp(2024, 2, 1, 0, 0, 0, 0);
+            expect(TimestampUtils.startOfDay(timestamp)).to.equal(expected);
+        });
+    });
+
+    describe('startOfHour', () => {
+        it('should set time to start of hour', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 45, 500);
+            const expected = createTimestamp(2024, 1, 1, 15, 0, 0, 0);
+            expect(TimestampUtils.startOfHour(timestamp)).to.equal(expected);
+        });
+
+        it('should handle hour boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 0, 0, 1);
+            const expected = createTimestamp(2024, 1, 1, 15, 0, 0, 0);
+            expect(TimestampUtils.startOfHour(timestamp)).to.equal(expected);
+        });
+
+        it('should handle day boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 2, 0, 30, 0, 0);
+            const expected = createTimestamp(2024, 1, 2, 0, 0, 0, 0);
+            expect(TimestampUtils.startOfHour(timestamp)).to.equal(expected);
+        });
+    });
+
+    describe('startOfMinute', () => {
+        it('should set time to start of minute', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 45, 500);
+            const expected = createTimestamp(2024, 1, 1, 15, 30, 0, 0);
+            expect(TimestampUtils.startOfMinute(timestamp)).to.equal(expected);
+        });
+
+        it('should handle minute boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 0, 1);
+            const expected = createTimestamp(2024, 1, 1, 15, 30, 0, 0);
+            expect(TimestampUtils.startOfMinute(timestamp)).to.equal(expected);
+        });
+
+        it('should handle hour boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 16, 0, 30, 0);
+            const expected = createTimestamp(2024, 1, 1, 16, 0, 0, 0);
+            expect(TimestampUtils.startOfMinute(timestamp)).to.equal(expected);
+        });
+    });
+
+    describe('startOfSecond', () => {
+        it('should set time to start of second', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 45, 500);
+            const expected = createTimestamp(2024, 1, 1, 15, 30, 45, 0);
+            expect(TimestampUtils.startOfSecond(timestamp)).to.equal(expected);
+        });
+
+        it('should handle second boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 30, 45, 1);
+            const expected = createTimestamp(2024, 1, 1, 15, 30, 45, 0);
+            expect(TimestampUtils.startOfSecond(timestamp)).to.equal(expected);
+        });
+
+        it('should handle minute boundary', () => {
+            const timestamp = createTimestamp(2024, 1, 1, 15, 31, 0, 500);
+            const expected = createTimestamp(2024, 1, 1, 15, 31, 0, 0);
+            expect(TimestampUtils.startOfSecond(timestamp)).to.equal(expected);
+        });
+    });
+
     describe('Example cases', () => {
         it('should handle example case 1: same day comparison', () => {
             const now = createTimestamp(2024, 3, 14, 10, 30);
