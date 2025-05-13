@@ -9,6 +9,8 @@ import { ThreadUtils } from "./utils/thread.utils";
 import { ActionUtils } from "./utils/action.utils";
 import { IOUtils } from "./utils/io.utils";
 import { ExtUtils } from "./utils/ext.utils";
+import { TimestampUtils } from "./utils/timestamp.utils";
+import { TIME_OF_DAY } from "./models/custom.type"
 
 const isNumber = ObjectUtils.isNumber;
 const isArray = ObjectUtils.isArray;
@@ -33,6 +35,7 @@ export {
   StringUtils,
   NumberUtils,
   DateUtils,
+  TimestampUtils,
   RegexUtils,
   HttpUtils,
   ArrayUtils,
@@ -56,4 +59,5 @@ export {
   contains,
   containsAny,
   containsIgnoreCase,
+  TIME_OF_DAY,
 };

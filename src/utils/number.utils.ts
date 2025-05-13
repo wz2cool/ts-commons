@@ -2,6 +2,7 @@ import { ObjectUtils } from "./object.utils";
 
 // isInteger and isSafeInteger cannot be found in IE
 export class NumberUtils {
+
   public static readonly MAX_SAFE_INTEGER: number = 9007199254740991;
   public static readonly MIN_SAFE_INTEGER: number = -9007199254740991;
 
@@ -57,5 +58,21 @@ export class NumberUtils {
       return ObjectUtils.getOrDefault(defaultValue, "");
     }
     return value.toFixed(fractionDigits);
+  }
+
+  /**
+   * compare two numbers
+   * @param num1 number 1
+   * @param num2 number 2
+   * @returns 0: num1 === num2, -1: num1 < num2, 1: num1 > num2
+   */
+  public static compare(num1: number, num2: number): number {
+    if (num1 === num2) {
+      return 0;
+    } else if (num1 < num2) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 }
