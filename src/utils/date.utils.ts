@@ -156,6 +156,10 @@ export class DateUtils {
    * "S" Milliseconds; no leading zero for single-digit seconds.
    */
   public static toString(date: Date, format: string): string {
+    if (!this.isValid(date)) {
+      return '';
+    }
+
     return format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(false, date, matched)
     );
@@ -182,6 +186,9 @@ export class DateUtils {
    * "S" Milliseconds; no leading zero for single-digit seconds.
    */
   public static toUTCString(date: Date, format: string): string {
+    if (!this.isValid(date)) {
+      return '';
+    }
     return format.replace(this.timeFormatRegex, matched =>
       this.getTimeFormat(true, date, matched)
     );
@@ -284,7 +291,24 @@ export class DateUtils {
     }
   }
 
-  // tslint:disable-next-line: cognitive-complexity
+  /**
+   * Checks if a Date object is valid.
+   * 
+   * @param date The date to check
+   * @returns true if the date is valid, false otherwise
+   * @example DateUtils.isValid(new Date()) = true
+   * @example DateUtils.isValid(new Date('Invalid Date')) = false
+   * @example DateUtils.isValid(DateUtils.invalid()) = false
+   * @example DateUtils.isValid(null) = false
+   * @example DateUtils.isValid(undefined) = false
+   */
+  public static isValid(date: Date): boolean {
+    if (ObjectUtils.isNullOrUndefined(date)) {
+      return false;
+    }
+    return !isNaN(date.getTime());
+  }
+
   private static getTimeFormat(
     isUTC: boolean,
     date: Date,
