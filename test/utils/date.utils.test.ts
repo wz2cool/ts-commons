@@ -672,4 +672,114 @@ describe(".DateUtils", () => {
       });
     });
   }
+
+  describe('#isSame', () => {
+    it('should return true when comparing exact same dates', () => {
+      const date1 = new Date(2024, 0, 1, 12, 30, 45, 500);
+      const date2 = new Date(2024, 0, 1, 12, 30, 45, 500);
+      expect(DateUtils.isSame(date1, date2)).to.be.true;
+    });
+
+    it('should return true when comparing same year', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = new Date(2024, 11, 31);
+      expect(DateUtils.isSame(date1, date2, 'year')).to.be.true;
+    });
+
+    it('should return true when comparing same month', () => {
+      const date1 = new Date(2024, 5, 1);
+      const date2 = new Date(2024, 5, 30);
+      expect(DateUtils.isSame(date1, date2, 'month')).to.be.true;
+    });
+
+    it('should return true when comparing same day', () => {
+      const date1 = new Date(2024, 5, 15, 0, 0, 0);
+      const date2 = new Date(2024, 5, 15, 23, 59, 59);
+      expect(DateUtils.isSame(date1, date2, 'day')).to.be.true;
+    });
+
+    it('should return true when comparing same hour', () => {
+      const date1 = new Date(2024, 5, 15, 10, 0, 0);
+      const date2 = new Date(2024, 5, 15, 10, 59, 59);
+      expect(DateUtils.isSame(date1, date2, 'hour')).to.be.true;
+    });
+
+    it('should return true when comparing same minute', () => {
+      const date1 = new Date(2024, 5, 15, 10, 30, 0);
+      const date2 = new Date(2024, 5, 15, 10, 30, 59);
+      expect(DateUtils.isSame(date1, date2, 'minute')).to.be.true;
+    });
+
+    it('should return true when comparing same second', () => {
+      const date1 = new Date(2024, 5, 15, 10, 30, 45, 0);
+      const date2 = new Date(2024, 5, 15, 10, 30, 45, 999);
+      expect(DateUtils.isSame(date1, date2, 'second')).to.be.true;
+    });
+
+    it('should return true when comparing same millisecond', () => {
+      const date1 = new Date(2024, 5, 15, 10, 30, 45, 500);
+      const date2 = new Date(2024, 5, 15, 10, 30, 45, 500);
+      expect(DateUtils.isSame(date1, date2, 'millisecond')).to.be.true;
+    });
+
+    it('should return false when comparing different milliseconds', () => {
+      const date1 = new Date(2024, 5, 15, 10, 30, 45, 500);
+      const date2 = new Date(2024, 5, 15, 10, 30, 45, 501);
+      expect(DateUtils.isSame(date1, date2, 'millisecond')).to.be.false;
+    });
+
+    it('should return false when comparing different years', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = new Date(2023, 0, 1);
+      expect(DateUtils.isSame(date1, date2, 'year')).to.be.false;
+    });
+
+    it('should return false when comparing different months', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = new Date(2024, 1, 1);
+      expect(DateUtils.isSame(date1, date2, 'month')).to.be.false;
+    });
+
+    it('should return false when dates are not the same at any level', () => {
+      const date1 = new Date(2024, 0, 1, 12, 30, 45);
+      const date2 = new Date(2023, 11, 31, 23, 59, 59);
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when first date is null', () => {
+      const date1 = null;
+      const date2 = new Date(2024, 0, 1);
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when second date is null', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = null;
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when both dates are null', () => {
+      const date1 = null;
+      const date2 = null;
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when first date is undefined', () => {
+      const date1 = undefined;
+      const date2 = new Date(2024, 0, 1);
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when second date is undefined', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = undefined;
+      expect(DateUtils.isSame(date1, date2)).to.be.false;
+    });
+
+    it('should return false when passing invalid unit type', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = new Date(2024, 0, 1);
+      expect(DateUtils.isSame(date1, date2, 'invalid' as any)).to.be.false;
+    });
+  });
 });

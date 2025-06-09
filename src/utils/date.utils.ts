@@ -209,15 +209,15 @@ export class DateUtils {
     }
   }
 
-   /**
-     * Checks if a given date falls within a specified time range (comparing only hours, minutes, and seconds)
-     * @param timestamp The timestamp to check (in milliseconds)
-     * @param startTime Start time containing hour, minute, second
-     * @param endTime End time containing hour, minute, second
-     * @returns true if the timestamp is within the specified range, false otherwise
-     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 10, 30, 0), { hour: 9, minute: 0, second: 0 }, { hour: 11, minute: 0, second: 0 }) = true
-     * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 23, 30, 0), { hour: 23, minute: 0, second: 0 }, { hour: 1, minute: 0, second: 0 }) = true
-     */
+  /**
+    * Checks if a given date falls within a specified time range (comparing only hours, minutes, and seconds)
+    * @param timestamp The timestamp to check (in milliseconds)
+    * @param startTime Start time containing hour, minute, second
+    * @param endTime End time containing hour, minute, second
+    * @returns true if the timestamp is within the specified range, false otherwise
+    * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 10, 30, 0), { hour: 9, minute: 0, second: 0 }, { hour: 11, minute: 0, second: 0 }) = true
+    * @example TimestampUtils.isInTimeRange(new Date(2023, 0, 1, 23, 30, 0), { hour: 23, minute: 0, second: 0 }, { hour: 1, minute: 0, second: 0 }) = true
+    */
   public static isInTimeRange<T extends TIME_OF_DAY>(date: Date, startTime: T, endTime: T): boolean {
     const currentSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
     const startSeconds = startTime.hour * 3600 + startTime.minute * 60 + startTime.second;
@@ -228,6 +228,60 @@ export class DateUtils {
       return currentSeconds >= startSeconds || currentSeconds <= endSeconds;
     }
     return currentSeconds >= startSeconds && currentSeconds <= endSeconds;
+  }
+
+  /**
+   * Checks if two dates are the same at the specified unit of granularity.
+   * 
+   * @param date1 The first date to compare
+   * @param date2 The second date to compare
+   * @param unit The unit to compare ('year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond')
+   * @returns true if the dates are the same at the specified unit, false otherwise
+   * @example DateUtils.isSame(new Date(2024, 0, 1), new Date(2024, 0, 1), 'day') = true
+   * @example DateUtils.isSame(new Date(2024, 0, 1), new Date(2024, 0, 2), 'year') = true
+   */
+  public static isSame(date1: Date, date2: Date, unit?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond'): boolean {
+    if (ObjectUtils.isNullOrUndefined(date1) || ObjectUtils.isNullOrUndefined(date2)) {
+      return false;
+    }
+
+    if (!unit) {
+      return date1.getTime() === date2.getTime();
+    }
+
+    switch (unit) {
+      case 'year':
+        return date1.getFullYear() === date2.getFullYear();
+      case 'month':
+        return date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth();
+      case 'day':
+        return date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate();
+      case 'hour':
+        return date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate() &&
+          date1.getHours() === date2.getHours();
+      case 'minute':
+        return date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate() &&
+          date1.getHours() === date2.getHours() &&
+          date1.getMinutes() === date2.getMinutes();
+      case 'second':
+        return date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate() &&
+          date1.getHours() === date2.getHours() &&
+          date1.getMinutes() === date2.getMinutes() &&
+          date1.getSeconds() === date2.getSeconds();
+      case 'millisecond':
+        return date1.getTime() === date2.getTime();
+      default:
+        return false;
+    }
   }
 
   // tslint:disable-next-line: cognitive-complexity
