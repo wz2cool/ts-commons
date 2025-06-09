@@ -427,6 +427,16 @@ describe(".DateUtils", () => {
         );
         expect("2018/06/19 00:00:00.000").to.be.eq(result);
       });
+
+      it("should return empty string when date is null", () => {
+        const result = DateUtils.toUTCString(null, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
+
+      it("should return empty string when date is undefined", () => {
+        const result = DateUtils.toUTCString(undefined, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
     });
 
     describe("#toString", () => {
@@ -437,6 +447,16 @@ describe(".DateUtils", () => {
         const hourStr = hours >= 10 ? hours.toString() : `0${hours}`;
         const result = DateUtils.toString(testDate, "yyyy/MM/dd HH:mm:ss.SSS");
         expect(`2018/06/19 ${hourStr}:00:00.000`).to.be.eq(result);
+      });
+
+      it("should return empty string when date is null", () => {
+        const result = DateUtils.toString(null, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
+
+      it("should return empty string when date is undefined", () => {
+        const result = DateUtils.toString(undefined, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
       });
     });
 
