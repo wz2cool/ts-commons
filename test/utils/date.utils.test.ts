@@ -230,7 +230,7 @@ describe(".DateUtils", () => {
     it('should handle exact boundary times', () => {
       // 测试边界值 - 开始时间
       const startTime: TIME_OF_DAY = { hour: 9, minute: 0, second: 0 };
-      const endTime : TIME_OF_DAY= { hour: 17, minute: 0, second: 0 };
+      const endTime: TIME_OF_DAY = { hour: 17, minute: 0, second: 0 };
       const testDateStart = new Date(2024, 0, 1, 9, 0, 0);
 
       expect(DateUtils.isInTimeRange(testDateStart, startTime, endTime)).to.be.true;
@@ -427,6 +427,16 @@ describe(".DateUtils", () => {
         );
         expect("2018/06/19 00:00:00.000").to.be.eq(result);
       });
+
+      it("should return empty string when date is null", () => {
+        const result = DateUtils.toUTCString(null, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
+
+      it("should return empty string when date is undefined", () => {
+        const result = DateUtils.toUTCString(undefined, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
     });
 
     describe("#toString", () => {
@@ -437,6 +447,16 @@ describe(".DateUtils", () => {
         const hourStr = hours >= 10 ? hours.toString() : `0${hours}`;
         const result = DateUtils.toString(testDate, "yyyy/MM/dd HH:mm:ss.SSS");
         expect(`2018/06/19 ${hourStr}:00:00.000`).to.be.eq(result);
+      });
+
+      it("should return empty string when date is null", () => {
+        const result = DateUtils.toString(null, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
+      });
+
+      it("should return empty string when date is undefined", () => {
+        const result = DateUtils.toString(undefined, "yyyy/MM/dd HH:mm:ss.SSS");
+        expect("").to.be.eq(result);
       });
     });
 
@@ -780,6 +800,52 @@ describe(".DateUtils", () => {
       const date1 = new Date(2024, 0, 1);
       const date2 = new Date(2024, 0, 1);
       expect(DateUtils.isSame(date1, date2, 'invalid' as any)).to.be.false;
+    });
+  });
+
+  describe('#isValid', () => {
+    it('should return true for valid dates', () => {
+      const validDate = new Date();
+      expect(DateUtils.isValid(validDate)).to.be.true;
+    });
+
+    it('should return true for specific valid dates', () => {
+      const validDate = new Date(2024, 0, 1);
+      expect(DateUtils.isValid(validDate)).to.be.true;
+    });
+
+    it('should return false for invalid dates', () => {
+      const invalidDate = new Date('Invalid Date');
+      expect(DateUtils.isValid(invalidDate)).to.be.false;
+    });
+
+
+    it('should return false for dates created with invalid strings', () => {
+      const invalidDate = new Date('not a date');
+      expect(DateUtils.isValid(invalidDate)).to.be.false;
+    });
+
+    it('should return false for dates with NaN time', () => {
+      const invalidDate = new Date(NaN);
+      expect(DateUtils.isValid(invalidDate)).to.be.false;
+    });
+
+    it('should return true for dates created from timestamps', () => {
+      const validDate = new Date(1640995200000); // 2022-01-01
+      expect(DateUtils.isValid(validDate)).to.be.true;
+    });
+
+    it('should return true for dates created from ISO strings', () => {
+      const validDate = new Date('2024-01-01T00:00:00.000Z');
+      expect(DateUtils.isValid(validDate)).to.be.true;
+    });
+
+    it('should return false for null', () => {
+      expect(DateUtils.isValid(null as any)).to.be.false;
+    });
+
+    it('should return false for undefined', () => {
+      expect(DateUtils.isValid(undefined as any)).to.be.false;
     });
   });
 });
