@@ -1,6 +1,8 @@
 import { NumberUtils } from "./number.utils";
 import { ObjectUtils } from "./object.utils";
 
+export type NullableArray<T> = T[] | undefined | null;
+
 export class ArrayUtils {
   /**
    * check whether current array is empty or null/undefined.
@@ -14,7 +16,7 @@ export class ArrayUtils {
    * @example ArrayUtils.isEmtpy("string") throw error;
    * @example ArrayUtils.isEmtpy(123) throw error;
    */
-  public static isEmpty<T>(array: T[] | undefined | null): boolean {
+  public static isEmpty<T>(array: NullableArray<T>): boolean {
     if (ObjectUtils.isNullOrUndefined(array)) {
       return true;
     }
@@ -37,7 +39,7 @@ export class ArrayUtils {
    * @example ArrayUtils.isNotEmpty("string") throw error;
    * @example ArrayUtils.isNotEmpty(123) throw error;
    */
-  public static isNotEmpty<T>(array: T[] | undefined | null): boolean {
+  public static isNotEmpty<T>(array: NullableArray<T>): array is NonNullable<NullableArray<T>> {
     return !this.isEmpty(array);
   }
 
