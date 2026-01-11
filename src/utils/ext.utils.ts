@@ -1,4 +1,4 @@
-import { ArrayUtils } from "./array.utils";
+import { ArrayUtils, NullableArray } from "./array.utils";
 import { ObjectUtils } from "./object.utils";
 import { NullableString, StringUtils } from "./string.utils";
 
@@ -22,7 +22,7 @@ export class ExtUtils {
         }
     }
 
-    public static isNotEmpty<T>(value: T[]): boolean
+    public static isNotEmpty<T>(value: NullableArray<T>): value is NonNullable<NullableArray<T>>
     public static isNotEmpty(value: NullableString): value is NonNullable<NullableString>
     /**
      * Checks whether the provided value is not empty.
