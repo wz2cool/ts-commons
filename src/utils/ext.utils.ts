@@ -32,7 +32,7 @@ export class ExtUtils {
      * @param value - The array or string to be checked. It can be an array of any type or a string, null, or undefined.
      * @returns {boolean} - Returns true if the provided value is not empty; otherwise, returns false.
      */
-    public static isNotEmpty<T>(value: T[] | NullableString): any {
+    public static isNotEmpty<T>(value: NullableArray<T> | NullableString): any {
         // Check if value is an array, and if so, use ArrayUtils.isNotEmpty for array's non-empty check
         if (ObjectUtils.isArray(value)) {
             return ArrayUtils.isNotEmpty(value);
